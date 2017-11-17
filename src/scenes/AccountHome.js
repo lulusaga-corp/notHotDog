@@ -11,9 +11,9 @@ import Button from 'react-native-button';
 
 class AccountHome extends Component {
     render () {
-        <View>
+        return (<View>
             <Text>Hello from Home</Text>
-        </View>
+        </View>)
     }
 }
 

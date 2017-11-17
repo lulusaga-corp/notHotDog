@@ -6,6 +6,7 @@ import {
     View,
     Button
 } from 'react-native';
+import {Actions} from 'react-native-router-flux'
 
 class LandingContainer extends Component {
     constructor(props){
@@ -13,9 +14,9 @@ class LandingContainer extends Component {
     }
     render() {
         return <View>
-            <Button onPress={console.log("button")} title="Logout" />
-            <Button onPress={console.log("button")} title="Account" />
-            <Button onPress={console.log("button")} title="Camera" />
+            <Button onPress={console.log('button')} title="Logout" />
+            <Button onPress={() => {Actions.tabbar()}} title="Account" />
+            <Button onPress={console.log('button')} title="Camera" />
           </View>;
     }
 }

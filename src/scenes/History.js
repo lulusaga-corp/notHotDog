@@ -11,9 +11,9 @@ import HistoryContainer from '../containers/LandingContainer';
 
 class History extends Component {
     render () {
-        <View>
+        return (<View>
             <Text>Hello from History</Text>
-        </View>
+        </View>)
     }
 }
 
