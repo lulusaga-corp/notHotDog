@@ -1,23 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+//import Config from 'react-native-config';
+import firebase from 'firebase';
+import LoginForm from './components/login/LoginForm'
 
-export default class App extends React.Component {
+
+class App extends Component {
+  componentWillMount() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCrC5z7j5oIYkFc-Tm5n3DMmgs2DzYc0OI",
+      authDomain: "lulusaga-app.firebaseapp.com",
+      databaseURL: "https://lulusaga-app.firebaseio.com",
+      projectId: "lulusaga-app",
+      storageBucket: "lulusaga-app.appspot.com",
+      messagingSenderId: "543277449359"
+    });
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View>
+        <LoginForm />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
