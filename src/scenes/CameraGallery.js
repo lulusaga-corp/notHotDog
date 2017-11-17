@@ -15,17 +15,18 @@ export default class CameraGallery extends Component<{}> {
   };
 
   componentDidMount() {
-    FileSystem.readDirectoryAsync(
-      FileSystem.documentDirectory + 'photos'
-    ).then(photos => {
-      this.setState({
-        photos,
-      });
-    });
-    // ImagePicker.launchImageLibraryAsync({base64: true})
-    // .then(photos => {
-    //   this.setState({photos: [photos]})
-    // })
+    // FileSystem.readDirectoryAsync(
+    //   FileSystem.documentDirectory + 'photos'
+    // ).then(photos => {
+    //   this.setState({
+    //     photos,
+    //   });
+    // });
+    ImagePicker.launchImageLibraryAsync({base64: true})
+    .then(photos => {
+      console.log(photos)
+      this.setState({photos: [photos]})
+    })
   }
 
   render() {
