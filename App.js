@@ -10,7 +10,6 @@ import firebaseConfig from './firebaseConfig.json';
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = { loaded: false };
   }
 
