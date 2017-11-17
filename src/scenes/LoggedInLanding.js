@@ -11,7 +11,11 @@ import LandingContainer from '../containers/LandingContainer';
 
 class LoggedIn extends Component {
     render () {
+        return (
+        <View>
         <LandingContainer />
+        </View>
+        )
     }
 }
 

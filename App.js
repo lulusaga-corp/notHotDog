@@ -9,7 +9,7 @@ import {
 
 // Containers go here:
 
-import LoggedInLanding from './src/scenes/LandingLoggedIn'; /* to navigate to camera or account home */
+import LoggedInLanding from './src/scenes/LoggedInLanding'; /* to navigate to camera or account home */
 import AccountHome from './src/scenes/AccountHome'; /* to display most recent meal */
 import AccountSettings from './src/scenes/AccountSettings'; /* to edit user account settings */
 import History from './src/scenes/History'; /* to see all past meal data */
@@ -18,6 +18,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <Router>
+      <Scene key="root"> 
         <Scene key="LoggedInLanding" initial={true} component={LoggedInLanding} title='Welcome' direction="vertical" />
         <Scene key="tabbar" tabs={true}>
           <Scene key="AccountHome" title="Most Recent Meal" initial={true}>
@@ -26,6 +27,7 @@ export default class App extends Component<{}> {
           <Scene key="history" title="Meal History">
             <Scene key="accountHistory" component={History} title="History" />
           </Scene>
+        </Scene>
         </Scene>
       </Router>
     );

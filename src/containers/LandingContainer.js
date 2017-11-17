@@ -3,22 +3,21 @@ import {
     Image,
     StyleSheet,
     Text,
-    View
+    View,
+    Button
 } from 'react-native';
-import Button from 'react-native-button';
 
 class LandingContainer extends Component {
     constructor(props){
         super(props)
-
     }
     render() {
-        return (
-            <View>
-                <Button>camera</Button> {/* open camera */}
-                <Button>my account</Button> {/* navigate to Account Home */}
-                <Button>logout</Button>
-            </View>
-        )
+        return <View>
+            <Button onPress={console.log("button")} title="Logout" />
+            <Button onPress={console.log("button")} title="Account" />
+            <Button onPress={console.log("button")} title="Camera" />
+          </View>;
     }
 }
+
+export default LandingContainer
