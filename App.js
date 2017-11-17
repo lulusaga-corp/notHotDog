@@ -8,6 +8,8 @@ import LoggedInLanding from "./src/scenes/LoggedInLanding"; /* to navigate to ca
 import AccountHome from "./src/scenes/AccountHome"; /* to display most recent meal */
 import AccountSettings from "./src/scenes/AccountSettings"; /* to edit user account settings */
 import History from "./src/scenes/History"; /* to see all past meal data */
+import CameraGallery from "./src/scenes/CameraGallery"; /* to choose a picture from the camera roll */
+
 
 export default class App extends Component<{}> {
   render() {
@@ -33,6 +35,7 @@ export default class App extends Component<{}> {
               <Scene key="accountHistory" component={History} title="History" />
             </Scene>
           </Scene>
+          <Scene key="gallery" component={CameraGallery} title="Camera Roll" />
         </Scene>
       </Router>
     );

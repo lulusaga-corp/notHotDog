@@ -24,19 +24,21 @@ export default class CameraGallery extends Component<{}> {
     // });
     ImagePicker.launchImageLibraryAsync({base64: true})
     .then(photos => {
-      console.log(photos)
-      this.setState({photos: [photos]})
+      this.setState({photos: [photos]}) 
+      {/* when you click a picture it is stored in the local react state */}
+      {/* here we could dispatch the photo to redux store or perhaps route to the next page */}
+      
     })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        {/* {<TouchableOpacity
           style={styles.backButton}
           onPress={this.props.onPress}>
           <Text>Back</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>} */}
         <ScrollView contentComponentStyle={{ flex: 1 }}>
           <View style={styles.pictures}>
             {this.state.photos.map(photoUri =>
@@ -70,10 +72,5 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 5,
     resizeMode: 'contain',
-  },
-  backButton: {
-    padding: 20,
-    marginBottom: 4,
-    backgroundColor: 'indianred',
-  },
+  }
 });
