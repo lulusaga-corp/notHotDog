@@ -75,12 +75,6 @@ export default class CameraScreen extends Component<{}> {
     });
   }
 
-  setRatio(ratio) {
-    this.setState({
-      ratio,
-    });
-  }
-
   toggleWB() {
     this.setState({
       whiteBalance: wbOrder[this.state.whiteBalance],
@@ -124,7 +118,9 @@ export default class CameraScreen extends Component<{}> {
           });
           Vibration.vibrate();
         });
-      });
+      }).catch(e => {
+      console.log(e, 'Photo error');
+    });
     }
   };
 
