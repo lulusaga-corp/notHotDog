@@ -6,9 +6,9 @@ import { Spinner } from '../common/Spinner';
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false };
+
   onLoginPress() {
     this.setState({ error: '', loading: true });
-
     const { email, password } = this.state;
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => { this.setState({ error: '', loading: false }); })
@@ -21,12 +21,22 @@ class LoginForm extends Component {
           });
       });
   }
+
+  onSignupPress(){
+
+  }
+
   renderButtonOrSpinner() {
     if (this.state.loading) {
       return <Text>Loading</Text>
     }
-    return <Button onPress={this.onLoginPress.bind(this)} title="Log in" />;
-  }
+    return (
+      <View>
+      <Button onPress={this.onLoginPress.bind(this)} title="Log in" />
+      <Button onPress={this.onSignupPress.bind(this)} title="Sign up" />
+      </View>
+  )}
+
   render() {
     return (
       <View>

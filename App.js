@@ -1,78 +1,38 @@
-import React, { Component } from "react";
-import { Scene, Router, TabBar, Icon } from "react-native-router-flux";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import firebase from 'firebase';
-import LoginForm from './components/login/LoginForm'
+import Router from './Router';
+import store from './configureStore';
+import { SIGN_IN_SUCCESS } from './src/modules/auth';
+import { Spinner } from './src/components/common';
+import firebaseConfig from './firebaseConfig.json';
 
-// Containers go here:
-import LoggedInLanding from "./src/scenes/LoggedInLanding"; /* to navigate to camera or account home */
-import AccountHome from "./src/scenes/AccountHome"; /* to display most recent meal */
-import AccountSettings from "./src/scenes/AccountSettings"; /* to edit user account settings */
-import History from "./src/scenes/History"; /* to see all past meal data */
+class App extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = { loaded: false };
+  }
 
-export default class App extends Component<{}> {
   componentWillMount() {
-    firebase.initializeApp({
-      apiKey: "AIzaSyCrC5z7j5oIYkFc-Tm5n3DMmgs2DzYc0OI",
-      authDomain: "lulusaga-app.firebaseapp.com",
-      databaseURL: "https://lulusaga-app.firebaseio.com",
-      projectId: "lulusaga-app",
-      storageBucket: "lulusaga-app.appspot.com",
-      messagingSenderId: "543277449359"
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ loaded: true });
+
+      if (user) {
+        store.dispatch({ type: SIGN_IN_SUCCESS, payload: user });
+      }
     });
   }
 
   render() {
     return (
-      <Router>
-        <Scene key="root">
-          <Scene
-            key="Login"
-            initial={true}
-            component={LoginForm}
-            title="Welcome"
-            direction="vertical"
-          />
-          <Scene
-          key="LoggedInLanding"
-          component={LoggedInLanding}
-          title="Welcome"
-          direction="vertical"
-          />
-          <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"} }>
-            <Scene key="AccountHome" title="Most Recent Meal" initial={true}>
-              <Scene
-                key="account"
-                component={AccountHome}
-                title="Account Home"
-              />
-            </Scene>
-            <Scene key="history" labelStyle="fontSize: 12" title="Meal History">
-              <Scene key="accountHistory" component={History} title="History" />
-            </Scene>
-          </Scene>
-        </Scene>
-      </Router>
+      <Provider store={store}>
+        {this.state.loaded ? <Router /> : <Spinner />}
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  },
-});
+export default App;
