@@ -15,13 +15,13 @@ export default function (ComposedComponent) {
   class Authentication extends Component {
     componentWillMount() {
       if (this.props.user) {
-        Actions.LoggedInLanding();
+        Actions.tabbar();
       }
     }
 
     componentWillUpdate(nextProps) {
       if (nextProps.user) {
-        Actions.LoggedInLanding();
+        Actions.tabbar();
       }
     }
 
