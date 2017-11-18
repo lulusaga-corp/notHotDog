@@ -1,6 +1,7 @@
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-
+///THIS IS EXAMPLES OF HOW WE MIGHT RUN USER DATA THROUGH THE STORE !
+///THIS IS ONLY HERE FOR REFERENCE AND NOT BEING USED
 /**
  |--------------------------------------------------
  | Types
