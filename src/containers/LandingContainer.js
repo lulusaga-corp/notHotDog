@@ -14,7 +14,7 @@ class LandingContainer extends Component {
     }
     render() {
         return <View>
-            <Button onPress={() => {console.log('button')}} title="Logout" />
+            <Button onPress={() => this.props.signOutUser() } title="SignOut"/>
             <Button onPress={() => {Actions.tabbar()}} title="Account" />
             <Button onPress={() => {Actions.gallery()}} title="Camera" />
           </View>;

@@ -29,7 +29,6 @@ export const signInUser = ({ email, password }) => (dispatch) => {
 
       dispatch(reset('signin'));
 
-      Actions.post();
     })
     .catch((error) => { dispatch({ type: SIGN_IN_FAILURE, payload: authFailMessage(error.code) }); });
 };
@@ -46,7 +45,6 @@ export const signUpUser = ({ email, password, firstname, lastname }) => (dispatc
 
           dispatch(reset('signup'));
 
-          Actions.post();
         });
     })
     .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
@@ -58,8 +56,8 @@ export const clearState = () => (
 
 export const signOutUser = () => (dispatch) => {
   dispatch({ type: SET_INITIAL_STATE });
-
   firebase.auth().signOut();
+  Actions.auth()
 };
 
 const authFailMessage = (errorCode) => {
