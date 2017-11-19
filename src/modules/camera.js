@@ -10,6 +10,7 @@ export const TOGGLE_FLASH = 'TOGGLE_FLASH';
 export const TOGGLE_WB = 'TOGGLE_WB';
 export const TOGGLE_AUTOFOCUS = 'TOGGLE_AUTOFOCUS';
 export const SET_FOCUS = 'SET_FOCUS';
+export const CHANGE_ZOOM = 'CHANGE_ZOOM';
 
 /**
  |--------------------------------------------------
@@ -70,6 +71,12 @@ export const setFocus = (newFocus) => (dispatch) => {
   dispatch({type: SET_FOCUS, payload: newFocus })
 }
 
+export const changeZoom = (newZoom) => (dispatch) => {
+  if (newZoom < 0) newZoom = 0;
+  if (newZoom > 1) newZoom = 1;
+  dispatch({type: CHANGE_ZOOM, payload: newZoom })
+}
+
 /**
  |--------------------------------------------------
  | Reducer
@@ -82,7 +89,8 @@ const INITIAL_STATE = {
   flash: 'off',
   wb: 'auto',
   autoFocus: 'on',
-  depth: 0
+  depth: 0,
+  zoom: 0
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -101,6 +109,8 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, autoFocus: action.payload };
     case SET_FOCUS:
       return { ...state, depth: action.payload };
+    case CHANGE_ZOOM:
+      return { ...state, zoom: action.payload };
     default:
       return state;
   }

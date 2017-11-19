@@ -1,8 +1,5 @@
 import {
   Camera,
-  Video,
-  FileSystem,
-  Permissions,
 } from 'expo';
 import React, { Component } from 'react';
 import {
@@ -19,37 +16,16 @@ import {
 } from 'react-native';
 import CameraGallery from './CameraGallery';
 import { connect } from 'react-redux';
-import { newPicture, showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus } from '../modules/camera';
-
-  // zoomOut() {
-  //   this.setState({
-  //     zoom: this.state.zoom - 0.1 < 0 ? 0 : this.state.zoom - 0.1,
-  //   });
-  // }
-
-  // zoomIn() {
-  //   this.setState({
-  //     zoom: this.state.zoom + 0.1 > 1 ? 1 : this.state.zoom + 0.1,
-  //   });
-  // }
+import { newPicture, showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus, changeZoom } from '../modules/camera';
 
 const takePicture = async function(props) {
   if (this.camera) {
     this.camera.takePictureAsync({base64: true}).then(data => {
       props.takePictureWithCamera(data.base64);
-  //     FileSystem.moveAsync({
-  //       from: data,
-  //       to: `${FileSystem.documentDirectory}photos/Photo_${props.photoId}.jpg`,
-  //     }).then((data) => {
-  //       console.log('data from pic then: ', data)
-  //       // this.setState({
-  //       //   photoId: this.state.photoId + 1
-  //       // });
-  //       Vibration.vibrate();
-  //     });
-  //   }).catch(e => {
-  //   console.log(e, 'Photo error');
-    });
+    })
+    .catch(e => {
+      console.log(e, 'Photo error');;
+    })
   }
 };
 
@@ -59,7 +35,7 @@ const renderGallery = (props) => {
 
 const renderCamera = (props) => {
   const { type, flash, autoFocus, zoom, whiteBalance, depth } = props;
-  const {toggleFacing, toggleFlash, toggleView, toggleWhiteBalance, toggleAutoFocus, setFocusDepth } = props;
+  const {toggleFacing, toggleFlash, toggleView, toggleWhiteBalance, toggleAutoFocus, setFocusDepth, changeZoom } = props;
     
   return (
     <Camera
@@ -111,12 +87,12 @@ const renderCamera = (props) => {
         style={styles.zoomView}>
         <TouchableOpacity
           style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
-          onPress={props.zoomIn()}>
+          onPress={() => changeZoom(zoom + 0.1)}>
           <Text style={styles.flipText}> + </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
-          onPress={props.zoomOut()}>
+          onPress={() => changeZoom(zoom - 0.1)}>
           <Text style={styles.flipText}> - </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -150,14 +126,6 @@ const renderCamera = (props) => {
 }
 
 const AppCamera = (props) => {
-
-  FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + 'photos',
-      {intermediates: true}
-    ).catch(e => {
-      console.log(e, 'Directory exists');
-    });
-
   return (
     <View style={styles.container}>
       {props.showGallery ? renderGallery(props) : renderCamera(props)}
@@ -168,7 +136,7 @@ const AppCamera = (props) => {
 const mapStateToProps = (state) => {
   return {
     flash: state.camera.flash,
-    zoom: 0,
+    zoom: state.camera.zoom,
     autoFocus: state.camera.autoFocus,
     depth: state.camera.depth,
     type: state.camera.cameraType,
@@ -199,11 +167,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleAutoFocus(currentAF) {
       dispatch(toggleAutoFocus(currentAF))
     },
-    setFocusDepth(e) {
-      dispatch(setFocus(e))
+    setFocusDepth(depth) {
+      dispatch(setFocus(depth))
     },
-    zoomIn() {},
-    zoomOut() {},
+    changeZoom(newZoom) {
+      dispatch(changeZoom(newZoom))
+    }
   }
 }
 

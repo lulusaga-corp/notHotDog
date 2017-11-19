@@ -23,7 +23,7 @@ const CameraGallery = (props) => {
     <View style={styles.container}>
       <Text>Your Picture Has Been Selected</Text>
       <Button 
-        title="back"
+        title="Return to Camera"
         onPress={() => endShowGallery()}>
         Return to Camera
       </Button>
@@ -33,8 +33,7 @@ const CameraGallery = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    currentPicture: state.camera.currentPicture,
-    showGallery: state.camera.showGallery
+    currentPicture: state.camera.currentPicture
   }
 }
 
