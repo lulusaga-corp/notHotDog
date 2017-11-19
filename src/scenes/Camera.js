@@ -18,6 +18,7 @@ import {
   Vibration,
 } from 'react-native';
 import CameraGallery from './CameraGallery';
+import store from '../../configureStore';
 
 const flashModeOrder = {
   off: 'on',
@@ -46,6 +47,7 @@ export default class CameraScreen extends Component<{}> {
     photoId: 1,
     showGallery: false,
     photos: [],
+    currentPhoto: ''
   };
 
   componentDidMount() {
@@ -108,16 +110,17 @@ export default class CameraScreen extends Component<{}> {
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
-        FileSystem.moveAsync({
-          from: data,
-          to: `${FileSystem.documentDirectory}photos/Photo_${this.state
-            .photoId}.jpg`,
-        }).then(() => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          });
-          Vibration.vibrate();
-        });
+        store.dispatch({type: 'TAKE_PICTURE', payload: data.base64})
+        // FileSystem.moveAsync({
+        //   from: data,
+        //   to: `${FileSystem.documentDirectory}photos/Photo_${this.state
+        //     .photoId}.jpg`,
+        // }).then((data) => {
+        //   this.setState({
+        //     photoId: this.state.photoId + 1
+        //   });
+        //   Vibration.vibrate();
+        // });
       }).catch(e => {
       console.log(e, 'Photo error');
     });
