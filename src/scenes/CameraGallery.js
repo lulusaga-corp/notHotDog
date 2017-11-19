@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Image,
   StyleSheet,
   View,
-  TouchableOpacity,
   Text,
-  ScrollView,
+  Button
 } from 'react-native';
 import { FileSystem, ImagePicker } from 'expo';
 import { connect } from 'react-redux';
-import { retrievePicture } from '../modules/camera'
+import { newPicture, showGallery } from '../modules/camera';
 
 const CameraGallery = (props) => {
-  const { currentPicture, retrievePictureFromCameraRoll, pictureUri } = props;
+  const { currentPicture, retrievePictureFromCameraRoll, endShowGallery } = props;
   if (!currentPicture) {
     ImagePicker.launchImageLibraryAsync({base64: true})
       .then(photo => {
@@ -24,20 +22,29 @@ const CameraGallery = (props) => {
   return (
     <View style={styles.container}>
       <Text>Your Picture Has Been Selected</Text>
+      <Button 
+        title="back"
+        onPress={() => endShowGallery()}>
+        Return to Camera
+      </Button>
     </View>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    currentPicture: state.camera.currentPicture
+    currentPicture: state.camera.currentPicture,
+    showGallery: state.camera.showGallery
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     retrievePictureFromCameraRoll(picture) {
-      dispatch(retrievePicture(picture))
+      dispatch(newPicture(picture))
+    }, 
+    endShowGallery() {
+      dispatch(showGallery())
     }
   }
 }
