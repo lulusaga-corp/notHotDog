@@ -17,11 +17,14 @@ import {
 import CameraGallery from './CameraGallery';
 import { connect } from 'react-redux';
 import { newPicture, showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus, changeZoom } from '../modules/camera';
+import {getOptions} from '../modules/food';
+
 
 const takePicture = async function(props) {
+
   if (this.camera) {
-    this.camera.takePictureAsync({base64: true}).then(data => {
-      props.takePictureWithCamera(data.base64);
+      this.camera.takePictureAsync({base64: true}).then(data => {
+      props.takePictureWithCamera(data);
     })
     .catch(e => {
       console.log(e, 'Photo error');;
@@ -150,7 +153,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     takePictureWithCamera (picture) {
-      dispatch(newPicture(picture))
+      dispatch(getOptions(picture))
     },
     toggleView() {
       dispatch(showGallery())

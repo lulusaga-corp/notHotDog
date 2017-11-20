@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "clarifai": "^2.5.0",
     "expo": "^22.0.2",
     "firebase": "^4.6.2",
     "prop-types": "^15.6.0",
