@@ -7,6 +7,7 @@ import { SIGN_IN_SUCCESS } from './src/modules/auth';
 import { Spinner } from './src/components/common';
 import firebaseConfig from './firebaseConfig.json';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
