@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
     Image,
     StyleSheet,
@@ -8,14 +7,12 @@ import {
 } from 'react-native';
 import IconContainer from '../components/IconContainer';
 
-//import AccountSettings from '../containers/LandingContainer';
-
-class AccountHome extends Component {
+class NutritionHistory extends Component {
     render () {
         return (
             <View style={styles.tabContainer}>
                 <IconContainer />
-                <Text>Hello from Home</Text>
+                <Text>Hello from Nutrition History</Text>
             </View>
         )
     }
@@ -29,4 +26,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AccountHome;
+export default NutritionHistory;
