@@ -10,7 +10,8 @@ import LoggedInLanding from "./src/scenes/LoggedInLanding"; /* to navigate to ca
 import AccountHome from "./src/scenes/AccountHome"; /* to display most recent meal */
 import AccountSettings from "./src/scenes/AccountSettings"; /* to edit user account settings */
 import History from "./src/scenes/History"; /* to see all past meal data */
-import CameraGallery from "./src/scenes/CameraGallery";
+// import CameraGallery from "./src/scenes/CameraGallery";  /* Camera Roll - not currently used */
+import Camera from "./src/scenes/Camera"; /* access to the camera */
 import NutritionHistory from "./src/scenes/NutritionHistory";
 
 const RouterComponent = () => (
@@ -22,7 +23,7 @@ const RouterComponent = () => (
         <Scene key="signin" component={requireNotAuth(Signin)}
                title="Please Sign in" />
       </Scene>
-      <Scene key="gallery" component={CameraGallery} title="Camera Roll" />
+      <Scene key="camera" component={Camera} title="Camera" />
       <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"}}>
         <Scene key="AccountHome" title="Most Recent Meal" initial={true} component={AccountHome} />
         <Scene key="history" title="Meal History" component={History} />
