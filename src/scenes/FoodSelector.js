@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import {
-    StyleSheet,
-    Text,
-    View
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 
@@ -180,15 +181,21 @@ class FoodSelector extends Component {
     constructor (props){
         super(props);
         this.state = {
-            response: ["sauce", "pasta", "basil", "penne", "meat", "beef", "spaghetti", "tomato", "cheese", "macaroni", "vegetable", "meat sauce"]
+            response: ["sauce", "pasta", "basil", "penne", "meat", "beef", "spaghetti", "tomato", "cheese", "macaroni", "vegetable", "meat sauce"],
+          foodInput:''
         }
+        this.handleTextInput = this.handleTextInput.bind(this)
     }
+
+    handleTextInput= (e) => this.setState({foodInput:e.target.value})
 
 
     render () {
+      console.log('state', this.state)
         const filtered = this.state.response
         return(
             <View style={styles.tabContainer}>
+              <ScrollView>
                 <List>
                     {
                     filtered.map((item, i) => {
@@ -199,7 +206,23 @@ class FoodSelector extends Component {
                         }} />
                     })
                     }
+                    <ListItem textInput={true}
+                              textInputValue={this.state.foodInput}
+                              textInputOnChangeText={(text)=>{
+                                this.setState({foodInput:text})
+                              }}
+                              textInputPlaceholder={'Add other foods...'}
+                              rightIcon={{ name: 'add'}}
+                              textInputAutoCorrect={true}
+                              textInputAutoCapitalize={"none"}
+                              onPressRightIcon={()=>{
+                                let stateArr = this.state.response.slice()
+                                stateArr.push(this.state.foodInput)
+                                this.setState({ response : stateArr })
+                                this.setState({foodInput:''})
+                              }}/>
                 </List>
+              </ScrollView>
             </View>
         )
     }
