@@ -13,6 +13,7 @@ import History from "./src/scenes/History"; /* to see all past meal data */
 // import CameraGallery from "./src/scenes/CameraGallery";  /* Camera Roll - not currently used */
 import Camera from "./src/scenes/Camera"; /* access to the camera */
 import NutritionHistory from "./src/scenes/NutritionHistory";
+import FoodSelector from "./src/scenes/FoodSelector";
 
 const RouterComponent = () => (
   <Router>
@@ -24,6 +25,7 @@ const RouterComponent = () => (
                title="Please Sign in" />
       </Scene>
       <Scene key="camera" component={Camera} title="Camera" />
+      <Scene key="FoodSelector" component={FoodSelector} title="Select" />
       <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"}}>
         <Scene key="AccountHome" title="Most Recent Meal" initial={true} component={AccountHome} />
         <Scene key="history" title="Meal History" component={History} />

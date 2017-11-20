@@ -19,7 +19,6 @@ class History extends Component {
     }
     render () {
         const meals = this.state.meals;
-        console.log(meals)
         return (
             <View style={styles.tabContainer}>
                 <IconContainer />
