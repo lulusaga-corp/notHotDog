@@ -8,17 +8,15 @@ import {
 import { FileSystem, ImagePicker } from 'expo';
 import { connect } from 'react-redux';
 import { newPicture, showGallery } from '../modules/camera';
+import { getOptions } from '../modules/food'
 
 const CameraGallery = (props) => {
   const { currentPicture, retrievePictureFromCameraRoll, endShowGallery } = props;
   if (!currentPicture) {
     ImagePicker.launchImageLibraryAsync({base64: true})
       .then(photo => {
-        retrievePictureFromCameraRoll(photo.base64)
-        {/* Right now this sends the photo to the store and then shows some placeholder text - we need to route to next page */}
-      })
-  }
-
+        retrievePictureFromCameraRoll(photo)
+  })}
   return (
     <View style={styles.container}>
       <Text>Your Picture Has Been Selected</Text>
@@ -39,8 +37,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    retrievePictureFromCameraRoll(picture) {
-      dispatch(newPicture(picture))
+    retrievePictureFromCameraRoll(data) {
+      dispatch(getOptions(data))
     }, 
     endShowGallery() {
       dispatch(showGallery())

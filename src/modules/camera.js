@@ -11,14 +11,16 @@ export const TOGGLE_WB = 'TOGGLE_WB';
 export const TOGGLE_AUTOFOCUS = 'TOGGLE_AUTOFOCUS';
 export const SET_FOCUS = 'SET_FOCUS';
 export const CHANGE_ZOOM = 'CHANGE_ZOOM';
-
 /**
  |--------------------------------------------------
  | Actions
  |--------------------------------------------------
  */
 export const newPicture = (picture) => (dispatch) => {
-  dispatch({type: NEW_PICTURE, payload: picture})
+  // dispatch({type: NEW_PICTURE, payload: picture})
+  dispatch({
+    
+  })
 }
 
 export const showGallery = () => (dispatch) => {
