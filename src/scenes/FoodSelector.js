@@ -174,28 +174,28 @@ const responseProp = {
     ]
   }
 
+
+
 class FoodSelector extends Component {
     constructor (props){
         super(props);
         this.state = {
-            response: responseProp.outputs[0].data.concepts.filter(item => item.value >= .85).map(item => item.name)
+            response: ["sauce", "pasta", "basil", "penne", "meat", "beef", "spaghetti", "tomato", "cheese", "macaroni", "vegetable", "meat sauce"]
         }
     }
 
 
     render () {
-        
-        console.log('188 state', this.state)
         const filtered = this.state.response
-        // console.log('food list', filtered)
         return(
             <View style={styles.tabContainer}>
                 <List>
                     {
                     filtered.map((item, i) => {
                         return <ListItem key={i} title={item} rightIcon={{name: 'clear'}} onPressRightIcon={item => {
-                            this.setState({ response : this.state.response.splice(i, 1)})
-                            console.log('line 198 state', this.state)
+                            let stateArr = this.state.response.slice()
+                            stateArr.splice(i, 1)
+                            this.setState({ response : stateArr })
                         }} />
                     })
                     }
