@@ -15,7 +15,7 @@ class LoggedIn extends Component {
     render () {
         return (
         <View>
-        <LandingContainer signOutUser={this.props.signOutUser}/>
+            <LandingContainer signOutUser={this.props.signOutUser}/>
         </View>
         )
     }
