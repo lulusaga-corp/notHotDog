@@ -1,61 +1,54 @@
 import React, { Component } from 'react';
 import {
-  Image,
   StyleSheet,
   View,
-  TouchableOpacity,
   Text,
-  ScrollView,
+  Button
 } from 'react-native';
 import { FileSystem, ImagePicker } from 'expo';
+import { connect } from 'react-redux';
+import { newPicture, showGallery } from '../modules/camera';
 
-export default class CameraGallery extends Component<{}> {
-  state = {
-    photos: [],
-  };
-
-  componentDidMount() {
-    // FileSystem.readDirectoryAsync(
-    //   FileSystem.documentDirectory + 'photos'
-    // ).then(photos => {
-    //   this.setState({
-    //     photos,
-    //   });
-    // });
+const CameraGallery = (props) => {
+  const { currentPicture, retrievePictureFromCameraRoll, endShowGallery } = props;
+  if (!currentPicture) {
     ImagePicker.launchImageLibraryAsync({base64: true})
-    .then(photos => {
-      this.setState({photos: [photos]}) 
-      {/* when you click a picture it is stored in the local react state */}
-      {/* here we could dispatch the photo to redux store or perhaps route to the next page */}
-      
-    })
+      .then(photo => {
+        retrievePictureFromCameraRoll(photo.base64)
+        {/* Right now this sends the photo to the store and then shows some placeholder text - we need to route to next page */}
+      })
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* {<TouchableOpacity
-          style={styles.backButton}
-          onPress={this.props.onPress}>
-          <Text>Back</Text>
-        </TouchableOpacity>} */}
-        <ScrollView contentComponentStyle={{ flex: 1 }}>
-          <View style={styles.pictures}>
-            {this.state.photos.map(photoUri =>
-              <Image
-                style={styles.picture}
-                source={{
-                  uri: `${FileSystem.documentDirectory}photos/${photoUri}`,
-                }}
-                key={photoUri}
-              />
-            )}
-          </View>
-        </ScrollView>
-      </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text>Your Picture Has Been Selected</Text>
+      <Button 
+        title="Return to Camera"
+        onPress={() => endShowGallery()}>
+        Return to Camera
+      </Button>
+    </View>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    currentPicture: state.camera.currentPicture
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    retrievePictureFromCameraRoll(picture) {
+      dispatch(newPicture(picture))
+    }, 
+    endShowGallery() {
+      dispatch(showGallery())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CameraGallery)
 
 const styles = StyleSheet.create({
   container: {

@@ -1,8 +1,5 @@
 import {
   Camera,
-  Video,
-  FileSystem,
-  Permissions,
 } from 'expo';
 import React, { Component } from 'react';
 import {
@@ -18,214 +15,168 @@ import {
   Vibration,
 } from 'react-native';
 import CameraGallery from './CameraGallery';
+import { connect } from 'react-redux';
+import { newPicture, showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus, changeZoom } from '../modules/camera';
 
-const flashModeOrder = {
-  off: 'on',
-  on: 'auto',
-  auto: 'torch',
-  torch: 'off',
+const takePicture = async function(props) {
+  if (this.camera) {
+    this.camera.takePictureAsync({base64: true}).then(data => {
+      props.takePictureWithCamera(data.base64);
+    })
+    .catch(e => {
+      console.log(e, 'Photo error');;
+    })
+  }
 };
 
-const wbOrder = {
-  auto: 'sunny',
-  sunny: 'cloudy',
-  cloudy: 'shadow',
-  shadow: 'fluorescent',
-  fluorescent: 'incandescent',
-  incandescent: 'auto',
-};
+const renderGallery = (props) => {
+  return <CameraGallery onPress={props.toggleView} />;
+}
 
-export default class CameraScreen extends Component<{}> {
-  state = {
-    flash: 'off',
-    zoom: 0,
-    autoFocus: 'on',
-    depth: 0,
-    type: 'back',
-    whiteBalance: 'auto',
-    photoId: 1,
-    showGallery: false,
-    photos: [],
-  };
-
-  componentDidMount() {
-    FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + 'photos',
-      {intermediates: true}
-    ).catch(e => {
-      console.log(e, 'Directory exists');
-    });
-  }
-
-  toggleView() {
-    this.setState({
-      showGallery: !this.state.showGallery,
-    });
-  }
-
-  toggleFacing() {
-    this.setState({
-      type: this.state.type === 'back' ? 'front' : 'back',
-    });
-  }
-
-  toggleFlash() {
-    this.setState({
-      flash: flashModeOrder[this.state.flash],
-    });
-  }
-
-  toggleWB() {
-    this.setState({
-      whiteBalance: wbOrder[this.state.whiteBalance],
-    });
-  }
-
-  toggleFocus() {
-    this.setState({
-      autoFocus: this.state.autoFocus === 'on' ? 'off' : 'on',
-    });
-  }
-
-  zoomOut() {
-    this.setState({
-      zoom: this.state.zoom - 0.1 < 0 ? 0 : this.state.zoom - 0.1,
-    });
-  }
-
-  zoomIn() {
-    this.setState({
-      zoom: this.state.zoom + 0.1 > 1 ? 1 : this.state.zoom + 0.1,
-    });
-  }
-
-  setFocusDepth(depth) {
-    this.setState({
-      depth,
-    });
-  }
-
-  takePicture = async function() {
-    if (this.camera) {
-      this.camera.takePictureAsync({base64: true}).then(data => {
-        FileSystem.moveAsync({
-          from: data,
-          to: `${FileSystem.documentDirectory}photos/Photo_${this.state
-            .photoId}.jpg`,
-        }).then(() => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          });
-          Vibration.vibrate();
-        });
-      }).catch(e => {
-      console.log(e, 'Photo error');
-    });
-    }
-  };
-
-  renderGallery() {
-    return <CameraGallery onPress={this.toggleView.bind(this)} />;
-  }
-
-  renderCamera() {
-    return (
-      <Camera
-        ref={ref => {
-          this.camera = ref;
-        }}
-        style={{
-          flex: 1,
-        }}
-        type={this.state.type}
-        flashMode={this.state.flash}
-        autoFocus={this.state.autoFocus}
-        zoom={this.state.zoom}
-        whiteBalance={this.state.whiteBalance}
-        ratio={this.state.ratio}
-        focusDepth={this.state.depth}>
-        <View
-          style={styles.buttonArea}>
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={this.toggleFacing.bind(this)}>
-            <Text style={styles.flipText}> FLIP </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={this.toggleFlash.bind(this)}>
-            <Text style={styles.flipText}>
-              {' '}FLASH: {this.state.flash}{' '}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={this.toggleWB.bind(this)}>
-            <Text style={styles.flipText}>
-              {' '}WB: {this.state.whiteBalance}{' '}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={styles.focusView}>
-          <Slider
-            style={{ width: 150, marginTop: 15, alignSelf: 'flex-end' }}
-            onValueChange={this.setFocusDepth.bind(this)}
-            value={this.state.depth}
-            step={0.1}
-            disabled={this.state.autoFocus === 'on'}
-          />
-        </View>
-        <View
-          style={styles.zoomView}>
-          <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
-            onPress={this.zoomIn.bind(this)}>
-            <Text style={styles.flipText}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
-            onPress={this.zoomOut.bind(this)}>
-            <Text style={styles.flipText}> - </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.25, alignSelf: 'flex-end' }]}
-            onPress={this.toggleFocus.bind(this)}>
-            <Text style={styles.flipText}>
-              {' '}AF : {this.state.autoFocus}{' '}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.flipButton,
-              styles.picButton,
-              { flex: 0.3, alignSelf: 'flex-end' },
-            ]}
-            onPress={this.takePicture.bind(this)}>
-            <Text style={styles.flipText}> SNAP </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.flipButton,
-              styles.galleryButton,
-              { flex: 0.25, alignSelf: 'flex-end' },
-            ]}
-            onPress={this.toggleView.bind(this)}>
-            <Text style={styles.flipText}> Gallery </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    );
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.state.showGallery ? this.renderGallery() : this.renderCamera()}
+const renderCamera = (props) => {
+  const { type, flash, autoFocus, zoom, whiteBalance, depth } = props;
+  const {toggleFacing, toggleFlash, toggleView, toggleWhiteBalance, toggleAutoFocus, setFocusDepth, changeZoom } = props;
+    
+  return (
+    <Camera
+      ref={ref => {
+        this.camera = ref;
+      }}
+      style={{
+        flex: 1,
+      }}
+      type={type}
+      flashMode={flash}
+      autoFocus={autoFocus}
+      zoom={zoom}
+      whiteBalance={whiteBalance}
+      focusDepth={depth}>
+      <View
+        style={styles.buttonArea}>
+        <TouchableOpacity
+          style={styles.flipButton}
+          onPress={() => toggleFacing(type)}>
+          <Text style={styles.flipText}> FLIP </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.flipButton}
+          onPress={() => toggleFlash(flash)}>
+          <Text style={styles.flipText}>
+            {' '}FLASH: {flash}{' '}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.flipButton}
+          onPress={() => toggleWhiteBalance(whiteBalance)}>
+          <Text style={styles.flipText}>
+            {' '}WB: {whiteBalance}{' '}
+          </Text>
+        </TouchableOpacity>
       </View>
-    );
+      <View
+        style={styles.focusView}>
+        <Slider
+          style={{ width: 150, marginTop: 15, alignSelf: 'flex-end' }}
+          onValueChange={() => setFocusDepth(depth+.1)}
+          value={depth}
+          step={0.1}
+          disabled={autoFocus === 'on'}
+        />
+      </View>
+      <View
+        style={styles.zoomView}>
+        <TouchableOpacity
+          style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
+          onPress={() => changeZoom(zoom + 0.1)}>
+          <Text style={styles.flipText}> + </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
+          onPress={() => changeZoom(zoom - 0.1)}>
+          <Text style={styles.flipText}> - </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.flipButton, { flex: 0.25, alignSelf: 'flex-end' }]}
+          onPress={() => toggleAutoFocus(autoFocus)}>
+          <Text style={styles.flipText}>
+            {' '}AF : {autoFocus}{' '}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.flipButton,
+            styles.picButton,
+            { flex: 0.3, alignSelf: 'flex-end' },
+          ]}
+          onPress={() => takePicture(props)}>
+          <Text style={styles.flipText}> SNAP </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.flipButton,
+            styles.galleryButton,
+            { flex: 0.25, alignSelf: 'flex-end' },
+          ]}
+          onPress={() => toggleView()}>
+          <Text style={styles.flipText}> Gallery </Text>
+        </TouchableOpacity>
+      </View>
+    </Camera>
+  );
+}
+
+const AppCamera = (props) => {
+  return (
+    <View style={styles.container}>
+      {props.showGallery ? renderGallery(props) : renderCamera(props)}
+    </View>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    flash: state.camera.flash,
+    zoom: state.camera.zoom,
+    autoFocus: state.camera.autoFocus,
+    depth: state.camera.depth,
+    type: state.camera.cameraType,
+    whiteBalance: state.camera.wb,
+    photoId: 1,
+    showGallery: state.camera.showGallery,
+    currentPicture: state.camera.currentPicture
   }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    takePictureWithCamera (picture) {
+      dispatch(newPicture(picture))
+    },
+    toggleView() {
+      dispatch(showGallery())
+    },
+    toggleFacing(currentType) {
+      dispatch(toggleFacing(currentType))
+    },
+    toggleFlash(currentFlash) {
+      dispatch(toggleFlash(currentFlash))
+    },
+    toggleWhiteBalance(currentWB) {
+      dispatch(toggleWB(currentWB))
+    },
+    toggleAutoFocus(currentAF) {
+      dispatch(toggleAutoFocus(currentAF))
+    },
+    setFocusDepth(depth) {
+      dispatch(setFocus(depth))
+    },
+    changeZoom(newZoom) {
+      dispatch(changeZoom(newZoom))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppCamera)
 
 const styles = StyleSheet.create({
   container: {
