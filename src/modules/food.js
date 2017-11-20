@@ -1,4 +1,5 @@
 import Clarifai from 'clarifai'
+import { Actions } from 'react-native-router-flux'
 const clarifai = new Clarifai.App({
             apiKey: "dd78fc13ab31417c9e61706721dc8179"
           });
@@ -9,15 +10,13 @@ export const getOptions = (data) => (dispatch) => {
     clarifai.models
         .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
         .then(response => {
-          let foodArr = response.outputs[0].data.concepts.filter(concept => {
-              return concept.value >= 0.85
-          }).map(item => item.name)
-          console.log('our food', foodArr)
-          dispatch({type: GET_OPTIONS, payload: foodArr})  
+          let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
+            .map(item => item.name)
+          dispatch({type: GET_OPTIONS, payload: foodArr});
+          Actions.FoodSelector();
         }, err => {
           console.error
         })
-        //Actions.FoodSelector() uncomment once FoodSelector ready
 } 
 
 const INITIAL_STATE = {
