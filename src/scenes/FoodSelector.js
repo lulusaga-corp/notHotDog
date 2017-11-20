@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
+import axios from 'axios'
 import {
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Button } from 'react-native-elements';
 
 const responseProp = {
     "status": {
@@ -184,11 +184,22 @@ class FoodSelector extends Component {
             response: ["sauce", "pasta", "basil", "penne", "meat", "beef", "spaghetti", "tomato", "cheese", "macaroni", "vegetable", "meat sauce"],
           foodInput:''
         }
-        this.handleTextInput = this.handleTextInput.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleTextInput= (e) => this.setState({foodInput:e.target.value})
-
+    handleSubmit(e) {
+      axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+        query: this.state.response.join(", ")
+      }, {
+        headers: {
+          "x-app-id": "da40e3ba",
+          "x-app-key": "9039730dc95644122941bec700a3ebe4",
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.data)
+      .then(data => console.log("DATA", data))
+    }
 
     render () {
       console.log('state', this.state)
@@ -221,6 +232,12 @@ class FoodSelector extends Component {
                                 this.setState({ response : stateArr })
                                 this.setState({foodInput:''})
                               }}/>
+                    <ListItem 
+                      onPress={this.handleSubmit} 
+                      title="Click here to submit!"
+                      hideChevron={true} 
+                      />
+
                 </List>
               </ScrollView>
             </View>
