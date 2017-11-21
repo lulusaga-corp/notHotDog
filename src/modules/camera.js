@@ -110,7 +110,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     case TOGGLE_AUTOFOCUS:
       return { ...state, autoFocus: action.payload };
     case SET_FOCUS:
-      return { ...state, depth: action.payload };
+      return { ...state, autoFocus: 'off', depth: action.payload };
     case CHANGE_ZOOM:
       return { ...state, zoom: action.payload };
     default:
