@@ -23,14 +23,18 @@
     "clarifai": "^2.5.0",
     "expo": "^22.0.2",
     "firebase": "^4.6.2",
+    "link": "^0.1.5",
     "prop-types": "^15.6.0",
     "react": "16.0.0-beta.5",
     "react-native": "^0.49.5",
     "react-native-button": "^2.1.0",
     "react-native-elements": "^0.18.2",
+    "react-native-pathjs-charts": "0.0.32",
     "react-native-router-flux": "^4.0.0-beta.24",
+    "react-native-svg": "^5.4.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.1.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "victory-native": "^0.16.1"
   }
 }
