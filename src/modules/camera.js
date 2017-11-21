@@ -3,7 +3,6 @@
  | Types
  |--------------------------------------------------
  */
-export const NEW_PICTURE = 'NEW_PICTURE';
 export const SHOW_GALLERY = 'SHOW_GALLERY';
 export const TOGGLE_FACING = 'TOGGLE_FACING';
 export const TOGGLE_FLASH = 'TOGGLE_FLASH';
@@ -11,18 +10,12 @@ export const TOGGLE_WB = 'TOGGLE_WB';
 export const TOGGLE_AUTOFOCUS = 'TOGGLE_AUTOFOCUS';
 export const SET_FOCUS = 'SET_FOCUS';
 export const CHANGE_ZOOM = 'CHANGE_ZOOM';
+
 /**
  |--------------------------------------------------
  | Actions
  |--------------------------------------------------
  */
-export const newPicture = (picture) => (dispatch) => {
-  // dispatch({type: NEW_PICTURE, payload: picture})
-  dispatch({
-    
-  })
-}
-
 export const showGallery = () => (dispatch) => {
   dispatch({type: SHOW_GALLERY})
 }
@@ -87,7 +80,6 @@ export const changeZoom = (newZoom) => (dispatch) => {
 const INITIAL_STATE = {
   cameraType: 'back',
   showGallery: false,
-  currentPicture: '',
   flash: 'off',
   wb: 'auto',
   autoFocus: 'on',
@@ -97,8 +89,6 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case NEW_PICTURE:
-      return { ...state, currentPicture: action.payload };
     case SHOW_GALLERY:
       return { ...state, showGallery: !state.showGallery };
     case TOGGLE_FACING:

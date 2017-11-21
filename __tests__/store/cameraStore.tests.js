@@ -6,7 +6,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'on',
@@ -19,7 +18,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.SHOW_GALLERY})).toEqual({
       cameraType: 'back',
       showGallery: true,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'on',
@@ -32,7 +30,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.TOGGLE_FACING, payload: 'front'})).toEqual({
       cameraType: 'front',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'on',
@@ -45,7 +42,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.TOGGLE_FLASH, payload: 'on'})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'on',
       wb: 'auto',
       autoFocus: 'on',
@@ -58,7 +54,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.TOGGLE_WB, payload: 'sunny'})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'sunny',
       autoFocus: 'on',
@@ -71,7 +66,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.TOGGLE_AUTOFOCUS, payload: 'off'})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'off',
@@ -84,7 +78,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'on',
@@ -97,7 +90,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.SET_FOCUS, payload: 0.2})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'off',
@@ -110,7 +102,6 @@ describe('camera reducer', () => {
     expect(camera.default(undefined, {type: camera.CHANGE_ZOOM, payload: 0.3})).toEqual({
       cameraType: 'back',
       showGallery: false,
-      currentPicture: '',
       flash: 'off',
       wb: 'auto',
       autoFocus: 'on',

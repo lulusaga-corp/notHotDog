@@ -10,7 +10,6 @@ import LoggedInLanding from "./src/scenes/LoggedInLanding"; /* to navigate to ca
 import AccountHome from "./src/scenes/AccountHome"; /* to display most recent meal */
 import AccountSettings from "./src/scenes/AccountSettings"; /* to edit user account settings */
 import History from "./src/scenes/History"; /* to see all past meal data */
-// import CameraGallery from "./src/scenes/CameraGallery";  /* Camera Roll - not currently used */
 import Camera from "./src/scenes/Camera"; /* access to the camera */
 import NutritionHistory from "./src/scenes/NutritionHistory";
 import FoodSelector from "./src/scenes/FoodSelector";
@@ -19,10 +18,8 @@ const RouterComponent = () => (
   <Router>
     <Scene key="root">
       <Scene key="auth">
-        <Scene key="signup" component={requireNotAuth(Signup)}
-               title="Please Sign up" />
-        <Scene key="signin" component={requireNotAuth(Signin)}
-               title="Please Sign in" />
+        <Scene key="signup" component={requireNotAuth(Signup)} title="Please Sign up" />
+        <Scene key="signin" component={requireNotAuth(Signin)} title="Please Sign in" />
       </Scene>
       <Scene key="camera" component={Camera} title="Camera" />
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />

@@ -2,37 +2,30 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Button
+  Text
 } from 'react-native';
-import { FileSystem, ImagePicker } from 'expo';
+import { ImagePicker } from 'expo';
 import { connect } from 'react-redux';
-import { newPicture, showGallery } from '../modules/camera';
+import { showGallery } from '../modules/camera';
 import { getOptions } from '../modules/food'
 
 const CameraGallery = (props) => {
   const { currentPicture, retrievePictureFromCameraRoll, endShowGallery } = props;
-  if (!currentPicture) {
-    ImagePicker.launchImageLibraryAsync({base64: true})
-      .then(photo => {
+  
+  ImagePicker.launchImageLibraryAsync({base64: true})
+    .then(photo => {
+      if (photo.cancelled) {
+        endShowGallery()
+      } else {
         retrievePictureFromCameraRoll(photo)
-  })}
+      }
+    })
+
   return (
     <View style={styles.container}>
-      <Text>Your Picture Has Been Selected</Text>
-      <Button 
-        title="Return to Camera"
-        onPress={() => endShowGallery()}>
-        Return to Camera
-      </Button>
+      <Text>Your Picture Is Being Analyzed</Text>
     </View>
   );
-}
-
-const mapStateToProps = (state) => {
-  return {
-    currentPicture: state.camera.currentPicture
-  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -46,7 +39,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CameraGallery)
+export default connect(mapDispatchToProps)(CameraGallery)
 
 const styles = StyleSheet.create({
   container: {

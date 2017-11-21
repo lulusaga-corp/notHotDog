@@ -8,16 +8,12 @@ import {
   View,
   TouchableOpacity,
   Slider,
-  Image,
-  Picker,
   Button,
-  ScrollView,
-  Vibration,
 } from 'react-native';
 import CameraGallery from './CameraGallery';
 import { connect } from 'react-redux';
-import { newPicture, showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus, changeZoom } from '../modules/camera';
-import {getOptions} from '../modules/food';
+import { showGallery, toggleFacing, toggleFlash, toggleWB, toggleAutoFocus, setFocus, changeZoom } from '../modules/camera';
+import { getOptions } from '../modules/food';
 
 
 const takePicture = async function(props) {
@@ -145,8 +141,7 @@ const mapStateToProps = (state) => {
     type: state.camera.cameraType,
     whiteBalance: state.camera.wb,
     photoId: 1,
-    showGallery: state.camera.showGallery,
-    currentPicture: state.camera.currentPicture
+    showGallery: state.camera.showGallery
   }
 }
 
