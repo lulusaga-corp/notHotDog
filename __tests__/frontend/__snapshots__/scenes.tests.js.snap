@@ -197,14 +197,22 @@ exports[`Camera Gallery scene renders without crashing 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
   >
-    Your Picture Is Being Analyzed
-  </Text>
+    <ActivityIndicator
+      animating={true}
+      color="#999999"
+      hidesWhenStopped={true}
+      size="large"
+    />
+  </View>
 </View>
 `;
 
@@ -339,6 +347,7 @@ exports[`Camera scene renders without crashing 1`] = `
         >
            
           FLASH: 
+          off
            
         </Text>
       </View>
@@ -391,6 +400,7 @@ exports[`Camera scene renders without crashing 1`] = `
         >
            
           WB: 
+          auto
            
         </Text>
       </View>
@@ -406,8 +416,8 @@ exports[`Camera scene renders without crashing 1`] = `
       }
     >
       <RCTSlider
-        disabled={false}
-        enabled={true}
+        disabled={true}
+        enabled={false}
         maximumValue={1}
         minimumValue={0}
         onChange={[Function]}
@@ -593,6 +603,7 @@ exports[`Camera scene renders without crashing 1`] = `
         >
            
           AF : 
+          on
            
         </Text>
       </View>

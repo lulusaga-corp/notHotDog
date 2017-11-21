@@ -10,11 +10,7 @@ import { getOptions } from '../modules/food';
 import { Spinner } from '../components/common'
 
 export default class GalleryScreen extends React.Component {
-  state = {
-    photos: [],
-  };
-
-  componentDidMount() {
+  render() {
     ImagePicker.launchImageLibraryAsync({base64: true})
     .then(photo => {
       if (photo.cancelled) {
@@ -23,9 +19,7 @@ export default class GalleryScreen extends React.Component {
         store.dispatch(getOptions(photo))
       }
     })
-  }
 
-  render() {
     return (
       <View style={styles.container}>
         <Spinner />
