@@ -1,9 +1,9 @@
 import React from 'react';
-import requireAuth from '../src/containers/auth/requireAuth';
-import requireNotAuth from '../src/containers/auth/requireNotAuth';
-import Signup from '../src/containers/auth/Signup';
-import Signin from '../src/containers/auth/Signin';
-import LandingContainer from '../src/containers/LandingContainer';
+import requireAuth from '../../src/containers/auth/requireAuth';
+import requireNotAuth from '../../src/containers/auth/requireNotAuth';
+import Signup from '../../src/containers/auth/Signup';
+import Signin from '../../src/containers/auth/Signin';
+import LandingContainer from '../../src/containers/LandingContainer';
 
 import renderer from 'react-test-renderer';
 
