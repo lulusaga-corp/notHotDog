@@ -116,9 +116,7 @@ export default class AppCamera extends Component {
         ref={ref => {
           this.camera = ref;
         }}
-        style={{
-          flex: 1,
-        }}
+        style={styles.camera}
         type={type}
         flashMode={flash}
         autoFocus={autoFocus}
@@ -150,7 +148,7 @@ export default class AppCamera extends Component {
         <View
           style={styles.focusView}>
           <Slider
-            style={{ width: 150, marginTop: 15, alignSelf: 'flex-end' }}
+            style={styles.focusSlider}
             onValueChange={this.setFocusDepth.bind(this)}
             value={depth}
             step={0.1}
@@ -160,17 +158,26 @@ export default class AppCamera extends Component {
         <View
           style={styles.zoomView}>
           <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
+            style={[
+              styles.flipButton, 
+              styles.zoomButton
+            ]}
             onPress={this.zoomIn.bind(this)}>
             <Text style={styles.flipText}> + </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.1, alignSelf: 'flex-end' }]}
+            style={[
+              styles.flipButton, 
+              styles.zoomButton
+            ]}
             onPress={this.zoomOut.bind(this)}>
             <Text style={styles.flipText}> - </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.flipButton, { flex: 0.25, alignSelf: 'flex-end' }]}
+            style={[
+              styles.flipButton, 
+              styles.afButton
+            ]}
             onPress={this.toggleFocus.bind(this)}>
             <Text style={styles.flipText}>
               {' '}AF : {autoFocus}{' '}
@@ -179,8 +186,7 @@ export default class AppCamera extends Component {
           <TouchableOpacity
             style={[
               styles.flipButton,
-              styles.picButton,
-              { flex: 0.3, alignSelf: 'flex-end' },
+              styles.picButton
             ]}
             onPress={this.takePicture.bind(this)}>
             <Text style={styles.flipText}> SNAP </Text>
@@ -189,7 +195,6 @@ export default class AppCamera extends Component {
             style={[
               styles.flipButton,
               styles.galleryButton,
-              { flex: 0.25, alignSelf: 'flex-end' },
             ]}
             onPress={this.toggleView.bind(this)}>
             <Text style={styles.flipText}> Gallery </Text>
@@ -216,6 +221,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'ivory',
   },
+  camera: {
+    flex: 1,
+  },
   navigation: {
     flex: 1,
   },
@@ -230,6 +238,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
   },
+  focusSlider: {
+    width: 150, 
+    marginTop: 15, 
+    alignSelf: 'flex-end'
+  },
   zoomView: {
     flex: 0.1,
     backgroundColor: 'transparent',
@@ -242,7 +255,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   flipButton: {
-    flex: 0.3,
+    flex: 0.33,
     height: 40,
     marginHorizontal: 2,
     marginBottom: 10,
@@ -253,6 +266,14 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  zoomButton: { 
+    flex: 0.1, 
+    alignSelf: 'flex-end' 
+  },
+  afButton: { 
+    flex: 0.25, 
+    alignSelf: 'flex-end' 
   },
   flipText: {
     color: 'white',
@@ -269,9 +290,13 @@ const styles = StyleSheet.create({
   },
   picButton: {
     backgroundColor: 'darkseagreen',
+    flex: 0.3, 
+    alignSelf: 'flex-end'
   },
   galleryButton: {
     backgroundColor: 'indianred',
+    flex: 0.25, 
+    alignSelf: 'flex-end'
   },
   row: {
     flexDirection: 'row',
