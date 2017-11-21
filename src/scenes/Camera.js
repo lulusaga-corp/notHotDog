@@ -50,9 +50,9 @@ const renderCamera = (props) => {
       }}
       type={type}
       flashMode={flash}
-      autoFocus={autoFocus}
       zoom={zoom}
       whiteBalance={whiteBalance}
+      autoFocus={autoFocus}
       focusDepth={depth}>
       <View
         style={styles.buttonArea}>

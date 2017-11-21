@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import AccountHome from '../src/scenes/AccountHome';
 import AccountSettings from '../src/scenes/AccountSettings';
 import Camera from '../src/scenes/Camera';
@@ -16,7 +16,7 @@ import { createStore } from 'redux';
 describe('AccountHome scene', () => {
   it('renders without crashing', () => {
     const renderedAccountHome = renderer.create(<AccountHome />).toJSON();
-    expect(renderedAccountHome).toBeTruthy();
+    expect(renderedAccountHome).toMatchSnapshot();
   });
 })
 
@@ -25,7 +25,7 @@ describe('AccountHome scene', () => {
 //   console.log(<AccountSettings />)
 //   it('renders without crashing', () => {
 //     const renderedAccountSettings = renderer.create(<AccountSettings />).toJSON();
-//     expect(renderedAccountSettings).toBeTruthy();
+//     expect(renderedAccountSettings).toMatchSnapshot();
 //   });
 // })
 
@@ -39,7 +39,7 @@ describe('Camera scene', () => {
   })
   it('renders without crashing', () => {
     const renderedCamera = renderer.create(<Camera store={store}/>).toJSON();
-    expect(renderedCamera).toBeTruthy();
+    expect(renderedCamera).toMatchSnapshot();
   });
 })
 
@@ -52,7 +52,7 @@ describe('Camera Gallery scene', () => {
   })
   it('renders without crashing', () => {
     const renderedCameraGallery = renderer.create(<CameraGallery store={store}/>).toJSON();
-    expect(renderedCameraGallery).toBeTruthy();
+    expect(renderedCameraGallery).toMatchSnapshot();
   });
 })
 
@@ -66,7 +66,7 @@ describe('Food Selector scene', () => {
   })
   it('renders without crashing', () => {
     const renderedFoodSelector = renderer.create(<FoodSelector store={store}/>).toJSON();
-    expect(renderedFoodSelector).toBeTruthy();
+    expect(renderedFoodSelector).toMatchSnapshot();
   });
 })
 
@@ -74,7 +74,7 @@ describe('Food Selector scene', () => {
 describe('History scene', () => {
   it('renders without crashing', () => {
     const renderedHistory = renderer.create(<History />).toJSON();
-    expect(renderedHistory).toBeTruthy();
+    expect(renderedHistory).toMatchSnapshot();
   });
 })
 
@@ -88,7 +88,7 @@ describe('LoggedInLanding scene', () => {
   })
   it('renders without crashing', () => {
     const renderedLoggedInLanding = renderer.create(<LoggedInLanding store={store}/>).toJSON();
-    expect(renderedLoggedInLanding).toBeTruthy();
+    expect(renderedLoggedInLanding).toMatchSnapshot();
   })
 })
 
@@ -96,7 +96,7 @@ describe('LoggedInLanding scene', () => {
 describe('NutritionHistory scene', () => {
   it('renders without crashing', () => {
     const renderedNutritionHistory = renderer.create(<NutritionHistory />).toJSON();
-    expect(renderedNutritionHistory).toBeTruthy();
+    expect(renderedNutritionHistory).toMatchSnapshot();
   })
 })
 
@@ -104,6 +104,6 @@ describe('NutritionHistory scene', () => {
 describe('Tab', () => {
   it('renders without crashing', () => {
     const renderedTab = renderer.create(<Tab />).toJSON();
-    expect(renderedTab).toBeTruthy();
+    expect(renderedTab).toMatchSnapshot();
   })
 })
