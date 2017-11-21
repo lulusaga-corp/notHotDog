@@ -6,7 +6,8 @@ import {
     View
 } from 'react-native';
 import IconContainer from '../components/IconContainer';
-import { VictoryPie, VictoryLabel } from 'victory-native';
+import { VictoryPie, VictoryLabel, VictoryContainer, VictoryChart } from 'victory-native';
+import { Svg } from 'react-native-svg'
 
 //import AccountSettings from '../containers/LandingContainer';
 
@@ -19,44 +20,45 @@ class AccountHome extends Component {
             const nutrients = this.props.parsed[0]
             const serving = this.props.parsed[0].serving_weight_grams
             console.log('serving', serving)
-            let cholestersol = ( Number(nutrients.nf_cholesterol) / 1000 ) / serving
-            console.log(cholestersol)
-            let sodium = ( Number(nutrients.nf_sodium) / 1000 ) / serving            
+            let protein = nutrients.nf_protein;
+            let carbs = nutrients.nf_total_carbohydrate;
+            let fat = nutrients .nf_total_fat;         
             data = [ 
-                { x: 'cholestersol', y: cholestersol }, 
-                // { x: 'sodium', y: ((Number(nutrients.nf_sodium)/1000) * 100 / serving) }, 
-                // { x: 'total fat', y: ( nutrients.nf_total_fat * 100 / serving ) }, 
-                // { x: 'protein', y: ( nutrients.nf_protein * 100 / serving ) * 100 / serving }, 
-                // { x: 'dietary fiber', y: ( nutrients.nf_dietary_fiber * 100 / serving ) * 100 / serving },
-                // { x: 'sugar', y: ( nutrients.nf_sugars * 100 / serving ) * 100 / serving }
+                { x: 'protein', y: protein }, 
+                { x: 'carbohydrates', y: carbs }, 
+                { x: 'total fat', y: fat }, 
+                
             ]
-            // data = [ 
-            //     { x: 'cholestersol', y: 45 }, 
-            //     { x: 'sodium', y: 65 }, 
-            //     // { x: 'total fat', y: ( nutrients.nf_total_fat * 100 / serving ) }, 
-            //     // { x: 'protein', y: ( nutrients.nf_protein * 100 / serving ) * 100 / serving }, 
-            //     // { x: 'dietary fiber', y: ( nutrients.nf_dietary_fiber * 100 / serving ) * 100 / serving },
-            //     // { x: 'sugar', y: ( nutrients.nf_sugars * 100 / serving ) * 100 / serving }
-            // ]
         }
         return (
             <View style={styles.container}>
                 <IconContainer />
+                <View style={styles.graphBox}>
                 {
-                    data && <VictoryPie colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy', 'pink']} data={data} />
+                    data && 
+                    <Svg viewBox={"0 0 100, 100"}>
+                        <VictoryPie
+                            colorScale={['tomato', 'orange', 'gold']} 
+                            data={data}
+                            innerRadius={3}
+                            padAngle={2} 
+                            />
+                    </Svg>
                 }
-                {/* <Text>Here</Text> */}
-                
+                <Text>Testing Alignment</Text>
+                </View>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    tabContainer: {
-        backgroundColor: '#fff',
+    container: {
         flex: 1,
-        flexDirection: 'column'
+    },
+    graphBox: {
+        flex: 1,
+        alignItems: 'center',
     }
 });
 
