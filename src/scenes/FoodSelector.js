@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
+import 'firebase/firestore';
 import axios from 'axios'
 import {
   ScrollView,
@@ -25,7 +27,7 @@ class FoodSelector extends Component {
       if (nextProps) this.state.foodInput = ''
     }
 
-    handleSubmit(e) {
+    handleSubmit(userId) {
       axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
         query: this.props.foodArr.join(", ")
       }, {
@@ -36,12 +38,19 @@ class FoodSelector extends Component {
         }
       })
       .then(res => res.data)
-      .then(data => console.log("DATA", JSON.stringify(data)))
-      .then(()=>Actions.AccountHome())
+      .then(data => {
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+        console.log('timestamp', timestamp)
+        return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data,timestamp })
+      })
+        .then(meal=>{
+          console.log('meal',meal)
+        })
+      .then(()=>Actions.AccountHome(data))
     }
 
     render () {
-      const { foodArr, deleteFromFoodArr, addToFoodArr } = this.props
+      const { foodArr, userId, deleteFromFoodArr, addToFoodArr } = this.props
       console.log('foodArr',foodArr)
         return(
             <View style={styles.tabContainer}>
@@ -70,7 +79,7 @@ class FoodSelector extends Component {
                       textInputAutoCapitalize={"none"}
                       onPressRightIcon={()=>addToFoodArr(this.state.foodInput)} />
                     <ListItem
-                      onPress={this.handleSubmit}
+                      onPress={()=>this.handleSubmit(userId)}
                       title="Click here to submit!"
                       hideChevron={true} 
                       />
@@ -91,7 +100,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  foodArr: state.food.foodArr
+  foodArr: state.food.foodArr,
+  userId: state.auth.user.uid
 });
 
 const mapDispatchToProps = (dispatch) =>
