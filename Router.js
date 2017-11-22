@@ -24,6 +24,7 @@ const RouterComponent = () => (
         <Scene key="signin" component={requireNotAuth(Signin)}
                title="Please Sign in" />
       </Scene>
+      <Scene key="settings" component={AccountSettings} title="Account Settings" />
       <Scene key="camera" component={Camera} title="Camera" />
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />
       <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"}}>
