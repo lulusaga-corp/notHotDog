@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
+import 'firebase/firestore';
 import axios from 'axios'
 import {
   ScrollView,
@@ -7,23 +9,27 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
+import { deleteFromFoodArr, addToFoodArr } from '../modules/food'
 
 
 class FoodSelector extends Component {
     constructor (props){
         super(props);
         this.state = {
-          response: this.props.response,
           foodInput:''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit(e) {
+    componentWillReceiveProps(nextProps){
+      if (nextProps) this.state.foodInput = ''
+    }
+
+    handleSubmit(userId) {
       axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
-        query: this.state.response.join(", ")
+        query: this.props.foodArr.join(", ")
       }, {
         headers: {
           "x-app-id": "da40e3ba",
@@ -32,43 +38,48 @@ class FoodSelector extends Component {
         }
       })
       .then(res => res.data)
-      .then(data => console.log("DATA", data))
-        .then(()=>Actions.AccountHome())
+      .then(data => {
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+        console.log('timestamp', timestamp)
+        return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data,timestamp })
+      })
+        .then(meal=>{
+          console.log('meal',meal)
+        })
+      .then(()=>Actions.AccountHome(data))
     }
 
     render () {
-      console.log('state', this.state)
-        const filtered = this.state.response
+      const { foodArr, userId, deleteFromFoodArr, addToFoodArr } = this.props
+      console.log('foodArr',foodArr)
         return(
             <View style={styles.tabContainer}>
               <ScrollView>
                 <List>
                     {
-                    filtered && filtered.map((item, i) => {
-                        return <ListItem key={i} title={item} rightIcon={{name: 'clear'}} onPressRightIcon={item => {
-                            let stateArr = this.state.response.slice()
-                            stateArr.splice(i, 1)
-                            this.setState({ response : stateArr })
-                        }} />
+                    foodArr && foodArr.map((item, i) => {
+                      return <ListItem
+                        key={i} title={item}
+                        rightIcon={{name: 'clear'}}
+                        onPressRightIcon={ ()=>{
+                          console.log("item", item)
+                          return deleteFromFoodArr(item)
+                        } } />
                     })
                     }
-                    <ListItem textInput={true}
-                              textInputValue={this.state.foodInput}
-                              textInputOnChangeText={(text)=>{
-                                this.setState({foodInput:text})
-                              }}
-                              textInputPlaceholder={'Add other foods...'}
-                              rightIcon={{ name: 'add'}}
-                              textInputAutoCorrect={true}
-                              textInputAutoCapitalize={"none"}
-                              onPressRightIcon={()=>{
-                                let stateArr = this.state.response.slice()
-                                stateArr.push(this.state.foodInput)
-                                this.setState({ response : stateArr })
-                                this.setState({foodInput:''})
-                              }}/>
-                    <ListItem 
-                      onPress={this.handleSubmit} 
+                    <ListItem
+                      textInput={true}
+                      textInputValue={this.state.foodInput}
+                      textInputOnChangeText={(text)=>{
+                        this.setState({foodInput:text})
+                      }}
+                      textInputPlaceholder={'Add other foods...'}
+                      rightIcon={{ name: 'add'}}
+                      textInputAutoCorrect={true}
+                      textInputAutoCapitalize={"none"}
+                      onPressRightIcon={()=>addToFoodArr(this.state.foodInput)} />
+                    <ListItem
+                      onPress={()=>this.handleSubmit(userId)}
                       title="Click here to submit!"
                       hideChevron={true} 
                       />
@@ -89,7 +100,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  response: state.food.foodArr
+  foodArr: state.food.foodArr,
+  userId: state.auth.user.uid
 });
 
-export default connect(mapStateToProps)(FoodSelector);
+const mapDispatchToProps = (dispatch) =>
+  ({
+    deleteFromFoodArr(item){ dispatch(deleteFromFoodArr(item)) },
+    addToFoodArr(item){ dispatch(addToFoodArr(item)) }
+  })
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodSelector);

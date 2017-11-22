@@ -1,8 +1,8 @@
 {
-  "apiKey": "AIzaSyCrC5z7j5oIYkFc-Tm5n3DMmgs2DzYc0OI",
-  "authDomain": "lulusaga-app.firebaseapp.com",
-  "projectId": "lulusaga-app",
-  "databaseURL": "https://lulusaga-app.firebaseio.com",
-  "storageBucket": "lulusaga-app.appspot.com",
-  "messagingSenderId": "543277449359"
+  "apiKey": "AIzaSyCJo25VLHMIutbCq1jrBiPjzCHLvkd8tTQ",
+  "authDomain": "lu-lu-sa-ga.firebaseapp.com",
+  "databaseURL": "https://lu-lu-sa-ga.firebaseio.com",
+  "projectId": "lu-lu-sa-ga",
+  "storageBucket": "lu-lu-sa-ga.appspot.com",
+  "messagingSenderId": "216257788034"
 }
