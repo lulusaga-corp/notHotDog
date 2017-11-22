@@ -1,18 +1,17 @@
 import React from "react";
 import { Scene, Router, TabBar, Icon } from "react-native-router-flux";
-import Signin from './src/containers/auth/Signin';
-import Signup from './src/containers/auth/Signup';
-import requireAuth from './src/containers/auth/requireAuth';
-import requireNotAuth from './src/containers/auth/requireNotAuth';
-
+import Signin from '../containers/auth/Signin';
+import Signup from '../containers/auth/Signup';
+import requireAuth from '../containers/auth/requireAuth';
+import requireNotAuth from '../containers/auth/requireNotAuth';
 // Containers go here:
-import LoggedInLanding from "./src/scenes/LoggedInLanding"; /* to navigate to camera or account home */
-import AccountHome from "./src/scenes/AccountHome"; /* to display most recent meal */
-import AccountSettings from "./src/scenes/AccountSettings"; /* to edit user account settings */
-import History from "./src/scenes/History"; /* to see all past meal data */
-import Camera from "./src/scenes/Camera"; /* access to the camera */
-import NutritionHistory from "./src/scenes/NutritionHistory";
-import FoodSelector from "./src/scenes/FoodSelector";
+import LoggedInLanding from "../scenes/LoggedInLanding"; /* to navigate to camera or account home */
+import AccountHome from "../scenes/AccountHome"; /* to display most recent meal */
+import AccountSettings from "../scenes/AccountSettings"; /* to edit user account settings */
+import History from "../scenes/History"; /* to see all past meal data */
+import Camera from "../scenes/Camera"; /* access to the camera */
+import NutritionHistory from "../scenes/NutritionHistory";
+import FoodSelector from "../scenes/FoodSelector";
 
 const RouterComponent = () => (
   <Router>
