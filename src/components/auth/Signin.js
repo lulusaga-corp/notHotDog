@@ -83,7 +83,7 @@ class Signin extends Component {
           </TouchableOpacity>
         </Item>
       </Container>
-    );
+    )
   }
 }
 

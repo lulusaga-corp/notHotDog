@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import firebaseConfig from './firebaseConfig.json';
+firebase.initializeApp(firebaseConfig);
+
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import Router from './Router';
 import store from './configureStore';
 import { SIGN_IN_SUCCESS } from './src/modules/auth';
 import { Spinner } from './src/components/common';
-import firebaseConfig from './firebaseConfig.json';
-
 
 class App extends Component {
   constructor(props) {
@@ -15,8 +16,6 @@ class App extends Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp(firebaseConfig);
-
     firebase.auth().onAuthStateChanged((user) => {
       this.setState({ loaded: true });
 

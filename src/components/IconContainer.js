@@ -7,7 +7,7 @@ const IconContainer = () => {
     return (
         <View style={styles.iconContainer}>
             <Icon raised name="camera" color='#00aced' reverse onPress={() => { Actions.camera() }} />
-            <Icon raised name="settings" color='#517fa4' reverse onPress={() => { console.log('going to setting page') }}/>
+            <Icon raised name="settings" color='#517fa4' reverse onPress={() => { Actions.settings() }}/>
         </View>
     )
 }
