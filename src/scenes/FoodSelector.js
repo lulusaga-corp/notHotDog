@@ -37,16 +37,12 @@ class FoodSelector extends Component {
           "Content-Type": "application/json"
         }
       })
-      .then(res => res.data)
-      .then(data => {
-        const timestamp = firebase.firestore.FieldValue.serverTimestamp()
-        console.log('timestamp', timestamp)
-        return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data,timestamp })
-      })
-        .then(meal=>{
-          console.log('meal',meal)
+        .then(res => res.data)
+        .then(data => {
+          const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+          firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data, timestamp})
+          Actions.AccountHome(data)
         })
-      .then(()=>Actions.AccountHome(data))
     }
 
     render () {
