@@ -1,7 +1,16 @@
 import {
   Camera,
 } from 'expo';
+import { Actions } from 'react-native-router-flux'
 import React, { Component } from 'react';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import { connect } from 'react-redux'
+import Clarifai from 'clarifai'
+const clarifai = new Clarifai.App({
+  apiKey: "dd78fc13ab31417c9e61706721dc8179"
+});
+process.nextTick = setImmediate;
 import {
   StyleSheet,
   Text,
@@ -13,8 +22,7 @@ import {
 import CameraGallery from './CameraGallery';
 import { Spinner } from '../components/common'
 import store from '../../configureStore';
-import { dispatch } from 'redux';
-import { getOptions } from '../modules/food';
+import { getAllUserMeals } from '../modules/food'
 
 const flashModeOrder = {
   off: 'on',
@@ -32,7 +40,7 @@ const wbOrder = {
   incandescent: 'auto',
 };
 
-export default class AppCamera extends Component {
+class AppCamera extends Component {
   state = {
     flash: 'off',
     zoom: 0,
@@ -43,6 +51,11 @@ export default class AppCamera extends Component {
     showGallery: false,
     loading: false
   };
+
+  componentDidMount(){
+    this.props.fetchAllMeals(this.props.userId)
+  }
+
 
   toggleView() {
     this.setState({
@@ -92,11 +105,19 @@ export default class AppCamera extends Component {
     });
   }
 
+
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
-        store.dispatch(getOptions(data))
-        this.setState({loading: true})
+        clarifai.models
+          .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
+          .then(response => {
+            let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
+              .map(item => item.name)
+            Actions.FoodSelector({ foodArr });
+          }, err => {
+            console.error
+          })
       })
       .catch(e => {
         console.log(e, 'Photo error');;
@@ -302,3 +323,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+const mapStateToProps = (state) => ({
+  userId: state.auth.user.uid
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllMeals: userId => dispatch(getAllUserMeals(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppCamera)

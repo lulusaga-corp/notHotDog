@@ -40,11 +40,9 @@ export const signUpUser = ({ email, password, firstname, lastname }) => (dispatc
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
       console.log('userId', user.uid)
+      dispatch({ type: SIGN_UP_SUCCESS, payload: user });
+      dispatch(reset('signup'));
       return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
-    })
-        .then(() => {
-          dispatch({ type: SIGN_UP_SUCCESS, payload: user });
-          dispatch(reset('signup'));
         })
     .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
 };

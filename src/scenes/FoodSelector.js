@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { connect } from 'react-redux'
 import axios from 'axios'
 import {
   ScrollView,
@@ -8,7 +9,6 @@ import {
   Text,
   View
 } from 'react-native';
-import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
 import { deleteFromFoodArr, addToFoodArr } from '../modules/food'
@@ -18,18 +18,31 @@ class FoodSelector extends Component {
     constructor (props){
         super(props);
         this.state = {
+          foodArr: props.foodArr,
           foodInput:''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentWillReceiveProps(nextProps){
+    componentD(nextProps){
       if (nextProps) this.state.foodInput = ''
+    }
+
+    deleteFromFoodArr = item => {
+      let newStateArr = this.state.foodArr.slice()
+      newStateArr.splice(newStateArr.indexOf(item), 1)
+      this.setState({foodArr: newStateArr})
+    }
+
+    addToFoodArr = item => {
+      let newStateArr = this.state.foodArr.slice()
+      newStateArr.push(item)
+      this.setState({ foodArr: newStateArr, foodInput: '' })
     }
 
     handleSubmit(userId) {
       axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
-        query: this.props.foodArr.join(", ")
+        query: this.state.foodArr.join(", ")
       }, {
         headers: {
           "x-app-id": "da40e3ba",
@@ -46,8 +59,8 @@ class FoodSelector extends Component {
     }
 
     render () {
-      const { foodArr, userId, deleteFromFoodArr, addToFoodArr } = this.props
-      console.log('foodArr',foodArr)
+      const { userId } = this.props
+      const { foodArr } = this.state
         return(
             <View style={styles.tabContainer}>
               <ScrollView>
@@ -57,10 +70,7 @@ class FoodSelector extends Component {
                       return <ListItem
                         key={i} title={item}
                         rightIcon={{name: 'clear'}}
-                        onPressRightIcon={ ()=>{
-                          console.log("item", item)
-                          return deleteFromFoodArr(item)
-                        } } />
+                        onPressRightIcon={ ()=> this.deleteFromFoodArr(item)} />
                     })
                     }
                     <ListItem
@@ -73,7 +83,7 @@ class FoodSelector extends Component {
                       rightIcon={{ name: 'add'}}
                       textInputAutoCorrect={true}
                       textInputAutoCapitalize={"none"}
-                      onPressRightIcon={()=>addToFoodArr(this.state.foodInput)} />
+                      onPressRightIcon={()=> this.addToFoodArr(this.state.foodInput)} />
                     <ListItem
                       onPress={()=>this.handleSubmit(userId)}
                       title="Click here to submit!"
@@ -96,14 +106,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  foodArr: state.food.foodArr,
   userId: state.auth.user.uid
 });
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    deleteFromFoodArr(item){ dispatch(deleteFromFoodArr(item)) },
-    addToFoodArr(item){ dispatch(addToFoodArr(item)) }
-  })
-
-export default connect(mapStateToProps, mapDispatchToProps)(FoodSelector);
+export default connect(mapStateToProps)(FoodSelector);
