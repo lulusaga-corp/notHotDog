@@ -127,16 +127,29 @@ class AccountSettings extends Component {
 
   deleteAccount(){
     AlertIOS.prompt(
-      'Confirm your password to delete your account',
-      null,
+      'Confirm Delete',
+      'Enter your password to delete your account',
       (pass) => {
         firebase.auth().signInWithEmailAndPassword(this.state.user.email, pass)
         .then((user) => {
           return user.delete()
         })
-        .then(() => Actions.auth())
-        .catch(err => console.error(err.stack))
-      }
+        .then(this.props.signOutUser)
+        .catch(err => {
+          if (err.code === 'auth/wrong-password') {
+            AlertIOS.alert(
+              'Incorrect Password',
+              null,
+            )
+          } else {
+            AlertIOS.alert(
+              'Unknown error',
+              null
+            )
+          }
+        })
+      },
+      'secure-text'
     );
   }
 
