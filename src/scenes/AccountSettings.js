@@ -12,7 +12,6 @@ import { signOutUser } from '../modules/auth'
 import { CheckBox, List, ListItem, FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
-import {Actions} from 'react-native-router-flux';
 
 class AccountSettings extends Component {
   state = {
@@ -35,12 +34,19 @@ class AccountSettings extends Component {
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
     .then(res => res.data())
     .then(data => {
-      this.setState({
-        diet: data.dietary.specialDiet || this.state.diet,
-        allergies: data.dietary.allergies || this.state.allergies,
-        firstname: data.name.firstname || this.state.firstname,
-        lastname: data.name.lastname || this.state.lastname
-      })
+      if (data.dietary && data.name) {
+        this.setState({
+          diet: data.dietary.specialDiet || this.state.diet,
+          allergies: data.dietary.allergies || this.state.allergies,
+          firstname: data.name.firstname || this.state.firstname,
+          lastname: data.name.lastname || this.state.lastname
+        })
+      } else if (data.firstname) {
+        this.setState({
+          firstname: data.firstname,
+          lastname: data.lastname
+        })
+      }
     })
   }
 
@@ -123,7 +129,7 @@ class AccountSettings extends Component {
     .then(() => {
       return this.props.signOutUser()
     })
-    .then(() => Actions.signup())
+    // .then(() => Actions.signup())
     .catch(err => console.error(err))
   }
 
@@ -217,9 +223,9 @@ class AccountSettings extends Component {
             </View>
             :
             <View>
+              <Text>Special Dietary Notes:</Text>
               { diet.length > 0 && 
                 <View>
-                  <Text>Special Diet:</Text>
                   {diet.map((diet, i) => {
                     return (
                       <Text key={i}>{diet} </Text>
@@ -240,13 +246,16 @@ class AccountSettings extends Component {
                   }
                 </View>
               }
+              {
+                !this.state.allergies[0] && !diet[0] && <Text>None Listed</Text>
+              }
               <Button onPress={this.editDiet.bind(this)} title="Edit Special Diet Info"/>
             </View>
           }
         </View>
         <View>
           <Button onPress={ this.props.signOutUser } title="SignOut"/>
-          <Button onPress={ this.deleteAccount.bind(this) } title="Delete My Account"/>
+          {/*<Button onPress={ this.deleteAccount.bind(this) } title="Delete My Account"/>*/}
         </View>
       </View>
     )
