@@ -47,7 +47,7 @@ export default class AppCamera extends Component {
         this.setState({loading: true})
       })
       .catch(e => {
-        console.log(e, 'Photo error');;
+        console.error(e, 'Photo error');;
       })
     }
   };
