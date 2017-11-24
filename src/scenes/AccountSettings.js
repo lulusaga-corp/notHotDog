@@ -5,13 +5,15 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView
+    ScrollView,
+    AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux'
 import { signOutUser } from '../modules/auth'
 import { CheckBox, List, ListItem, FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
+import {Actions} from 'react-native-router-flux';
 
 class AccountSettings extends Component {
   state = {
@@ -124,13 +126,18 @@ class AccountSettings extends Component {
   }
 
   deleteAccount(){
-    let user = firebase.auth().currentUser
-    user.delete()
-    .then(() => {
-      return this.props.signOutUser()
-    })
-    // .then(() => Actions.signup())
-    .catch(err => console.error(err))
+    AlertIOS.prompt(
+      'Confirm your password to delete your account',
+      null,
+      (pass) => {
+        firebase.auth().signInWithEmailAndPassword(this.state.user.email, pass)
+        .then((user) => {
+          return user.delete()
+        })
+        .then(() => Actions.auth())
+        .catch(err => console.error(err.stack))
+      }
+    );
   }
 
   render () {
@@ -255,7 +262,7 @@ class AccountSettings extends Component {
         </View>
         <View>
           <Button onPress={ this.props.signOutUser } title="SignOut"/>
-          {/*<Button onPress={ this.deleteAccount.bind(this) } title="Delete My Account"/>*/}
+          {<Button onPress={ this.deleteAccount.bind(this) } title="Delete My Account"/>}
         </View>
       </View>
     )
