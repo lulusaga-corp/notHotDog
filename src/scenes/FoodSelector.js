@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import 'firebase/firestore';
-import axios from 'axios'
+import axios from 'axios';
 import {
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
-import { deleteFromFoodArr, addToFoodArr } from '../modules/food'
+import { deleteFromFoodArr, addToFoodArr } from '../modules/food';
+import fullNutrientParser from '../utilities/nutrientParser';
 
 
 class FoodSelector extends Component {
@@ -39,6 +40,7 @@ class FoodSelector extends Component {
       })
         .then(res => res.data)
         .then(data => {
+          fullNutrientParser(data);
           const timestamp = firebase.firestore.FieldValue.serverTimestamp()
           firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data, timestamp})
           Actions.AccountHome(data)
@@ -47,7 +49,6 @@ class FoodSelector extends Component {
 
     render () {
       const { foodArr, userId, deleteFromFoodArr, addToFoodArr } = this.props
-      console.log('foodArr',foodArr)
         return(
             <View style={styles.tabContainer}>
               <ScrollView>
@@ -58,7 +59,6 @@ class FoodSelector extends Component {
                         key={i} title={item}
                         rightIcon={{name: 'clear'}}
                         onPressRightIcon={ ()=>{
-                          console.log("item", item)
                           return deleteFromFoodArr(item)
                         } } />
                     })
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   foodArr: state.food.foodArr,
-  userId: state.auth.user.uid
+  userId: state.auth.user.id
 });
 
 const mapDispatchToProps = (dispatch) =>
