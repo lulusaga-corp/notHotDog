@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux'
-import axios from 'axios'
+import axios from 'axios';
 import {
   ScrollView,
   StyleSheet,
@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
-import { deleteFromFoodArr, addToFoodArr } from '../modules/food'
-
+import { deleteFromFoodArr, addToFoodArr } from '../modules/food';
+import fullNutrientParser from '../utilities/nutrientParser';
 
 class FoodSelector extends Component {
     constructor (props){
@@ -52,15 +52,32 @@ class FoodSelector extends Component {
       })
         .then(res => res.data)
         .then(data => {
+          console.log('data', data)
+          let mealInstance = [];
+          if (data) {
+            fullNutrientParser(data)
+            data.foods.forEach(food => {
+              let foodItem = {};
+              foodItem.food_name = food.food_name;
+              foodItem.serving = food.serving_weight_grams;
+              foodItem.data = {};
+              foodItem.data.protein = food.nf_protein;
+              foodItem.data.carbs = food.nf_total_carbohydrate;
+              foodItem.data.fat = food.nf_total_fat;
+              foodItem.nutrients = food.parsed_nutrients
+              mealInstance.push(foodItem);
+            });
+          }
           const timestamp = firebase.firestore.FieldValue.serverTimestamp()
-          firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({data, timestamp})
-          Actions.AccountHome(data)
+          return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({ mealInstance, timestamp})
+            .then(()=> Actions.AccountHome(mealInstance))
         })
     }
 
     render () {
       const { userId } = this.props
       const { foodArr } = this.state
+
         return(
             <View style={styles.tabContainer}>
               <ScrollView>
@@ -105,7 +122,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userId: state.auth.user.uid
 });
 

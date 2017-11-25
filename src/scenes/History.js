@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import IconContainer from '../components/IconContainer';
 import { Card } from 'react-native-elements';
+import { connect } from 'react-redux'
 
 class History extends Component {
   constructor(props){
@@ -15,18 +16,24 @@ class History extends Component {
       meals: [{date: 'june 30', food: 'potatoes'}, {date: 'june 30', food: 'potatoes'}, {date: 'june 30', food: 'potatoes'},{date: 'june 30', food: 'potatoes'}]
     }
   }
+
   render () {
-    const meals = this.state.meals;
+    const { allMeals } = this.props
+    const {meals} = this.state
+    console.log("allmeals", this.props.allMeals)
+
     return (
       <View style={styles.tabContainer}>
         <IconContainer />
         <View style={styles.mealContainer}>
           {
-            meals.map((meal, index) => {
+            allMeals && allMeals.map((meal, index) => {
+              console.log('meal from map',meal)
+              console.log("meal", meal)
               return (
                 <TouchableOpacity key={index} onPress={() => console.log('preseeddd')}>
-                  <Card title={meal.date} >
-                    <Text>{meal.food}</Text>
+                  <Card title={meal.timestamp.toString(' ').split(' ').slice(0,5).join(' ')} >
+                    <Text>{meal.mealInstance.map(food=>food.food_name).join(', ')}</Text>
                   </Card>
                 </TouchableOpacity>
               )
@@ -46,4 +53,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default History;
+const mapPropsToState = state =>({
+  allMeals: state.food.allMeals
+})
+
+export default connect(mapPropsToState)(History);

@@ -22,7 +22,7 @@ export const getAllUserMeals = userId => dispatch => {
     .get()
     .then(snapshot => {
       let allMeals = []
-      snapshot.forEach(doc => allMeals.push(doc.data().data.foods))
+      snapshot.forEach(doc => allMeals.push(doc.data()))
       dispatch({type: GET_ALL_USER_MEALS, payload: allMeals})
     })
     .catch(err => {
@@ -36,13 +36,13 @@ export const getAllUserMeals = userId => dispatch => {
  |--------------------------------------------------
  */
 const INITIAL_STATE = {
-  allUserMeals: []
+  allMeals: []
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case GET_ALL_USER_MEALS:
-            return {...state, allUserMeals: action.payload}
+            return {...state, allMeals: action.payload}
         default: 
             return state;
     }

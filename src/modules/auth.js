@@ -39,7 +39,6 @@ export const signUpUser = ({ email, password, firstname, lastname }) => (dispatc
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      console.log('userId', user.uid)
       dispatch({ type: SIGN_UP_SUCCESS, payload: user });
       dispatch(reset('signup'));
       return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
@@ -81,6 +80,7 @@ const authFailMessage = (errorCode) => {
  | Reducer
  |--------------------------------------------------
  */
+
 const INITIAL_STATE = {
   error: '',
   loading: false,
