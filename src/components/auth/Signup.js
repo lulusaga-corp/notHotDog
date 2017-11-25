@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Input, Button, Item, Spinner } from '../common/index';
-import styles from './authStyle';
+// import styles from './authStyle';
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -82,7 +82,9 @@ class Signup extends Component {
 
         {this.props.authError
           ?
-            <Text style={styles.error}>
+            <Text 
+            // style={styles.error}
+            >
               {this.props.authError}
             </Text>
           :
@@ -90,7 +92,9 @@ class Signup extends Component {
 
         {this.props.loading
           ?
-            <Item style={styles.loadingContainer}>
+            <Item 
+            // style={styles.loadingContainer}
+            >
               <Spinner />
             </Item>
           :
@@ -101,9 +105,11 @@ class Signup extends Component {
         <Item>
           <TouchableOpacity
             onPress={() => Actions.signin()}
-            style={styles.questionContainer}
+            // style={styles.questionContainer}
           >
-            <Text style={styles.questionText}>
+            <Text 
+            // style={styles.questionText}
+            >
               Already signed up? Click here to sign in
             </Text>
           </TouchableOpacity>

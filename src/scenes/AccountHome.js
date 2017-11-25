@@ -13,7 +13,9 @@ import IconContainer from '../components/IconContainer';
 class AccountHome extends Component {
     render () {
         return (
-            <View style={styles.tabContainer}>
+            <View 
+            // style={styles.tabContainer}
+            >
                 <IconContainer />
                 <Text>Hello from Home</Text>
             </View>
@@ -21,12 +23,12 @@ class AccountHome extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    tabContainer: {
-        backgroundColor: '#fff',
-        flex: 1,
-        flexDirection: 'column'
-    }
-});
+// const styles = StyleSheet.create({
+//     tabContainer: {
+//         backgroundColor: '#fff',
+//         flex: 1,
+//         flexDirection: 'column'
+//     }
+// });
 
 export default AccountHome;

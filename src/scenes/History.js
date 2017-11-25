@@ -18,9 +18,13 @@ class History extends Component {
   render () {
     const meals = this.state.meals;
     return (
-      <View style={styles.tabContainer}>
+      <View 
+      // style={styles.tabContainer}
+      >
         <IconContainer />
-        <View style={styles.mealContainer}>
+        <View 
+        // style={styles.mealContainer}
+        >
           {
             meals.map((meal, index) => {
               return (
@@ -38,12 +42,12 @@ class History extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  tabContainer: {
-    backgroundColor: '#fff',
-    flex: 1,
-    flexDirection: 'column'
-  }
-});
+// const styles = StyleSheet.create({
+//   tabContainer: {
+//     backgroundColor: '#fff',
+//     flex: 1,
+//     flexDirection: 'column'
+//   }
+// });
 
 export default History;

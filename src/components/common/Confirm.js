@@ -13,7 +13,7 @@ const propTypes = {
 };
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
-  const { textContainer, textStyle, containerStyle } = styles;
+  // const { textContainer, textStyle, containerStyle } = styles;
 
   return (
     <Modal
@@ -22,15 +22,21 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
       animationType="fade"
       onRequestClose={() => {}}
     >
-      <View style={containerStyle}>
-        <Item style={textContainer}>
-          <Text style={textStyle}>
+      <View 
+      // style={containerStyle}
+      >
+        <Item 
+        // style={textContainer}
+        >
+          <Text 
+          // style={textStyle}
+          >
             {children}
           </Text>
         </Item>
         <Item>
           <Button
-            buttonStyle={{ backgroundColor: '#e62117' }}
+            // buttonStyle={{ backgroundColor: '#e62117' }}
             onPress={onAccept}
           >
             Yes
@@ -46,22 +52,22 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 
 Confirm.propTypes = propTypes;
 
-const styles = {
-  containerStyle: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    position: 'relative',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  textContainer: {
-    justifyContent: 'center',
-  },
-  textStyle: {
-    flex: 1,
-    fontSize: 18,
-    textAlign: 'center',
-    lineHeight: 40,
-  },
-};
+// const styles = {
+//   containerStyle: {
+//     backgroundColor: 'rgba(0, 0, 0, 0.75)',
+//     position: 'relative',
+//     flex: 1,
+//     justifyContent: 'center',
+//   },
+//   textContainer: {
+//     justifyContent: 'center',
+//   },
+//   textStyle: {
+//     flex: 1,
+//     fontSize: 18,
+//     textAlign: 'center',
+//     lineHeight: 40,
+//   },
+// };
 
 export { Confirm };

@@ -21,16 +21,18 @@ export default class GalleryScreen extends React.Component {
     })
 
     return (
-      <View style={styles.container}>
+      <View 
+      // style={styles.container}
+      >
         <Spinner />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     paddingTop: 20,
+//   }
+// });
