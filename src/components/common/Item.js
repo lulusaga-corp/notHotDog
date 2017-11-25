@@ -5,7 +5,7 @@ import { View } from 'react-native';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
-  // style: PropTypes.object,
+  style: PropTypes.object,
 };
 
 const defaultProps = {
@@ -14,21 +14,21 @@ const defaultProps = {
 
 const Item = props => (
   <View 
-  // style={[styles.container, props.style]}
+  style={[styles.container, props.style]}
   >
     {props.children}
   </View>
 );
 
-// const styles = {
-//   container: {
-//     padding: 5,
-//     backgroundColor: '#fff',
-//     justifyContent: 'flex-start',
-//     flexDirection: 'row',
-//     position: 'relative',
-//   },
-// };
+const styles = {
+  container: {
+    padding: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    position: 'relative',
+  },
+};
 
 Item.defaultProps = defaultProps;
 Item.propTypes = propTypes;

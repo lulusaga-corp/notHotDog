@@ -72,21 +72,21 @@ export default class AppCamera extends Component {
             raised
             name={`flash-${flash}`}
             size={26}
-            color="gray"
+            color="#00a587"
             reverse
             onPress={this.toggleFlash.bind(this)} />
           <Icon
             raised
             name="camera"
             size={36}
-            color="darkseagreen"
+            color="#ef4836"
             reverse
             onPress={this.takePicture.bind(this)} />
           <Icon
             raised
             name="image"
             size={26}
-            color="indianred"
+            color="#b5000c"
             reverse
             onPress={this.toggleView.bind(this)} />
         </View>

@@ -6,27 +6,27 @@ import { Text, TouchableOpacity } from 'react-native';
 const propTypes = {
   children: PropTypes.node.isRequired,
   onPress: PropTypes.func.isRequired,
-  // buttonStyle: PropTypes.object,
-  // textStyle: PropTypes.object,
+  buttonStyle: PropTypes.object,
+  textStyle: PropTypes.object,
 };
 
 const defaultProps = {
-  // buttonStyle: {},
-  // textStyle: {},
+  buttonStyle: {},
+  textStyle: {},
 };
 
 function Button({ onPress, children, 
-  // buttonStyle, textStyle 
+  buttonStyle, textStyle 
 }) {
-  // const { button, text } = styles;
+  const { button, text } = styles;
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      // style={[button, buttonStyle]}
+      style={[button, buttonStyle]}
     >
       <Text 
-      // style={[text, textStyle]}
+      style={[text, textStyle]}
       >
         {children}
       </Text>
@@ -34,23 +34,23 @@ function Button({ onPress, children,
   );
 }
 
-// const styles = {
-//   button: {
-//     flex: 1,
-//     alignSelf: 'stretch',
-//     backgroundColor: '#039be5',
-//     borderRadius: 3,
-//     marginTop: 10,
-//   },
-//   text: {
-//     alignSelf: 'center',
-//     color: '#fff',
-//     fontSize: 16,
-//     fontWeight: '600',
-//     paddingTop: 10,
-//     paddingBottom: 10,
-//   },
-// };
+const styles = {
+  button: {
+    flex: 1,
+    alignSelf: 'stretch',
+    backgroundColor: '#039be5',
+    borderRadius: 3,
+    marginTop: 10,
+  },
+  text: {
+    alignSelf: 'center',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+};
 
 Button.defaultProps = defaultProps;
 Button.propTypes = propTypes;

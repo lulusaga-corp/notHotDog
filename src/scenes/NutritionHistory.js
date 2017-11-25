@@ -12,7 +12,7 @@ class NutritionHistory extends Component {
       <View 
       // style={styles.tabContainer}
       >
-        <IconContainer />
+        {/* <IconContainer /> */}
         <Text>Hello from Nutrition History</Text>
       </View>
     )

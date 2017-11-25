@@ -16,7 +16,7 @@ class AccountHome extends Component {
             <View 
             // style={styles.tabContainer}
             >
-                <IconContainer />
+                {/* <IconContainer /> */}
                 <Text>Hello from Home</Text>
             </View>
         )

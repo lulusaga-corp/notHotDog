@@ -21,7 +21,7 @@ class History extends Component {
       <View 
       // style={styles.tabContainer}
       >
-        <IconContainer />
+        {/* <IconContainer /> */}
         <View 
         // style={styles.mealContainer}
         >

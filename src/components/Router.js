@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Scene, Router, TabBar, Icon } from "react-native-router-flux";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
+import { Scene, Router, TabBar, Actions } from "react-native-router-flux";
+import { Header, Icon, Title } from 'react-native-elements';
 import Signin from '../containers/auth/Signin';
 import Signup from '../containers/auth/Signup';
 import requireAuth from '../containers/auth/requireAuth';
@@ -14,20 +15,29 @@ import Camera from "../scenes/Camera"; /* access to the camera */
 import NutritionHistory from "../scenes/NutritionHistory";
 import FoodSelector from "../scenes/FoodSelector";
 
+
+
 const RouterComponent = () => (
   <Router style={styles.container}>
-    <Scene key="root">
-      <Scene key="auth">
-        <Scene key="signup" component={requireNotAuth(Signup)} title="Please Sign up" />
-        <Scene key="signin" component={requireNotAuth(Signin)} title="Please Sign in" />
+    <Scene 
+      key="root"
+      navigationBarStyle={styles.navBar}
+      nagivationTitleStyle={styles.navBar}
+      >
+      <Scene key="auth" tabs={true} title="Welcome" hideTabBar>
+        <Scene key="signup" component={requireNotAuth(Signup)} />
+        <Scene key="signin" component={requireNotAuth(Signin)} initial={true} />
       </Scene>
       <Scene key="settings" component={AccountSettings} title="Account Settings" />
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />
-      <Scene key="tabbar" tabs={true} swipeEnabled={true}>
-        <Scene key="AccountHome" title="Most Recent Meal" initial={true} component={AccountHome} />
-        <Scene key="history" title="Meal History" component={History} />
-        <Scene key="nutrition" title="Nutrition History" component={NutritionHistory} />
-        <Scene key="camera" component={Camera} title="Camera" />
+      <Scene key="tabbar" tabs={true} showLabel={false} swipeEnabled={true} tabBarStyle={styles.tabContainer} activeBackgroundColor="#76ffe9"
+        renderRightButton={() => {
+          return <Icon name="settings" underlayColor="#36d7b7" onPress={() => Actions.settings() } />
+        }}>
+        <Scene key="AccountHome" title="Your Latest Meal" icon={() => <Icon name="local-dining" />}  component={AccountHome} />
+        <Scene key="history" title="Meal Diary" icon={() => <Icon name="date-range" />} component={History} />
+        <Scene key="nutrition" title="Nutrition History" icon={() => <Icon name="assessment" />} component={NutritionHistory} />
+        <Scene key="camera" title="Camera" component={Camera} icon={() => <Icon name="camera-alt" />} initial={true} />
       </Scene>
     </Scene>
   </Router>
@@ -35,8 +45,17 @@ const RouterComponent = () => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'ivory',
+    flex: 1
+  },
+  navBar: {
+    backgroundColor: '#36d7b7',
+    padding: 10
+  },
+  navTitle: {
+    color: 'black'
+  },
+  tabContainer: {
+    backgroundColor: '#36d7b7'
   }
 })
 

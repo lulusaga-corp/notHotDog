@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Input, Button, Item, Spinner } from '../common/index';
-// import styles from './authStyle';
+import { authStyle as styles } from '../../assets/stylesheets';
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -56,9 +56,7 @@ class Signin extends Component {
 
         {this.props.authError
           ?
-            <Text 
-            // style={styles.error}
-            >
+            <Text style={styles.error}>
               {this.props.authError}
             </Text>
           :
@@ -66,9 +64,7 @@ class Signin extends Component {
 
         {this.props.loading
           ?
-            <Item 
-            // style={styles.loadingContainer}
-            >
+            <Item style={styles.loadingContainer}>
               <Spinner />
             </Item>
           :
@@ -79,11 +75,9 @@ class Signin extends Component {
         <Item>
           <TouchableOpacity
             onPress={() => Actions.signup()}
-            // style={styles.questionContainer}
+            style={styles.questionContainer}
           >
-            <Text 
-            // style={styles.questionText}
-            >
+            <Text style={styles.questionText}>
               Don't have an account? Click here to sign up
             </Text>
           </TouchableOpacity>
@@ -92,21 +86,16 @@ class Signin extends Component {
     )
   }
 }
-
 const validate = (props) => {
   const errors = {};
   const fields = ['email', 'password'];
-
   fields.forEach((f) => {
     if (!(f in props)) {
       errors[f] = `${f} is required`;
     }
   });
-
   return errors;
 };
-
 Signin.propTypes = propTypes;
 Signin = reduxForm({ form: 'signin', validate })(Signin);
-
 export default Signin;
