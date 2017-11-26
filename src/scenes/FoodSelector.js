@@ -50,7 +50,7 @@ class FoodSelector extends Component {
     render () {
       const { foodArr, userId, deleteFromFoodArr, addToFoodArr } = this.props
         return(
-            <View style={styles.tabContainer}>
+            <View>
               <ScrollView>
                 <List>
                     {
@@ -86,14 +86,6 @@ class FoodSelector extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    tabContainer: {
-        backgroundColor: '#fff',
-        flex: 1,
-        flexDirection: 'column'
-    }
-});
 
 const mapStateToProps = (state) => ({
   foodArr: state.food.foodArr,
