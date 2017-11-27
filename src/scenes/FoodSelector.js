@@ -1,12 +1,19 @@
-import React, { Component } from "react";
-import firebase from "firebase";
-import "firebase/firestore";
-import axios from "axios";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { connect } from "react-redux";
-import { Actions } from "react-native-router-flux";
-import { List, ListItem, Button } from "react-native-elements";
-import { deleteFromFoodArr, addToFoodArr } from "../modules/food";
+import React, { Component } from 'react';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import axios from 'axios';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { List, ListItem, Button } from 'react-native-elements';
+import { deleteFromFoodArr, addToFoodArr } from '../modules/food';
+import fullNutrientParser from '../utilities/nutrientParser';
+
 
 class FoodSelector extends Component {
   constructor(props) {
@@ -35,6 +42,7 @@ class FoodSelector extends Component {
             "Content-Type": "application/json"
           }
         }
+
       )
       .then(res => res.data)
       .then(data => {
@@ -90,6 +98,7 @@ class FoodSelector extends Component {
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

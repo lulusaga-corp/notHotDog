@@ -21,12 +21,12 @@ const RouterComponent = () => (
         <Scene key="signin" component={requireNotAuth(Signin)} title="Please Sign in" />
       </Scene>
       <Scene key="settings" component={AccountSettings} title="Account Settings" />
-      <Scene key="camera" component={Camera} title="Camera" />
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />
-      <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"}}>
+      <Scene key="tabbar" tabs={true} tabBarStyle={ {backgroundColor: "#d4d6d8"}} swipeEnabled={true}>
         <Scene key="AccountHome" title="Most Recent Meal" initial={true} component={AccountHome} />
         <Scene key="history" title="Meal History" component={History} />
         <Scene key="nutrition" title="Nutrition History" component={NutritionHistory} />
+        <Scene key="camera" component={Camera} title="Camera" />
       </Scene>
     </Scene>
   </Router>
