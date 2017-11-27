@@ -6,6 +6,8 @@ import Signin from '../containers/auth/Signin';
 import Signup from '../containers/auth/Signup';
 import requireAuth from '../containers/auth/requireAuth';
 import requireNotAuth from '../containers/auth/requireNotAuth';
+import { connect } from 'react-redux';
+
 // Containers go here:
 import LoggedInLanding from "../scenes/LoggedInLanding"; /* to navigate to camera or account home */
 import AccountHome from "../scenes/AccountHome"; /* to display most recent meal */
@@ -19,7 +21,9 @@ import UserInfo from "./settings/UserInfo";
 import AccountManagement from "./settings/AccountManagement";
 
 
-const RouterComponent = () => (
+const RouterComponent = (props) => {
+  console.log('router user', props.user)
+  return (
   <Router style={styles.container}>
     <Scene 
       key="root"
@@ -30,7 +34,6 @@ const RouterComponent = () => (
         <Scene key="signin" component={requireNotAuth(Signin)} />
         <Scene key="signup" component={requireNotAuth(Signup)} />
       </Scene>
-
       <Scene key="settings" component={AccountSettings} title="Account Settings" />
       <Scene key="deleteAccount" component={AccountManagement} title="Delete Account" />
       <Scene key="dietary" component={DietaryInfo} title="Edit Dietary Preferences" />
@@ -44,11 +47,19 @@ const RouterComponent = () => (
         <Scene key="AccountHome" title="Your Latest Meal" icon={() => <Icon name="local-dining" />}  component={AccountHome} />
         <Scene key="history" title="Meal Diary" icon={() => <Icon name="date-range" />} component={History} />
         <Scene key="nutrition" title="Nutrition History" icon={() => <Icon name="assessment" />} component={NutritionHistory} />
-        <Scene key="camera" title="Camera" component={Camera} icon={() => <Icon name="camera-alt" />} initial={true} />
+        {/* <Scene key="camera" title="Camera" component={Camera} icon={() => <Icon name="camera-alt" />} initial={true} /> */}
       </Scene>
     </Scene>
   </Router>
-);
+  )
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: !!state.auth.user
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -66,4 +77,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default RouterComponent;
+export default connect(mapStateToProps)(RouterComponent);

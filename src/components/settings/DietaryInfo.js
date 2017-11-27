@@ -10,9 +10,12 @@ import { CheckBox, List, ListItem } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 class DietaryInfo extends Component {
-  state = {
+  constructor(props){
+    super(props)
+    this.state = {
     diet: {
       vegan: false,
       vegetarian: false,
@@ -20,20 +23,36 @@ class DietaryInfo extends Component {
     },
     allergies: [],
     newAllergy: '',
-    editDiet: false
+    uid: props.uid
+    }
   }
 
   /* Load dietary data from Firestore */
   componentDidMount(){
+    console.log('diet uid', this.state.uid)
+    console.log('diet props', this.props)
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
     .then(res => res.data())
     .then(data => {
+      console.log('line 36')
       if (data.dietary) {
         this.setState({
           diet: data.dietary.specialDiet || this.state.diet,
           allergies: data.dietary.allergies || this.state.allergies,
         })
       }
+    })
+  }
+
+  componentWillUnmount(){
+    this.setState({
+      diet: {
+        vegan: false,
+        vegetarian: false,
+        gf: false
+      },
+      allergies: [],
+      newAllergy: ''
     })
   }
 
@@ -77,8 +96,6 @@ class DietaryInfo extends Component {
     
       firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data)
       .catch(err => console.error(err))
-    
-    this.setState({editDiet: !this.state.editDiet})
     Actions.pop()
   }
 
@@ -90,12 +107,13 @@ class DietaryInfo extends Component {
       gf: 'Gluten Free'
     }
     let diet = Object.keys(this.state.diet).filter(key => this.state.diet[key] === true).map(diet => specialDiets[diet]);
+    console.log('diet rebder uid', this.state.uid)
+    let fuser = firebase.auth().currentUser;
+    console.log('diet user', fuser)
     return (
       <View>
-      
           <View>
             <View>
-              <Text>Dietary Preferences: (Check All That Apply)</Text>
               <CheckBox
                 title='Vegan'
                 checked={this.state.diet.vegan}
@@ -111,6 +129,7 @@ class DietaryInfo extends Component {
                 checked={this.state.diet.gf}
                 onPress={this.addgf.bind(this)}
               />
+              <Text>Check All That Apply</Text>
             </View>
             <ScrollView>
               <Text>Allergies:</Text>
@@ -137,11 +156,27 @@ class DietaryInfo extends Component {
                   onPressRightIcon={() => this.addAllergy(this.state.newAllergy)} />
               </List>
             </ScrollView>
-            <Button onPress={this.editDiet.bind(this)} title="Save Special Diet Changes"/>
+            <Button onPress={this.editDiet.bind(this)} title="Save Dietary Preferences"/>
       </View>
     </View>
     )
   }
 }
 
-export default DietaryInfo
+const mapStateToProps = (state) => {
+  console.log('state diet', state)
+  if (state.auth.user){
+    
+    return {
+      uid: state.auth.user.uid
+    }
+  } else {
+    return {
+      uid: 'NO USER'
+    }
+  }
+  
+}
+
+
+export default connect(mapStateToProps)(DietaryInfo);
