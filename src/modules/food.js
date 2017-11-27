@@ -35,8 +35,10 @@ export const getOptions = (data) => (dispatch) => {
 }
 
 export const deleteFromFoodArr = item => (dispatch, getState) => {
+
   let stateArr = getState().food.foodArr.slice()
   stateArr.splice(stateArr.indexOf(item), 1)
+
   dispatch({ type: DELETE_FROM_FOODARR, payload : stateArr })
 }
 
