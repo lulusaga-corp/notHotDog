@@ -43,7 +43,6 @@ class AccountHome extends Component {
       { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }})
 
     const { selectedIndex } = this.state
-    console.log("props in nut hist", this.props)
     return (
       <View>
         <ButtonGroup

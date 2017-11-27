@@ -24,11 +24,11 @@ class History extends Component {
         <ScrollView>
         <View style={ styles.mealContainer }>
           {
-            allMeals && allMeals.map((mealInstance, index) => {
+            allMeals && allMeals.map((meal, index) => {
               return (
-                <TouchableOpacity key={index} onPress={() => Actions.AccountHome(mealInstance)}>
-                  <Card title={mealInstance.timestamp.toString().split(' ').slice(0,5).join(' ')} >
-                    <Text>{ mealInstance.mealInstance.map(food=>food.food_name).join(', ') }</Text>
+                <TouchableOpacity key={index} onPress={() => Actions.SingleHistoryView(meal)}>
+                  <Card title={meal.timestamp.toString().split(' ').slice(0,5).join(' ')} >
+                    <Text>{ meal.mealInstance.map(food=>food.food_name).join(', ') }</Text>
                   </Card>
                 </TouchableOpacity>
               )
