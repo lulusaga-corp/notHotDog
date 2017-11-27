@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import IconContainer from '../components/IconContainer';
 import { Card } from 'react-native-elements';
 
 class History extends Component {
@@ -18,9 +17,8 @@ class History extends Component {
   render () {
     const meals = this.state.meals;
     return (
-      <View style={styles.tabContainer}>
-        <IconContainer />
-        <View style={styles.mealContainer}>
+      <View>
+        <View>
           {
             meals.map((meal, index) => {
               return (
@@ -37,13 +35,5 @@ class History extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  tabContainer: {
-    backgroundColor: '#fff',
-    flex: 1,
-    flexDirection: 'column'
-  }
-});
 
 export default History;

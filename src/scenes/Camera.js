@@ -1,9 +1,6 @@
-import {
-  Camera,
-} from 'expo';
+import { Camera } from 'expo';
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity
@@ -14,6 +11,7 @@ import store from '../../configureStore';
 import { dispatch } from 'redux';
 import { getOptions } from '../modules/food';
 import { Icon } from 'react-native-elements';
+import { cameraStyle as styles }  from '../assets/stylesheets';
 
 const flashModeOrder = {
   off: 'on',
@@ -22,11 +20,14 @@ const flashModeOrder = {
 };
 
 export default class AppCamera extends Component {
-  state = {
-    flash: 'auto',
-    showGallery: false,
-    loading: false
-  };
+  constructor (props) {
+    super(props)
+    this.state = {
+      flash: 'auto',
+      showGallery: false,
+      loading: false
+    };
+  }
 
   toggleView() {
     this.setState({
@@ -57,7 +58,7 @@ export default class AppCamera extends Component {
   }
     
   renderCamera() {
-    const { type, flash, autoFocus, zoom,whiteBalance, depth } = this.state;
+    const { type, flash, autoFocus, zoom, whiteBalance, depth } = this.state;
     
     return (
       <Camera
@@ -71,21 +72,21 @@ export default class AppCamera extends Component {
             raised
             name={`flash-${flash}`}
             size={26}
-            color="gray"
+            color="#00a587"
             reverse
             onPress={this.toggleFlash.bind(this)} />
           <Icon
             raised
             name="camera"
             size={36}
-            color="darkseagreen"
+            color="#ef4836"
             reverse
             onPress={this.takePicture.bind(this)} />
           <Icon
             raised
             name="image"
             size={26}
-            color="indianred"
+            color="#b5000c"
             reverse
             onPress={this.toggleView.bind(this)} />
         </View>
@@ -105,19 +106,3 @@ export default class AppCamera extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'ivory',
-  },
-  camera: {
-    flex: 1,
-  },
-  controls: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-end',
-    margin: 5,
-  },
-});

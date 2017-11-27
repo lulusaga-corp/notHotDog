@@ -32,5 +32,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-  }
+  },
+  navBar: {
+    backgroundColor: '#36d7b7',
+    padding: 10
+  },
+  navTitle: {
+    color: 'black'
+  },
 });
