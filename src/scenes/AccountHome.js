@@ -19,7 +19,6 @@ class AccountHome extends Component {
     console.log(this.props)
     return (
       <View style={styles.container}>
-        <IconContainer />
         {
           this.props.mostRecent ? <PieChart allFoods={this.props.mostRecent} /> :
             null

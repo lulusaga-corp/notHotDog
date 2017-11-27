@@ -27,7 +27,7 @@ const flashModeOrder = {
   auto: 'off'
 };
 
-export default class AppCamera extends Component {
+export class AppCamera extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -125,23 +125,6 @@ export default class AppCamera extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'ivory',
-  },
-  camera: {
-    flex: 1,
-  },
-  controls: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-end',
-    margin: 5,
-  },
-});
 
 const mapStateToProps = (state) => ({
   userId: state.auth.user.uid

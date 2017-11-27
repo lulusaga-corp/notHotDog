@@ -22,7 +22,6 @@ class History extends Component {
     return (
       <View style={styles.tabContainer}>
         <ScrollView>
-        <IconContainer />
         <View style={ styles.mealContainer }>
           {
             allMeals && allMeals.map((mealInstance, index) => {
