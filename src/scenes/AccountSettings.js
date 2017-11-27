@@ -33,4 +33,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(() => ({}), {signOutUser})(AccountSettings);
+const mapStateToProps = (state) => {
+  return {
+    userFirstName : state.auth.user.displayName,
+  }
+}
+export default connect(mapStateToProps, {signOutUser})(AccountSettings);
