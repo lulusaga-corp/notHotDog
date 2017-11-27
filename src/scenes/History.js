@@ -7,7 +7,6 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import IconContainer from '../components/IconContainer';
 import { Card } from 'react-native-elements';
 import { connect } from 'react-redux'
 import moment  from 'moment'

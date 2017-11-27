@@ -1,6 +1,4 @@
-import {
-  Camera,
-} from 'expo';
+import { Camera } from 'expo';
 import { Actions } from 'react-native-router-flux'
 import React, { Component } from 'react';
 import firebase from 'firebase';
@@ -12,7 +10,6 @@ const clarifai = new Clarifai.App({
 });
 process.nextTick = setImmediate;
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity
@@ -22,6 +19,7 @@ import { Spinner } from '../components/common'
 import store from '../../configureStore';
 import { getAllUserMeals } from '../modules/food'
 import { Icon } from 'react-native-elements';
+import { cameraStyle as styles }  from '../assets/stylesheets';
 
 const flashModeOrder = {
   off: 'on',
@@ -29,12 +27,15 @@ const flashModeOrder = {
   auto: 'off'
 };
 
-class AppCamera extends Component {
-  state = {
-    flash: 'auto',
-    showGallery: false,
-    loading: false
-  };
+export default class AppCamera extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      flash: 'auto',
+      showGallery: false,
+      loading: false
+    };
+  }
 
   componentDidMount(){
     this.props.fetchAllMeals(this.props.userId)
@@ -77,7 +78,7 @@ class AppCamera extends Component {
   }
     
   renderCamera() {
-    const { type, flash, autoFocus, zoom,whiteBalance, depth } = this.state;
+    const { type, flash, autoFocus, zoom, whiteBalance, depth } = this.state;
     
     return (
       <Camera
@@ -91,21 +92,21 @@ class AppCamera extends Component {
             raised
             name={`flash-${flash}`}
             size={26}
-            color="gray"
+            color="#00a587"
             reverse
             onPress={this.toggleFlash.bind(this)} />
           <Icon
             raised
             name="camera"
             size={36}
-            color="darkseagreen"
+            color="#ef4836"
             reverse
             onPress={this.takePicture.bind(this)} />
           <Icon
             raised
             name="image"
             size={26}
-            color="indianred"
+            color="#b5000c"
             reverse
             onPress={this.toggleView.bind(this)} />
         </View>
