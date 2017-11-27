@@ -24,10 +24,11 @@ const RouterComponent = () => (
       navigationBarStyle={styles.navBar}
       nagivationTitleStyle={styles.navBar}
       >
-      <Scene key="auth" title="Welcome">
-        <Scene key="signin" component={requireNotAuth(Signin)} />      
+      <Scene key="auth" title="Welcome" hideNavBar={true}>
+        <Scene key="signin" component={requireNotAuth(Signin)} />
         <Scene key="signup" component={requireNotAuth(Signup)} />
       </Scene>
+
       <Scene key="settings" component={AccountSettings} title="Account Settings" />
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />
       <Scene key="tabbar" tabs={true} showLabel={false} swipeEnabled={true} tabBarStyle={styles.tabContainer} activeBackgroundColor="#76ffe9"
