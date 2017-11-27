@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
-import { deleteFromFoodArr, addToFoodArr } from '../modules/food';
+import { updateMostRecentMeal } from '../modules/food'
 import fullNutrientParser from '../utilities/nutrientParser';
 
 class FoodSelector extends Component {
@@ -70,7 +70,9 @@ class FoodSelector extends Component {
           }
           const timestamp = firebase.firestore.FieldValue.serverTimestamp()
           return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({ mealInstance, timestamp})
-            .then(()=> Actions.AccountHome(mealInstance))
+            .then(()=> {
+            Actions.AccountHome(mealInstance)
+            })
         })
     }
 
