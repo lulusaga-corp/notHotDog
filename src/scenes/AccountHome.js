@@ -16,7 +16,6 @@ import { Svg } from "react-native-svg";
 class AccountHome extends Component {
 
   render(props) {
-    console.log(this.props)
     return (
       <View style={styles.container}>
         {

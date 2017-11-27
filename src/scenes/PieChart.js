@@ -13,21 +13,18 @@ import { style } from "expo/src/Font";
 
 class PieChart extends Component {
   render() {
-    console.log("foodCharts", this.props.allFoods)
     const foodCharts = this.props.allFoods
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
           {foodCharts &&
             foodCharts.map((food, idx) => {
-              console.log("food from food",food)
               let chartData = [];
               chartData.push(
                 { x: "carbs", y: food.data.carbs },
                 { x: "fat", y: food.data.fat },
                 { x: "protein", y: food.data.protein }
               );
-              console.log("chartData",chartData)
               return (
                 <View key={idx} style={styles.container}>
                   <Svg width={Dimensions.get("window").width} height={130}>
