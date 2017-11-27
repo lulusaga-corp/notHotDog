@@ -10,13 +10,16 @@ import { FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
 
 class UserInfo extends Component {
-  state = {
-    user: this.props.user,
-    uid: this.props.uid,
-    name: this.props.user.displayName,
-    editAccount: false,
-    currentPass: '',
-    newPass: ''
+  constructor(props){
+    super(props);
+    this.state = {
+      user: this.props.user,
+      uid: this.props.uid,
+      firstName: this.props.user.displayName,
+      lastName: '',
+      currentPass: '',
+      newPass: ''
+    }
   }
 
   componentDidMount(){
@@ -25,15 +28,19 @@ class UserInfo extends Component {
     .then(data => {
       if (data.firstname) {
         this.setState({
-          firstname: data.firstname,
-          lastname: data.lastname
+          firstName: data.firstname,
+          lastName: data.lastname
         })
       }
     })
   }
 
-  editName(text){
-    this.setState({name: text})
+  editFirstName(text){
+    this.setState({firstName: text})
+  }
+  
+  editLastName(text){
+    this.setState({lastName: text})
   }
 
   editEmail(text){
@@ -71,7 +78,7 @@ class UserInfo extends Component {
       })
       .catch(err => console.error(err))
     }
-    this.setState({editAccount: !this.state.editAccount, user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
+    this.setState({ user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
   }
 
   render () {
@@ -79,13 +86,16 @@ class UserInfo extends Component {
     return (
       <View>
         <View>
-          { this.state.editAccount ?
             <View>
               <View>
-                <FormLabel>Name:</FormLabel>
+                <FormLabel>First Name:</FormLabel>
                 <FormInput 
-                  onChangeText={(text) => this.editName(text)} 
-                  defaultValue={(this.state.name) ? this.state.name : user.displayName} />
+                  onChangeText={(text) => this.editFirstName(text)} 
+                  defaultValue={(this.state.firstName) ? this.state.firstName : user.displayName} />
+                <FormLabel>Last Name:</FormLabel>
+                <FormInput 
+                  onChangeText={(text) => this.editLastName(text)} 
+                  defaultValue={(this.state.lastName) ? this.state.lastName : null} />
                 <FormLabel>Email:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editEmail(text)} 
@@ -101,15 +111,6 @@ class UserInfo extends Component {
               </View>
               <Button onPress={this.editAccount.bind(this)} title="Save Account Changes"/>
             </View>
-          :
-            <View>
-              <View>
-                <Text>Name: {this.state.firstname || user.displayName || null}</Text>
-                <Text>Email: {user.email} </Text>
-              </View>
-              <Button onPress={this.editAccount.bind(this)} title="Edit Account Info"/>
-            </View>
-          }
         </View>
       </View>
     )

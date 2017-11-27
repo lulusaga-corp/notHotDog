@@ -16,7 +16,6 @@ class AccountHome extends Component {
  render() {
     return (
         <View style={styles.container}>
-          <IconContainer />
           <PieChart allFoods={this.props.foods} />
         </View>
      )
