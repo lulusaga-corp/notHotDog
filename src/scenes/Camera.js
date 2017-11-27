@@ -37,11 +37,6 @@ export class AppCamera extends Component {
     };
   }
 
-  componentDidMount(){
-    this.props.fetchAllMeals(this.props.userId)
-  }
-
-
   toggleView() {
     this.setState({
       showGallery: !this.state.showGallery,
@@ -126,12 +121,4 @@ export class AppCamera extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  userId: state.auth.user.uid
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchAllMeals: userId => dispatch(getAllUserMeals(userId))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppCamera)
+export default AppCamera

@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import { Scene, Router, TabBar, Actions } from "react-native-router-flux";
 import { Header, Icon, Title } from 'react-native-elements';
@@ -6,6 +5,10 @@ import Signin from '../containers/auth/Signin';
 import Signup from '../containers/auth/Signup';
 import requireAuth from '../containers/auth/requireAuth';
 import requireNotAuth from '../containers/auth/requireNotAuth';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { getAllUserMeals } from '../modules/food';
+
 // Containers go here:
 import LoggedInLanding from "../scenes/LoggedInLanding"; /* to navigate to camera or account home */
 import AccountHome from "../scenes/AccountHome"; /* to display most recent meal */
@@ -14,35 +17,52 @@ import History from "../scenes/History"; /* to see all past meal data */
 import Camera from "../scenes/Camera"; /* access to the camera */
 import NutritionHistory from "../scenes/NutritionHistory";
 import FoodSelector from "../scenes/FoodSelector";
+import firebase from 'firebase';
+import 'firebase/firestore';
+import moment from 'moment';
 
+class RouterComponent extends Component{
+  constructor (props) {
+    super(props)
+  }
 
+  componentWillReceiveProps(nextProps){
+    if (this.props !== nextProps){
+      this.props.fetchAllMeals(this.props.userId)
+    }
+    console.log("nextProps", nextProps.userId)
+  }
 
-const RouterComponent = () => (
-  <Router style={styles.container}>
-    <Scene 
-      key="root"
-      navigationBarStyle={styles.navBar}
-      nagivationTitleStyle={styles.navBar}
-      >
-      <Scene key="auth" title="Welcome" hideNavBar={true}>
-        <Scene key="signin" component={requireNotAuth(Signin)} />
-        <Scene key="signup" component={requireNotAuth(Signup)} />
-      </Scene>
+  render(){
+    return (
+      <Router style={styles.container}>
+        <Scene
+          key="root"
+          navigationBarStyle={styles.navBar}
+          nagivationTitleStyle={styles.navBar}
+        >
+          <Scene key="auth" title="Welcome" hideNavBar={true}>
+            <Scene key="signin" component={requireNotAuth(Signin)} />
+            <Scene key="signup" component={requireNotAuth(Signup)} />
+          </Scene>
 
-      <Scene key="settings" component={AccountSettings} title="Account Settings" />
-      <Scene key="FoodSelector" component={FoodSelector} title="Select" />
-      <Scene key="tabbar" tabs={true} showLabel={false} swipeEnabled={true} tabBarStyle={styles.tabContainer} activeBackgroundColor="#76ffe9"
-        renderRightButton={() => {
-          return <Icon name="settings" underlayColor="#36d7b7" onPress={() => Actions.settings() } />
-        }}>
-        <Scene key="AccountHome" title="Your Latest Meal" icon={() => <Icon name="local-dining" />}  component={AccountHome} />
-        <Scene key="history" title="Meal Diary" icon={() => <Icon name="date-range" />} component={History} />
-        <Scene key="nutrition" title="Nutrition History" icon={() => <Icon name="assessment" />} component={NutritionHistory} />
-        <Scene key="camera" title="Camera" component={Camera} icon={() => <Icon name="camera-alt" />} initial={true} />
-      </Scene>
-    </Scene>
-  </Router>
-);
+          <Scene key="settings" component={AccountSettings} title="Account Settings" />
+          <Scene key="FoodSelector" component={FoodSelector} title="Select" />
+          <Scene key="tabbar" tabs={true} showLabel={false} swipeEnabled={true} tabBarStyle={styles.tabContainer} activeBackgroundColor="#76ffe9"
+                 renderRightButton={() => {
+                   return <Icon name="settings" underlayColor="#36d7b7" onPress={() => Actions.settings() } />
+                 }}>
+            <Scene key="AccountHome" title="Your Latest Meal" icon={() => <Icon name="local-dining" />}  component={AccountHome} />
+            <Scene key="history" title="Meal Diary" icon={() => <Icon name="date-range" />} component={History} />
+            <Scene key="nutrition" title="Nutrition History" icon={() => <Icon name="assessment" />} component={NutritionHistory} />
+            <Scene key="camera" title="Camera" component={Camera} icon={() => <Icon name="camera-alt" />} initial={true} />
+          </Scene>
+        </Scene>
+      </Router>
+    );
+  }
+
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -59,5 +79,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#36d7b7'
   }
 })
+const mapStateToProps = (state) => ({
+  userId: state.auth && state.auth.user ? state.auth.user.uid : null
+});
 
-export default RouterComponent;
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllMeals: userId => dispatch(getAllUserMeals(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RouterComponent)
+
