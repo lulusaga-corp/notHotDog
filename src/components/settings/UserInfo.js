@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux'
 import { FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
 class UserInfo extends Component {
   state = {
@@ -54,7 +55,6 @@ class UserInfo extends Component {
       email: this.state.user.email
     }
 
-    if (this.state.editAccount) {
       let user = firebase.auth().currentUser
       user.updateProfile({ displayName: `${updatedInfo.displayName}` })
       .then(() => {
@@ -70,8 +70,8 @@ class UserInfo extends Component {
         }
       })
       .catch(err => console.error(err))
-    }
     this.setState({editAccount: !this.state.editAccount, user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
+    Actions.pop();
   }
 
   render () {
@@ -79,7 +79,6 @@ class UserInfo extends Component {
     return (
       <View>
         <View>
-          { this.state.editAccount ?
             <View>
               <View>
                 <FormLabel>Name:</FormLabel>
@@ -101,15 +100,7 @@ class UserInfo extends Component {
               </View>
               <Button onPress={this.editAccount.bind(this)} title="Save Account Changes"/>
             </View>
-          :
-            <View>
-              <View>
-                <Text>Name: {this.state.firstname || user.displayName || null}</Text>
-                <Text>Email: {user.email} </Text>
-              </View>
-              <Button onPress={this.editAccount.bind(this)} title="Edit Account Info"/>
-            </View>
-          }
+          
         </View>
       </View>
     )

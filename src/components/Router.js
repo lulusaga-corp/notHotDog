@@ -14,7 +14,9 @@ import History from "../scenes/History"; /* to see all past meal data */
 import Camera from "../scenes/Camera"; /* access to the camera */
 import NutritionHistory from "../scenes/NutritionHistory";
 import FoodSelector from "../scenes/FoodSelector";
-
+import DietaryInfo from "./settings/DietaryInfo";
+import UserInfo from "./settings/UserInfo";
+import AccountManagement from "./settings/AccountManagement";
 
 
 const RouterComponent = () => (
@@ -30,6 +32,10 @@ const RouterComponent = () => (
       </Scene>
 
       <Scene key="settings" component={AccountSettings} title="Account Settings" />
+      <Scene key="deleteAccount" component={AccountManagement} title="Delete Account" />
+      <Scene key="dietary" component={DietaryInfo} title="Edit Dietary Preferences" />
+      <Scene key="userInfo" component={UserInfo} title="Edit Account Info" />
+      
       <Scene key="FoodSelector" component={FoodSelector} title="Select" />
       <Scene key="tabbar" tabs={true} showLabel={false} swipeEnabled={true} tabBarStyle={styles.tabContainer} activeBackgroundColor="#76ffe9"
         renderRightButton={() => {
