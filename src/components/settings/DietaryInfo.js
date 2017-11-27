@@ -9,17 +9,22 @@ import {
 import { CheckBox, List, ListItem } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 class DietaryInfo extends Component {
-  state = {
-    diet: {
-      vegan: false,
-      vegetarian: false,
-      gf: false
-    },
-    allergies: [],
-    newAllergy: '',
-    editDiet: false
+  constructor(props){
+    super(props)
+    this.state = {
+      diet: {
+        vegan: false,
+        vegetarian: false,
+        gf: false
+      },
+      allergies: [],
+      newAllergy: '',
+      uid: this.props.uid
+    }
   }
 
   /* Load dietary data from Firestore */
@@ -73,11 +78,9 @@ class DietaryInfo extends Component {
         allergies: this.state.allergies
       }
     }
-    if (this.state.editDiet) {
-      firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data)
+      firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data, { merge: true })
       .catch(err => console.error(err))
-    }
-    this.setState({editDiet: !this.state.editDiet})
+    Actions.pop();
   }
 
   render () {
@@ -90,8 +93,6 @@ class DietaryInfo extends Component {
     let diet = Object.keys(this.state.diet).filter(key => this.state.diet[key] === true).map(diet => specialDiets[diet]);
     return (
       <View>
-        { 
-          this.state.editDiet ?
           <View>
             <View>
               <Text>Dietary Preferences: (Check All That Apply)</Text>
@@ -138,41 +139,15 @@ class DietaryInfo extends Component {
             </ScrollView>
             <Button onPress={this.editDiet.bind(this)} title="Save Special Diet Changes"/>
           </View>
-          :
-          <View>
-            { 
-              diet.length > 0 && 
-              <View>
-                {diet.map((diet, i) => {
-                  return (
-                    <Text key={i}>{diet} </Text>
-                    )
-                  })
-                }
-              </View>
-            }
-            {
-              this.state.allergies.length > 0 && 
-              <View>
-                <Text>Allergies</Text>
-                {
-                  this.state.allergies.map((allergy, i) => {
-                    return (
-                      <Text key={i}> {allergy} </Text>
-                    )
-                  })
-                }
-              </View>
-            }
-            {
-              !this.state.allergies[0] && !diet[0] && <Text>None Listed</Text>
-            }
-            <Button onPress={this.editDiet.bind(this)} title="Edit Special Diet Info"/>
-          </View>
-        }
       </View>
     )
   }
 }
 
-export default DietaryInfo
+const mapStateToProps = (state) => {
+  return {
+    uid: state.auth.user.uid
+  }
+}
+
+export default connect(mapStateToProps)(DietaryInfo);

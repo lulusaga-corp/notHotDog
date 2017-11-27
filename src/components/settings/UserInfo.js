@@ -6,17 +6,21 @@ import {
   AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux';
 import { FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
 
 class UserInfo extends Component {
-  state = {
-    user: this.props.user,
-    uid: this.props.uid,
-    name: this.props.user.displayName,
-    editAccount: false,
-    currentPass: '',
-    newPass: ''
+  constructor(props){
+    super(props);
+    this.state = {
+      user: this.props.user,
+      uid: this.props.uid,
+      firstName: this.props.user.displayName,
+      lastName: '',
+      currentPass: '',
+      newPass: ''
+    }
   }
 
   componentDidMount(){
@@ -25,15 +29,19 @@ class UserInfo extends Component {
     .then(data => {
       if (data.firstname) {
         this.setState({
-          firstname: data.firstname,
-          lastname: data.lastname
+          firstName: data.firstname,
+          lastName: data.lastname
         })
       }
     })
   }
 
-  editName(text){
-    this.setState({name: text})
+  editFirstName(text){
+    this.setState({firstName: text})
+  }
+  
+  editLastName(text){
+    this.setState({lastName: text})
   }
 
   editEmail(text){
@@ -50,28 +58,28 @@ class UserInfo extends Component {
 
   editAccount(){
     let updatedInfo = {
-      displayName: this.state.name,
-      email: this.state.user.email
+      displayName: this.state.firstName,
+      email: this.state.user.email,
+      lastName: this.state.lastName
     }
-
-    if (this.state.editAccount) {
-      let user = firebase.auth().currentUser
-      user.updateProfile({ displayName: `${updatedInfo.displayName}` })
-      .then(() => {
-        return user.updateEmail(`${updatedInfo.email}`)
-      })
-      .then(() => {
-        if (this.state.newPass && this.state.currentPass) {
-          firebase.auth().signInWithEmailAndPassword(this.state.user.email, this.state.currentPass)
-          .then((user) => user.updatePassword(this.state.newPass))
-          .catch(err => AlertIOS.alert('Password Error', null))
-        } else if (this.state.newPass) {
-          AlertIOS.alert('Password Required', 'Please return to previous page and enter your current password')
-        }
-      })
+    let user = firebase.auth().currentUser
+    user.updateProfile({ displayName: `${updatedInfo.displayName}` })
+    .then(() => {
+      return user.updateEmail(`${updatedInfo.email}`)
+    })
+    .then(() => {
+      if (this.state.newPass && this.state.currentPass) {
+        firebase.auth().signInWithEmailAndPassword(this.state.user.email, this.state.currentPass)
+        .then((user) => user.updatePassword(this.state.newPass))
+        .catch(err => AlertIOS.alert('Password Error', null))
+      } else if (this.state.newPass) {
+        AlertIOS.alert('Password Required', 'Please return to previous page and enter your current password')
+      }
+    })
       .catch(err => console.error(err))
-    }
-    this.setState({editAccount: !this.state.editAccount, user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
+    this.setState({ user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
+    firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set({ firstname: updatedInfo.displayName, lastname: updatedInfo.lastName }, { merge: true })
+    Actions.popTo('settings', { userFirstName: updatedInfo.displayName });
   }
 
   render () {
@@ -79,13 +87,16 @@ class UserInfo extends Component {
     return (
       <View>
         <View>
-          { this.state.editAccount ?
             <View>
               <View>
-                <FormLabel>Name:</FormLabel>
+                <FormLabel>First Name:</FormLabel>
                 <FormInput 
-                  onChangeText={(text) => this.editName(text)} 
-                  defaultValue={(this.state.name) ? this.state.name : user.displayName} />
+                  onChangeText={(text) => this.editFirstName(text)} 
+                  defaultValue={(this.state.firstName) ? this.state.firstName : user.displayName} />
+                <FormLabel>Last Name:</FormLabel>
+                <FormInput 
+                  onChangeText={(text) => this.editLastName(text)} 
+                  defaultValue={(this.state.lastName) ? this.state.lastName : null} />
                 <FormLabel>Email:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editEmail(text)} 
@@ -101,15 +112,6 @@ class UserInfo extends Component {
               </View>
               <Button onPress={this.editAccount.bind(this)} title="Save Account Changes"/>
             </View>
-          :
-            <View>
-              <View>
-                <Text>Name: {this.state.firstname || user.displayName || null}</Text>
-                <Text>Email: {user.email} </Text>
-              </View>
-              <Button onPress={this.editAccount.bind(this)} title="Edit Account Info"/>
-            </View>
-          }
         </View>
       </View>
     )
