@@ -97,7 +97,7 @@ export default function fullNutrientParser(apiResponse){
     foodArr.forEach(item => {
       let nutrients = item.full_nutrients;
       item.parsed_nutrients = {};
-      return nutrients.forEach(nutrient => {      
+      return nutrients.forEach(nutrient => {
         if (key[nutrient.attr_id]){
           let parsed = item.parsed_nutrients;
           let nutrientObj = {}

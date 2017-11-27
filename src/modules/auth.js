@@ -15,7 +15,6 @@ export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
-
 /**
  |--------------------------------------------------
  | Actions
@@ -39,11 +38,9 @@ export const signUpUser = ({ email, password, firstname, lastname }) => (dispatc
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
+      dispatch({ type: SIGN_UP_SUCCESS, payload: user });
+      dispatch(reset('signup'));
       return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
-    })
-        .then(() => {
-          dispatch({ type: SIGN_UP_SUCCESS, payload: user });
-          dispatch(reset('signup'));
         })
     .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
 };
@@ -82,6 +79,7 @@ const authFailMessage = (errorCode) => {
  | Reducer
  |--------------------------------------------------
  */
+
 const INITIAL_STATE = {
   error: '',
   loading: false,
