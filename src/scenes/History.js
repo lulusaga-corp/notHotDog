@@ -19,9 +19,6 @@ class History extends Component {
 
   render () {
     const { allMeals } = this.props
-    let sortedMeals = allMeals ? allMeals.sort(function(a, b){
-      return moment(b.timestamp).format('X')-moment(a.timestamp).format('X')
-    }) : []
 
     return (
       <View style={styles.tabContainer}>
@@ -29,7 +26,7 @@ class History extends Component {
         <IconContainer />
         <View style={ styles.mealContainer }>
           {
-            sortedMeals && sortedMeals.map((mealInstance, index) => {
+            allMeals && allMeals.map((mealInstance, index) => {
               return (
                 <TouchableOpacity key={index} onPress={() => Actions.AccountHome(mealInstance)}>
                   <Card title={mealInstance.timestamp.toString().split(' ').slice(0,5).join(' ')} >
