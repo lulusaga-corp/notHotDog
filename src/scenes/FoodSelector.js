@@ -19,7 +19,8 @@ class FoodSelector extends Component {
     super(props);
     this.state = {
       foodArr: props.foodArr,
-      foodInput: ''
+      foodInput: '',
+      error: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -75,6 +76,7 @@ class FoodSelector extends Component {
             Actions.AccountHome({mealInstance})
           })
       })
+      .catch(()=>this.setState({error: true}))
   }
 
   render () {
@@ -113,12 +115,15 @@ class FoodSelector extends Component {
               hideChevron={true}
             />
           </List>
+          {
+            this.state.error ? <Text>We could not find one of the foods you entered in our database as it was typed. Please try again!</Text> : null
+          }
         </ScrollView>
       </View>
     );
   }
 }
-
+/////DO ERROR HNADLING
 
 const styles = StyleSheet.create({
   tabContainer: {
