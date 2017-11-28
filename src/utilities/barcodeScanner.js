@@ -1,19 +1,17 @@
 import axios from 'axios';
-import { Actions } from 'react-native-router-flux';
+import storeMeal from './storeMeal';
 
-export default function getProductFromUPC(upc) {
-  console.log('upc:', upc)
+export default function getProductFromUPC(upc,userId) {
   axios.get(`https://trackapi.nutritionix.com/v2/search/item?upc=${upc}`, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": "eeab842c",
+        "x-app-key": "21e0db6ffe3531c4fc579edd953ca88f",
         "Content-Type": "application/json"
       }
     })
     .then(res => res.data)
     .then(response => {
-      let foodArr = [response.foods[0].food_name]
-      Actions.FoodSelector({ foodArr });
+      storeMeal(response, userId)
     }, err => {
       console.error
     })

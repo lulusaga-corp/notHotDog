@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 import { cameraStyle as styles }  from '../assets/stylesheets';
 import clarifaiCall from '../utilities/clarifaiCall';
 import barcodeScanner from '../utilities/barcodeScanner'
+import { connect } from 'react-redux';
 
 const flashModeOrder = {
   off: 'on',
@@ -66,9 +67,8 @@ export class AppCamera extends Component {
   }
 
   renderBarCode() {
-    console.log('bout to render me a barcode')
     return (
-      <BarCodeScanner onBarCodeRead={data => barcodeScanner(data.data)} style={styles.camera} />
+      <BarCodeScanner onBarCodeRead={data => barcodeScanner(data.data,this.props.userId)} style={styles.camera} />
     )
   }
     
@@ -136,4 +136,8 @@ export class AppCamera extends Component {
   }
 }
 
-export default AppCamera
+const mapStateToProps = state => ({
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+});
+
+export default connect(mapStateToProps)(AppCamera)
