@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Image, Text, StyleSheet, View, ScrollView } from "react-native";
 import IconContainer from "../components/IconContainer";
 import PieChart from "./PieChart";
+import { getAllUserMeals } from '../modules/food';
 import { connect } from 'react-redux'
 
 import {
@@ -15,11 +16,19 @@ import { Svg } from "react-native-svg";
 
 class AccountHome extends Component {
 
+  componentWillMount () {
+     this.props.userId && this.props.fetchAllMeals(this.props.userId)
+  }
+
+
   render(props) {
+    const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
+    const singleMeal = this.props.mealInstance ? this.props.mealInstance : mostRecent
+
     return (
       <View style={styles.container}>
         {
-          this.props.mostRecent ? <PieChart allFoods={this.props.mostRecent} /> :
+          singleMeal ? <PieChart allFoods={singleMeal} /> :
             null
         }
       </View>
@@ -34,7 +43,12 @@ const styles = StyleSheet.create({
 })
 
 mapStateToProps = state => ({
-  mostRecent: state.food.mostRecent
+  mostRecent: state.food.mostRecent,
+  userId: state.auth && state.auth.user ? state.auth.user.uid : null
 })
 
-export default connect(mapStateToProps)(AccountHome);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllMeals: userId => dispatch(getAllUserMeals(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountHome);

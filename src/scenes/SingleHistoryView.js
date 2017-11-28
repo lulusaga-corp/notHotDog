@@ -16,7 +16,6 @@ import { Svg } from 'react-native-svg';
 class SingleHistoryView extends Component {
   render(props) {
     //get the timestamp going
-    console.log('propsFromSingleHist', this.props)
     const singleMeal = this.props.mealInstance
     return (
       <View style={styles.container}>

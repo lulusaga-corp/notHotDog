@@ -13,6 +13,7 @@ import moment from 'moment';
 export const GET_OPTIONS = 'GET_OPTIONS'
 export const GET_ALL_USER_MEALS = 'GET_ALL_USER_MEALS'
 export const UPDATE_MOST_RECENT_MEAL = 'UPDATE_MOST_RECENT_MEAL'
+export const CLEAR_FOOD_STORE = 'CLEAR_FOOD_STORE'
 
 /**
  |--------------------------------------------------
@@ -26,9 +27,7 @@ export const getAllUserMeals = userId => dispatch => {
     .then(snapshot => {
       let allMeals = []
       snapshot.forEach(doc => allMeals.push(doc.data()))
-      // let sortedMeals = allMeals.sort(function(a, b){
-      //   return moment(b.timestamp).format('X')-moment(a.timestamp).format('X')
-      // });
+
       //---------time filterers-----------
       const today = mealInstance => moment(mealInstance.timestamp).isSame(moment(), "day")
       const week = mealInstance => moment(mealInstance.timestamp).isAfter(moment().subtract(1, "week"), "day")
@@ -48,13 +47,9 @@ export const getAllUserMeals = userId => dispatch => {
     .catch(err => {
       console.log('Error getting documents', err);
     });
-
 }
 
-export const updateMostRecentMeal = mealInstance => {
-  const action = { type: UPDATE_MOST_RECENT_MEAL, payload: mealInstance };
-  return action;
-}
+export const clearFoodStore = () => ({ type: CLEAR_FOOD_STORE });
 
 /**
  |--------------------------------------------------
@@ -69,6 +64,8 @@ const reducer = (state = INITIAL_STATE, action) => {
           return {...state, ...action.payload}
       case UPDATE_MOST_RECENT_MEAL:
           return {...state, mostRecent: action.payload}
+      case CLEAR_FOOD_STORE:
+        return {}
         default: 
             return state;
     }

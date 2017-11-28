@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux'
+
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Input, Button, Item, Spinner } from '../common/index';
@@ -22,7 +24,7 @@ class Signin extends Component {
   }
 
   componentWillMount() {
-    this.props.clearState();
+    this.props.userId ? null : this.props.clearState();
   }
 
   handleFormSubmit(props) {
@@ -103,4 +105,8 @@ const validate = (props) => {
 Signin.propTypes = propTypes;
 Signin = reduxForm({ form: 'signin', validate })(Signin);
 
-export default Signin;
+const mapStateToProps = state => ({
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+});
+
+export default connect(mapStateToProps)(Signin);
