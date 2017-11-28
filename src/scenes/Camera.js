@@ -31,11 +31,16 @@ export class AppCamera extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hasCameraPermission: true,
+      hasCameraPermission: null,
       flash: 'auto',
       showGallery: false,
       loading: false
     };
+  }
+
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
   }
 
   toggleView() {
@@ -52,8 +57,8 @@ export class AppCamera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
-      this.setState({loading: true})
       this.camera.takePictureAsync({base64: true}).then(data => {
+        this.setState({loading: true})
         clarifai.models
           .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
           .then(response => {
