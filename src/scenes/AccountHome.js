@@ -22,8 +22,8 @@ class AccountHome extends Component {
 
 
   render(props) {
-    const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
-    const singleMeal = this.props.mealInstance ? this.props.mealInstance : mostRecent
+    // const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
+    const singleMeal = this.props.mealInstance ? this.props.mealInstance : (this.props.mostRecent || null)
 
     return (
       <View style={styles.container}>
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   }
 })
 
+//set up default state for mostRecent
 mapStateToProps = state => ({
   mostRecent: state.food.mostRecent,
   userId: state.auth && state.auth.user ? state.auth.user.uid : null
