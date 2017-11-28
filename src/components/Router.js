@@ -48,7 +48,6 @@ class RouterComponent extends Component {
             <Scene key="signin" component={requireNotAuth(Signin)} />
             <Scene key="signup" component={requireNotAuth(Signup)} />
           </Scene>
-
           <Scene key="settings" component={AccountSettings} title="Account Settings" />
           <Scene key="deleteAccount" component={AccountManagement} title="Delete Account" />
           <Scene key="dietary" component={DietaryInfo} title="Edit Dietary Preferences" />

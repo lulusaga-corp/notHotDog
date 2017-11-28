@@ -42,7 +42,7 @@ class AccountManagement extends Component {
   render() {
     return (
       <View>
-        <Button onPress={ this.props.signOutUser } title="SignOut"/>
+        <Text>Are you sure you want to delete your account? This action cannot be undone.</Text>
         <Button onPress={ this.deleteAccount.bind(this) } title="Delete My Account"/>
       </View>
     )
