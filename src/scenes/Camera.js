@@ -1,16 +1,11 @@
 import { Camera, Permissions } from 'expo';
-import { Actions } from 'react-native-router-flux'
 import React, { Component } from 'react';
-import Clarifai from 'clarifai'
 import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
 import { cameraStyle as styles }  from '../assets/stylesheets';
-const clarifai = new Clarifai.App({
-  apiKey: "dd78fc13ab31417c9e61706721dc8179"
-});
-process.nextTick = setImmediate;
+import clarifaiCall from '../utilities/clarifaiCall';
 
 const flashModeOrder = {
   off: 'on',
@@ -50,15 +45,7 @@ export class AppCamera extends Component {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifai.models
-          .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
-          .then(response => {
-            let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
-              .map(item => item.name)
-            Actions.FoodSelector({ foodArr });
-          }, err => {
-            console.error
-          })
+        clarifaiCall(data.base64);
       })
       .catch(e => {
         console.error(e, 'Photo error');;
