@@ -1,4 +1,4 @@
-import { Camera } from 'expo';
+import { Camera, Permissions } from 'expo';
 import { Actions } from 'react-native-router-flux'
 import React, { Component } from 'react';
 import firebase from 'firebase';
@@ -31,6 +31,7 @@ export class AppCamera extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      hasCameraPermission: true,
       flash: 'auto',
       showGallery: false,
       loading: false
@@ -74,40 +75,45 @@ export class AppCamera extends Component {
   }
     
   renderCamera() {
-    const { type, flash, autoFocus, zoom, whiteBalance, depth } = this.state;
-    
-    return (
-      <Camera
-        ref={ref => {
-          this.camera = ref;
-        }}
-        style={styles.camera}
-        flashMode={flash}>
-        <View style={styles.controls}>
-          <Icon
-            raised
-            name={`flash-${flash}`}
-            size={26}
-            color="#00a587"
-            reverse
-            onPress={this.toggleFlash.bind(this)} />
-          <Icon
-            raised
-            name="camera"
-            size={36}
-            color="#ef4836"
-            reverse
-            onPress={this.takePicture.bind(this)} />
-          <Icon
-            raised
-            name="image"
-            size={26}
-            color="#b5000c"
-            reverse
-            onPress={this.toggleView.bind(this)} />
-        </View>
-      </Camera>
-    );
+    const { flash, hasCameraPermission } = this.state;
+    if (hasCameraPermission === null) {
+      return <View />;
+    } else if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    } else {
+      return (
+        <Camera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={styles.camera}
+          flashMode={flash}>
+          <View style={styles.controls}>
+            <Icon
+              raised
+              name={`flash-${flash}`}
+              size={26}
+              color="#00a587"
+              reverse
+              onPress={this.toggleFlash.bind(this)} />
+            <Icon
+              raised
+              name="camera"
+              size={36}
+              color="#ef4836"
+              reverse
+              onPress={this.takePicture.bind(this)} />
+            <Icon
+              raised
+              name="image"
+              size={26}
+              color="#b5000c"
+              reverse
+              onPress={this.toggleView.bind(this)} />
+          </View>
+        </Camera>
+      );
+    }
   }
 
   render() {
