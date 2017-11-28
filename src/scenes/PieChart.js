@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Image, Text, StyleSheet, View, ScrollView, Dimensions } from "react-native";
-import IconContainer from "../components/IconContainer";
 import {
   VictoryPie,
   VictoryLabel,

@@ -1,7 +1,6 @@
 import React from 'react';
 // import Signin from '../../src/components/auth/Signin';
 import {Button, Confirm, Container, Header, Input, Item, Spinner} from '../../src/components/common';
-import IconContainer from '../../src/components/IconContainer';
 
 import renderer from 'react-test-renderer';
 import { createStore } from 'redux';

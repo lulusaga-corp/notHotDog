@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, Text, StyleSheet, View, ScrollView } from 'react-native';
-import IconContainer from '../components/IconContainer';
 import PieChart from './PieChart';
 import { connect } from 'react-redux';
 
