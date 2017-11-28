@@ -1,8 +1,6 @@
-import { Actions } from 'react-native-router-flux'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import moment from 'moment';
-
 
 /**
  |--------------------------------------------------
@@ -10,7 +8,6 @@ import moment from 'moment';
  |--------------------------------------------------
  */
 
-export const GET_OPTIONS = 'GET_OPTIONS'
 export const GET_ALL_USER_MEALS = 'GET_ALL_USER_MEALS'
 export const UPDATE_MOST_RECENT_MEAL = 'UPDATE_MOST_RECENT_MEAL'
 export const CLEAR_FOOD_STORE = 'CLEAR_FOOD_STORE'

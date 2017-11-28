@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import { Image, Text, StyleSheet, View, ScrollView } from "react-native";
-import PieChart from "./PieChart";
-import { getAllUserMeals } from '../modules/food';
+import {StyleSheet, View } from "react-native";
+import PieChart from "../components/PieChart";
+import { getAllUserMeals } from '../store/food';
 import { connect } from 'react-redux'
-
-import {
-  VictoryPie,
-  VictoryLabel,
-  VictoryContainer,
-  VictoryChart,
-  VictoryLegend
-} from "victory-native";
-import { Svg } from "react-native-svg";
 
 class AccountHome extends Component {
 
@@ -20,7 +11,7 @@ class AccountHome extends Component {
   }
 
 
-  render(props) {
+  render() {
     const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
     const singleMeal = this.props.mealInstance ? this.props.mealInstance : mostRecent
 

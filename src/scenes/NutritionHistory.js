@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { View } from 'react-native';
 import { ButtonGroup } from "react-native-elements"
-import PieChart from "./PieChart";
+import PieChart from "../components/PieChart";
 
 class AccountHome extends Component {
   constructor (props) {

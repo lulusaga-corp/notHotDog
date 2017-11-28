@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getAllUserMeals } from '../modules/food';
-import { StyleSheet, TouchableHighlight, View } from 'react-native';
+import { getAllUserMeals } from './store/food';
+import { StyleSheet } from 'react-native';
 import { Scene, Router, TabBar, Actions } from 'react-native-router-flux';
-import { Header, Icon, Title } from 'react-native-elements';
-import Signin from '../containers/auth/Signin';
-import Signup from '../containers/auth/Signup';
-import requireAuth from '../containers/auth/requireAuth';
-import requireNotAuth from '../containers/auth/requireNotAuth';
-// Containers go here:
-import LoggedInLanding from '../scenes/LoggedInLanding'; /* to navigate to camera or account home */
-import AccountHome from '../scenes/AccountHome'; /* to display most recent meal */
-import AccountSettings from '../scenes/AccountSettings'; /* to edit user account settings */
-import History from '../scenes/History'; /* to see all past meal data */
-import Camera from '../scenes/Camera'; /* access to the camera */
-import NutritionHistory from '../scenes/NutritionHistory';
-import FoodSelector from '../scenes/FoodSelector';
-import SingleHistoryView from '../scenes/SingleHistoryView'
-import DietaryInfo from "./settings/DietaryInfo";
-import UserInfo from "./settings/UserInfo";
-import AccountManagement from "./settings/AccountManagement";
+import { Icon, Title } from 'react-native-elements';
+import requireNotAuth from './scenes/auth/requireNotAuth';
+// SCENES ---------------------------
+import Signin from './scenes/auth/Signin';
+import Signup from './scenes/auth/Signup';
+import AccountHome from './scenes/AccountHome'; /* to display most recent meal */
+import AccountSettings from './scenes/AccountSettings'; /* to edit user account settings */
+import History from './scenes/History'; /* to see all past meal data */
+import Camera from './scenes/Camera'; /* access to the camera */
+import NutritionHistory from './scenes/NutritionHistory';
+import FoodSelector from './scenes/FoodSelector';
+import SingleHistoryView from './scenes/SingleHistoryView'
+import DietaryInfo from "./scenes/settings/DietaryInfo";
+import UserInfo from "./scenes/settings/UserInfo";
+import AccountManagement from "./scenes/settings/AccountManagement";
 
 class RouterComponent extends Component {
   constructor (props) {

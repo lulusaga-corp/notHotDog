@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet
-} from 'react-native';
-import UserInfo from '../components/settings/UserInfo';
-import DietaryInfo from '../components/settings/DietaryInfo';
-import AccountManagement from '../components/settings/AccountManagement';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import { signOutUser } from '../modules/auth';
+import { signOutUser } from '../store/auth';
 import { connect } from 'react-redux';
 
 const AccountSettings = (props) =>  {

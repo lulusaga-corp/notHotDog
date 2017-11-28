@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Text,
-  View,
-  AlertIOS
-} from 'react-native';
+import { Button, Text, View, AlertIOS } from 'react-native';
 import { connect } from 'react-redux'
-import { signOutUser } from '../../modules/auth'
+import { signOutUser } from '../../store/auth'
 import firebase from 'firebase';
 
 class AccountManagement extends Component {

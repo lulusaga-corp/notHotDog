@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Text,
-  View,
-  AlertIOS
-} from 'react-native';
+import { Button, View, AlertIOS } from 'react-native';
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux';
 import { FormLabel, FormInput } from 'react-native-elements'
