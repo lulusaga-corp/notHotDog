@@ -27,7 +27,7 @@ class History extends Component {
             allMeals && allMeals.map((meal, index) => {
               return (
                 <TouchableOpacity key={index} onPress={() => Actions.SingleHistoryView(meal)}>
-                  <Card title={meal.timestamp.toString().split(' ').slice(0,5).join(' ')} >
+                  <Card title={meal.timestamp ? meal.timestamp.toString().split(' ').slice(0,5).join(' ') : null} >
                     <Text>{ meal.mealInstance.map(food=>food.food_name).join(', ') }</Text>
                   </Card>
                 </TouchableOpacity>
