@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { Actions } from 'react-native-router-flux';
 import { reset } from 'redux-form';
+import { clearFoodStore } from './food'
 
 /**
  |--------------------------------------------------
@@ -51,6 +52,7 @@ export const clearState = () => (
 
 export const signOutUser = () => (dispatch) => {
   dispatch({ type: SET_INITIAL_STATE });
+  dispatch(clearFoodStore())
   firebase.auth().signOut();
   Actions.auth()
 };
@@ -107,4 +109,4 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default reducer;
+export default reducer

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem, Button } from 'react-native-elements';
-import { updateMostRecentMeal } from '../modules/food'
+import { getAllUserMeals } from '../modules/food'
 import fullNutrientParser from '../utilities/nutrientParser';
 
 class FoodSelector extends Component {
@@ -37,6 +37,7 @@ class FoodSelector extends Component {
   }
 
   handleSubmit (userId) {
+    if (!userId) return;
     axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
       query: this.state.foodArr.join(", ")
     }, {
@@ -48,7 +49,6 @@ class FoodSelector extends Component {
     })
       .then(res => res.data)
       .then(data => {
-        console.log('data', data)
         let mealInstance = [];
         if (data) {
           fullNutrientParser(data)
@@ -70,7 +70,9 @@ class FoodSelector extends Component {
           timestamp
         })
           .then(() => {
-            Actions.AccountHome()
+          const mostRecent = {mostRecent: mealInstance[0]}
+            console.log("######",mostRecent)
+            Actions.AccountHome({mealInstance})
           })
       })
   }
@@ -103,7 +105,10 @@ class FoodSelector extends Component {
               textInputAutoCapitalize={"none"}
               onPressRightIcon={() => this.addToFoodArr(this.state.foodInput)}/>
             <ListItem
-              onPress={() => this.handleSubmit(userId)}
+              onPress={() =>{
+                console.log("user ID", userId)
+                this.handleSubmit(userId)
+              }}
               title="Click here to submit!"
               hideChevron={true}
             />
@@ -124,7 +129,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  userId: state.auth.user.uid
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllMeals: userId => dispatch(getAllUserMeals(userId))
 });
 
-export default connect(mapStateToProps)(FoodSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(FoodSelector);
