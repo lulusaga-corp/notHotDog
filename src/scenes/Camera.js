@@ -56,6 +56,7 @@ export class AppCamera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
+      this.setState({loading: true})
       this.camera.takePictureAsync({base64: true}).then(data => {
         clarifai.models
           .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
