@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, ScrollView, Dimensions } from "react-native";
-import { VictoryPie, VictoryLegend } from "victory-native";
+import { VictoryPie, VictoryLegend, VictoryContainer } from "victory-native";
 import { Svg } from "react-native-svg";
+import SinglePieChart from './SinglePieChart';
 
 class PieChart extends Component {
   render() {
     const foodCharts = this.props.allFoods
-
     return (
         <ScrollView contentContainerStyle={styles.container}>
           {foodCharts &&
@@ -17,30 +17,7 @@ class PieChart extends Component {
                 { x: "fat", y: food.data.fat },
                 { x: "protein", y: food.data.protein }
               );
-              return (
-                <View key={idx} style={styles.container}>
-                  <Svg width={Dimensions.get("window").width} height={130}>
-                    <VictoryLegend x={100} y={100}
-                    centerTitle
-                    orientation="horizontal"
-                    gutter={10}
-                    data={[
-                      { name: "Carbs", symbol: { fill: "tomato" } },
-                      { name: "Fat", symbol: { fill: "orange" } },
-                      { name: "Protein", symbol: { fill: "gold" } }
-                    ]}
-                  />
-                </Svg>
-                <VictoryPie
-                colorScale={["tomato", "orange", "gold"]}
-                data={chartData}
-                innerRadius={2}
-                padAngle={2}
-                style={{ labels: { fontSize: 1 } }}
-                />
-                <Text style={styles.title}>{food.food_name}</Text>
-                </View>
-              );
+              return <SinglePieChart data={chartData} key={idx} foodName={food.food_name}/>
             })}
         </ScrollView>
     );
@@ -50,17 +27,13 @@ class PieChart extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingLeft: 50,
     paddingRight: 50,
-  },
-  title: {
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: 18,
-    fontWeight: "bold",
+    paddingBottom: 50,
+    marginTop: 0
   }
-  
 });
 
 export default PieChart;
+

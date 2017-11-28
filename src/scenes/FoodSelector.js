@@ -67,7 +67,7 @@ class FoodSelector extends Component {
         })
           .then(() => {
           const mostRecent = {mostRecent: mealInstance[0]}
-            console.log("######",mostRecent)
+            // console.log("######",mostRecent)
             Actions.AccountHome({mealInstance})
           })
       })
@@ -103,7 +103,7 @@ class FoodSelector extends Component {
               onPressRightIcon={() => this.addToFoodArr(this.state.foodInput)}/>
             <ListItem
               onPress={() =>{
-                console.log("user ID", userId)
+                // console.log("user ID", userId)
                 this.handleSubmit(userId)
               }}
               title="Click here to submit!"
