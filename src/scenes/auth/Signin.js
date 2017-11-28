@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux'
+import { signInUser, clearState } from '../../store/auth';
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
-import { Container, Input, Button, Item, Spinner } from '../common/index';
+import { Container, Input, Button, Item, Spinner } from '../../components/common/index';
 import styles from './authStyle';
 
 const propTypes = {
@@ -14,7 +16,7 @@ const propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-class UserProfile extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +24,7 @@ class UserProfile extends Component {
   }
 
   componentWillMount() {
-    this.props.clearState();
+    this.props.userId ? null : this.props.clearState();
   }
 
   handleFormSubmit(props) {
@@ -56,21 +58,21 @@ class UserProfile extends Component {
 
         {this.props.authError
           ?
-          <Text style={styles.error}>
-            {this.props.authError}
-          </Text>
+            <Text style={styles.error}>
+              {this.props.authError}
+            </Text>
           :
-          <View />}
+            <View />}
 
         {this.props.loading
           ?
-          <Item style={styles.loadingContainer}>
-            <Spinner />
-          </Item>
+            <Item style={styles.loadingContainer}>
+              <Spinner />
+            </Item>
           :
-          <Item>
-            <Button onPress={handleSubmit(this.handleFormSubmit)}>Log in</Button>
-          </Item>}
+            <Item>
+              <Button onPress={handleSubmit(this.handleFormSubmit)}>Log in</Button>
+            </Item>}
 
         <Item>
           <TouchableOpacity
@@ -83,7 +85,7 @@ class UserProfile extends Component {
           </TouchableOpacity>
         </Item>
       </Container>
-    );
+    )
   }
 }
 
@@ -103,4 +105,10 @@ const validate = (props) => {
 Signin.propTypes = propTypes;
 Signin = reduxForm({ form: 'signin', validate })(Signin);
 
-export default Signin;
+const mapStateToProps = ({auth}) => ({
+  authError: auth.error,
+  loading: auth.loading ,
+  userId: auth && auth.user  ? auth.user.uid : ''
+});
+
+export default connect(mapStateToProps, { signInUser, clearState })(Signin);

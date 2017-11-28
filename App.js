@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import firebaseConfig from './firebaseConfig.json';
 firebase.initializeApp(firebaseConfig);
-
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
-import Router from './src/components/Router';
+import Router from './src/Router';
 import store from './configureStore';
-import { SIGN_IN_SUCCESS } from './src/modules/auth';
+import { SIGN_IN_SUCCESS } from './src/store/auth';
 import { Spinner } from './src/components/common';
 
 class App extends Component {

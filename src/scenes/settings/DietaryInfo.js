@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView
-} from 'react-native';
+import { Button, Text, View, ScrollView } from 'react-native';
 import { CheckBox, List, ListItem } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';

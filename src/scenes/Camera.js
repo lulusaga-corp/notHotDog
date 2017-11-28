@@ -1,25 +1,16 @@
 import { Camera, Permissions } from 'expo';
 import { Actions } from 'react-native-router-flux'
 import React, { Component } from 'react';
-import firebase from 'firebase';
-import 'firebase/firestore';
-import { connect } from 'react-redux'
 import Clarifai from 'clarifai'
+import { Text, View } from 'react-native';
+import CameraGallery from '../components/CameraGallery';
+import { Spinner } from '../components/common'
+import { Icon } from 'react-native-elements';
+import { cameraStyle as styles }  from '../assets/stylesheets';
 const clarifai = new Clarifai.App({
   apiKey: "dd78fc13ab31417c9e61706721dc8179"
 });
 process.nextTick = setImmediate;
-import {
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
-import CameraGallery from './CameraGallery';
-import { Spinner } from '../components/common'
-import store from '../../configureStore';
-import { getAllUserMeals } from '../modules/food'
-import { Icon } from 'react-native-elements';
-import { cameraStyle as styles }  from '../assets/stylesheets';
 
 const flashModeOrder = {
   off: 'on',

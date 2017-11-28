@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
-import { Container, Input, Button, Item, Spinner } from '../common/index';
+import { Container, Input, Button, Item, Spinner } from '../../components/common/index';
 import styles from './authStyle';
+import { signUpUser, clearState } from '../../store/auth';
+
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -153,4 +156,10 @@ const validate = (props) => {
 Signup.propTypes = propTypes;
 Signup = reduxForm({ form: 'signup', validate })(Signup);
 
-export default Signup;
+const mapStateToProps = ({ auth }) => {
+  const { error, loading, user } = auth;
+
+  return { authError: error, loading, user };
+};
+
+export default connect(mapStateToProps, { signUpUser, clearState })(Signup);

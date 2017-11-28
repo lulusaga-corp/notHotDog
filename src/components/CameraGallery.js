@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import { 
-  View,
-  StyleSheet
-} from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { ImagePicker } from 'expo';
-import store from '../../configureStore';
 import { dispatch } from 'redux';
-import { getOptions } from '../modules/food';
-import { Spinner } from '../components/common';
+import { getOptions } from '../store/food';
+import { Spinner } from './common/index';
 import Clarifai from 'clarifai'
 const clarifai = new Clarifai.App({
   apiKey: "dd78fc13ab31417c9e61706721dc8179"

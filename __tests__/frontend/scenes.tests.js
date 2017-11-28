@@ -2,7 +2,7 @@ import React from 'react';
 import AccountHome from '../../src/scenes/AccountHome';
 import AccountSettings from '../../src/scenes/AccountSettings';
 import Camera from '../../src/scenes/Camera';
-import CameraGallery from '../../src/scenes/CameraGallery';
+import CameraGallery from '../../src/components/CameraGallery';
 import FoodSelector from '../../src/scenes/FoodSelector';
 import History from '../../src/scenes/History';
 import LoggedInLanding from '../../src/scenes/LoggedInLanding';

@@ -1,14 +1,7 @@
 import React, { Component } from "react";
-import { Image, Text, StyleSheet, View, ScrollView, Dimensions } from "react-native";
-import {
-  VictoryPie,
-  VictoryLabel,
-  VictoryContainer,
-  VictoryChart,
-  VictoryLegend
-} from "victory-native";
+import { Text, StyleSheet, View, ScrollView, Dimensions } from "react-native";
+import { VictoryPie, VictoryLegend } from "victory-native";
 import { Svg } from "react-native-svg";
-import { style } from "expo/src/Font";
 
 class PieChart extends Component {
   render() {

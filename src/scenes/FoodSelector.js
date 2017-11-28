@@ -3,15 +3,10 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { List, ListItem, Button } from 'react-native-elements';
-import { getAllUserMeals } from '../modules/food'
+import { List, ListItem } from 'react-native-elements';
+import { getAllUserMeals } from '../store/food'
 import fullNutrientParser from '../utilities/nutrientParser';
 
 class FoodSelector extends Component {
