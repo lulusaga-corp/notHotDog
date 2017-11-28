@@ -2,38 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2982d932-a87f-4f6a-aa9e-fa32254fc9d4" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/auth/UserProfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/containers/LandingContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/containers/auth/Signin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/containers/auth/Signup.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/modules/post.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/scenes/LoggedInLanding.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/scenes/Tab.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/Router.js" afterPath="$PROJECT_DIR$/src/Router.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/auth/Signin.js" afterPath="$PROJECT_DIR$/src/scenes/auth/Signin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/auth/Signup.js" afterPath="$PROJECT_DIR$/src/scenes/auth/Signup.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/auth/authStyle.js" afterPath="$PROJECT_DIR$/src/scenes/auth/authStyle.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/settings/AccountManagement.js" afterPath="$PROJECT_DIR$/src/scenes/settings/AccountManagement.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/settings/DietaryInfo.js" afterPath="$PROJECT_DIR$/src/scenes/settings/DietaryInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/settings/UserInfo.js" afterPath="$PROJECT_DIR$/src/scenes/settings/UserInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/containers/auth/requireAuth.js" afterPath="$PROJECT_DIR$/src/scenes/auth/requireAuth.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/containers/auth/requireNotAuth.js" afterPath="$PROJECT_DIR$/src/scenes/auth/requireNotAuth.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/auth.js" afterPath="$PROJECT_DIR$/src/store/auth.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/modules/food.js" afterPath="$PROJECT_DIR$/src/store/food.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/scenes/CameraGallery.js" afterPath="$PROJECT_DIR$/src/components/CameraGallery.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/scenes/PieChart.js" afterPath="$PROJECT_DIR$/src/components/PieChart.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App.js" afterPath="$PROJECT_DIR$/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/frontend/containers.tests.js" afterPath="$PROJECT_DIR$/__tests__/frontend/containers.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/frontend/scenes.tests.js" afterPath="$PROJECT_DIR$/__tests__/frontend/scenes.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configureStore.js" afterPath="$PROJECT_DIR$/configureStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/AccountHome.js" afterPath="$PROJECT_DIR$/src/scenes/AccountHome.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/AccountSettings.js" afterPath="$PROJECT_DIR$/src/scenes/AccountSettings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CameraGallery.js" afterPath="$PROJECT_DIR$/src/components/CameraGallery.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/Camera.js" afterPath="$PROJECT_DIR$/src/scenes/Camera.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/FoodSelector.js" afterPath="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/History.js" afterPath="$PROJECT_DIR$/src/scenes/History.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/NutritionHistory.js" afterPath="$PROJECT_DIR$/src/scenes/NutritionHistory.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/SingleHistoryView.js" afterPath="$PROJECT_DIR$/src/scenes/SingleHistoryView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/food.js" afterPath="$PROJECT_DIR$/src/store/food.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,25 +20,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="nutrientParser.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/nutrientParser.js">
+      <file leaf-file-name="food.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/store/food.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="99" column="13" lean-forward="false" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="64">
+              <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Router.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Router.js">
+      <file leaf-file-name="FoodSelector.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="37" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+            <state relative-caret-position="357">
+              <caret line="22" column="3" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="22" selection-end-column="3" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#396#438#0" expanded="true" />
-                <element signature="e#793#850#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CameraGallery.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/CameraGallery.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="30" column="7" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="30" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Camera.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,17 +129,17 @@
         <option value="$PROJECT_DIR$/src/scenes/auth/Signup.js" />
         <option value="$PROJECT_DIR$/src/scenes/settings/AccountManagement.js" />
         <option value="$PROJECT_DIR$/src/components/PieChart.js" />
-        <option value="$PROJECT_DIR$/src/components/CameraGallery.js" />
         <option value="$PROJECT_DIR$/src/scenes/settings/UserInfo.js" />
         <option value="$PROJECT_DIR$/src/scenes/settings/DietaryInfo.js" />
         <option value="$PROJECT_DIR$/src/scenes/SingleHistoryView.js" />
         <option value="$PROJECT_DIR$/src/scenes/NutritionHistory.js" />
         <option value="$PROJECT_DIR$/src/scenes/History.js" />
-        <option value="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
-        <option value="$PROJECT_DIR$/src/scenes/Camera.js" />
-        <option value="$PROJECT_DIR$/src/store/food.js" />
         <option value="$PROJECT_DIR$/src/scenes/AccountHome.js" />
         <option value="$PROJECT_DIR$/src/Router.js" />
+        <option value="$PROJECT_DIR$/src/store/food.js" />
+        <option value="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
+        <option value="$PROJECT_DIR$/src/components/CameraGallery.js" />
+        <option value="$PROJECT_DIR$/src/scenes/Camera.js" />
       </list>
     </option>
   </component>
@@ -204,7 +201,7 @@
               <item name="notHotDog" type="b2602c69:ProjectViewProjectNode" />
               <item name="notHotDog" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="scenes" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="notHotDog" type="b2602c69:ProjectViewProjectNode" />
@@ -269,7 +266,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115637000" />
+    <option name="totallyTimeSpent" value="120756000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-322" y="-1057" width="1594" height="1057" extended-state="0" />
@@ -278,6 +275,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18181819" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2215269" sideWeight="0.5022861" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -299,6 +297,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22716442" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -340,13 +339,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/LoggedInLanding.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="65" lean-forward="false" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/LoggedInLanding.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/firebase-admin/lib/auth/credential.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -383,13 +376,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="49" column="14" lean-forward="false" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/post.js" />
     <entry file="file://$PROJECT_DIR$/src/modules/camera.js" />
     <entry file="file://$PROJECT_DIR$/../gabrieldefazio.com/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -435,46 +422,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/Tab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/LandingContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/auth/UserProfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/auth/Signin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="44" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/auth/Signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/Tab.js" />
+    <entry file="file://$PROJECT_DIR$/src/containers/LandingContainer.js" />
+    <entry file="file://$PROJECT_DIR$/src/components/auth/UserProfile.js" />
+    <entry file="file://$PROJECT_DIR$/src/containers/auth/Signin.js" />
+    <entry file="file://$PROJECT_DIR$/src/containers/auth/Signup.js" />
     <entry file="file://$PROJECT_DIR$/configureStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -526,16 +478,6 @@
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CameraGallery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -640,40 +582,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="47" lean-forward="true" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/scenes/AccountSettings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/food.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -696,6 +610,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="41" lean-forward="true" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#396#438#0" expanded="true" />
+            <element signature="e#793#850#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/nutrientParser.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -704,14 +630,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Router.js">
+    <entry file="file://$PROJECT_DIR$/src/store/food.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="37" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+        <state relative-caret-position="64">
+          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="22" column="3" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="22" selection-end-column="3" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#396#438#0" expanded="true" />
-            <element signature="e#793#850#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CameraGallery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="30" column="7" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

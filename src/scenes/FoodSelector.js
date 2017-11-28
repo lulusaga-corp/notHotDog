@@ -15,9 +15,20 @@ class FoodSelector extends Component {
     this.state = {
       foodArr: props.foodArr,
       foodInput: '',
-      error: ''
-    }
+      error: '',
+      xAppId: "",
+      xAppKey: "",
+      }
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount(){
+    return firebase.firestore().doc(`env/nutrionix`)
+      .get()
+      .then(snapshot =>{
+        const nutrionix = snapshot.data()
+        this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
+      })
   }
 
   deleteFromFoodArr = item => {
@@ -38,8 +49,8 @@ class FoodSelector extends Component {
       query: this.state.foodArr.join(", ")
     }, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": this.state.xAppId,
+        "x-app-key": this.state.xAppKey,
         "Content-Type": "application/json"
       }
     })
@@ -67,7 +78,6 @@ class FoodSelector extends Component {
         })
           .then(() => {
           const mostRecent = {mostRecent: mealInstance[0]}
-            console.log("######",mostRecent)
             Actions.AccountHome({mealInstance})
           })
       })

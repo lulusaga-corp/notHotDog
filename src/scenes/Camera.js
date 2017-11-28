@@ -6,10 +6,10 @@ import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
+import firebase from 'firebase';
+import 'firebase/firestore';
 import { cameraStyle as styles }  from '../assets/stylesheets';
-const clarifai = new Clarifai.App({
-  apiKey: "dd78fc13ab31417c9e61706721dc8179"
-});
+
 process.nextTick = setImmediate;
 
 const flashModeOrder = {
@@ -22,6 +22,7 @@ export class AppCamera extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      clarifaiKey: "",
       hasCameraPermission: null,
       flash: 'auto',
       showGallery: false,
@@ -32,6 +33,14 @@ export class AppCamera extends Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
+  componentDidMount(){
+    firebase.firestore().doc(`env/clarifai`).get()
+      .then(snapshot =>{
+        const clarifaiKey = snapshot.data().apiKey
+        this.setState({clarifaiKey})
+      })
   }
 
   toggleView() {
@@ -47,6 +56,9 @@ export class AppCamera extends Component {
   }
 
   takePicture = async function() {
+    const clarifai = new Clarifai.App({
+      apiKey: this.state.clarifaiKey
+    });
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})

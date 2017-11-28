@@ -19,7 +19,7 @@ export const CLEAR_FOOD_STORE = 'CLEAR_FOOD_STORE'
  */
 
 export const getAllUserMeals = userId => dispatch => {
-  firebase.firestore().collection(`users/${userId}/meals`)
+  return firebase.firestore().collection(`users/${userId}/meals`)
     .get()
     .then(snapshot => {
       let allMeals = []
