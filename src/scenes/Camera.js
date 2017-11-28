@@ -1,4 +1,4 @@
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, BarCodeScanner } from 'expo';
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
@@ -6,6 +6,7 @@ import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
 import { cameraStyle as styles }  from '../assets/stylesheets';
 import clarifaiCall from '../utilities/clarifaiCall';
+import barcodeScanner from '../utilities/barcodeScanner'
 
 const flashModeOrder = {
   off: 'on',
@@ -20,6 +21,7 @@ export class AppCamera extends Component {
       hasCameraPermission: null,
       flash: 'auto',
       showGallery: false,
+      showBarcode: false,
       loading: false
     };
   }
@@ -41,6 +43,12 @@ export class AppCamera extends Component {
     });
   }
 
+  toggleBarCode() {
+    this.setState({
+      showBarcode: !this.state.showBarcode
+    })
+  }
+
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
@@ -56,6 +64,13 @@ export class AppCamera extends Component {
   renderGallery() {
     return <CameraGallery onPress={this.toggleView.bind(this)} />;
   }
+
+  renderBarCode() {
+    console.log('bout to render me a barcode')
+    return (
+      <BarCodeScanner onBarCodeRead={data => barcodeScanner(data.data)} style={styles.camera} />
+    )
+  }
     
   renderCamera() {
     const { flash, hasCameraPermission } = this.state;
@@ -63,6 +78,8 @@ export class AppCamera extends Component {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
+    } else if (this.state.showBarcode) {
+      return this.renderBarCode()
     } else {
       return (
         <Camera
@@ -72,6 +89,14 @@ export class AppCamera extends Component {
           style={styles.camera}
           flashMode={flash}>
           <View style={styles.controls}>
+            <Icon
+              raised
+              name="barcode"
+              type="font-awesome"
+              size={26}
+              color="#00a587"
+              reverse
+              onPress={this.toggleBarCode.bind(this)} />
             <Icon
               raised
               name={`flash-${flash}`}
