@@ -7,7 +7,13 @@ import { ImagePicker } from 'expo';
 import store from '../../configureStore';
 import { dispatch } from 'redux';
 import { getOptions } from '../modules/food';
-import { Spinner } from '../components/common'
+import { Spinner } from '../components/common';
+import Clarifai from 'clarifai'
+const clarifai = new Clarifai.App({
+  apiKey: "dd78fc13ab31417c9e61706721dc8179"
+});
+process.nextTick = setImmediate;
+import { Actions } from 'react-native-router-flux';
 
 export default class GalleryScreen extends React.Component {
   render() {
@@ -16,7 +22,15 @@ export default class GalleryScreen extends React.Component {
       if (photo.cancelled) {
         this.props.onPress();
       } else {
-        store.dispatch(getOptions(photo))
+        clarifai.models
+          .predict(Clarifai.FOOD_MODEL, { base64: photo.base64 })
+          .then(response => {
+            let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
+              .map(item => item.name)
+            Actions.FoodSelector({ foodArr });
+          }, err => {
+            console.error
+          })
       }
     })
 
