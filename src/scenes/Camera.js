@@ -69,7 +69,10 @@ export class AppCamera extends Component {
   renderBarCode() {
     return (
       <BarCodeScanner 
-        onBarCodeRead={data => barcodeScanner(data.data,this.props.userId)} 
+        onBarCodeRead={data => {
+          barcodeScanner(data.data,this.props.userId)
+          this.setState({showBarcode: false, loading: true})
+        }} 
         style={styles.scanner}>
         <View style={styles.barcode}>
             <Icon
