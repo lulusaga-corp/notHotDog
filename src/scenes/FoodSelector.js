@@ -77,18 +77,22 @@ class FoodSelector extends Component {
       <View style={styles.tabContainer}>
         <ScrollView>
           <List>
+          <Text style={styles.title}>Select The Foods You Are Going To Eat:</Text>
             {
               foodArr && foodArr.map((item, i) => {
                 return ( 
                   <CheckBox
                     key={i}
-                    right
+                    center 
                     title={item}
                     iconRight
                     iconType='material'
                     checkedIcon='check'
                     uncheckedIcon='add'
+                    uncheckedColor={'#fafafa'}
                     checkedColor={'#00a587'}
+                    containerStyle={this.state.checked[item] && styles.checkedbox}
+                    textStyle={this.state.checked[item] && styles.checkedText}
                     checked={this.state.checked[item] || false}
                     onPress={() => this.toggleChecked(item)}
                   />
@@ -110,6 +114,8 @@ class FoodSelector extends Component {
               onPress={() =>{
                 this.handleSubmit(userId)
               }}
+              containerStyle={styles.checkedbox}
+              titleStyle={styles.checkedText}
               title="Click here to submit!"
               hideChevron={true}
             />
@@ -128,6 +134,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
     flexDirection: "column"
+  },
+  title: {
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  checkedbox: {
+    backgroundColor: "#00a587",
+  },
+  checkedText: {
+    color: "white",
+    textAlign: 'center'
   },
   error: {
     color: "#b5000c"
