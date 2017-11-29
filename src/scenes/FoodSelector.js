@@ -77,7 +77,7 @@ class FoodSelector extends Component {
       <View style={styles.tabContainer}>
         <ScrollView>
           <List>
-          <Text style={styles.title}>Select The Foods You Are Going To Eat:</Text>
+          <Text style={styles.title}>Select the foods you're going to eat...</Text>
             {
               foodArr && foodArr.map((item, i) => {
                 return ( 
