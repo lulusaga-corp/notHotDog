@@ -4,6 +4,8 @@ import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
+import firebase from 'firebase';
+import 'firebase/firestore';
 import { cameraStyle as styles }  from '../assets/stylesheets';
 import clarifaiCall from '../utilities/clarifaiCall';
 import barcodeScanner from '../utilities/barcodeScanner'
@@ -19,6 +21,7 @@ export class AppCamera extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      clarifaiKey: "",
       hasCameraPermission: null,
       flash: 'auto',
       showGallery: false,
@@ -51,6 +54,9 @@ export class AppCamera extends Component {
   }
 
   takePicture = async function() {
+    const clarifai = new Clarifai.App({
+      apiKey: this.state.clarifaiKey
+    });
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})

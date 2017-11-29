@@ -14,9 +14,20 @@ class FoodSelector extends Component {
     this.state = {
       foodArr: props.foodArr,
       foodInput: '',
-      error: ''
-    }
+      error: '',
+      xAppId: "",
+      xAppKey: "",
+      }
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount(){
+    return firebase.firestore().doc(`env/nutrionix`)
+      .get()
+      .then(snapshot =>{
+        const nutrionix = snapshot.data()
+        this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
+      })
   }
 
   deleteFromFoodArr = item => {
@@ -37,13 +48,37 @@ class FoodSelector extends Component {
       query: this.state.foodArr.join(", ")
     }, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": this.state.xAppId,
+        "x-app-key": this.state.xAppKey,
         "Content-Type": "application/json"
       }
     })
       .then(res => res.data)
       .then(data => {
+        let mealInstance = [];
+        if (data) {
+          fullNutrientParser(data)
+          data.foods.forEach(food => {
+            let foodItem = {};
+            foodItem.food_name = food.food_name;
+            foodItem.serving = food.serving_weight_grams;
+            foodItem.data = {};
+            foodItem.data.protein = food.nf_protein;
+            foodItem.data.carbs = food.nf_total_carbohydrate;
+            foodItem.data.fat = food.nf_total_fat;
+            foodItem.nutrients = food.parsed_nutrients
+            mealInstance.push(foodItem);
+          });
+        }
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+        return firebase.firestore().collection(`users`).doc(`${userId}`).collection('meals').add({
+          mealInstance,
+          timestamp
+        })
+          .then(() => {
+          const mostRecent = {mostRecent: mealInstance[0]}
+            Actions.AccountHome({mealInstance})
+          })
         storeMeal(data, userId)
       })
       .catch(()=>this.setState({error: true}))
@@ -93,7 +128,6 @@ class FoodSelector extends Component {
     );
   }
 }
-/////DO ERROR HNADLING
 
 const styles = StyleSheet.create({
   tabContainer: {
