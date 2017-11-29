@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Constants } from 'expo';
 
 const cameraStyle = StyleSheet.create({
   container: {
