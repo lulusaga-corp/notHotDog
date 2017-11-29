@@ -54,7 +54,7 @@ export class AppCamera extends Component {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64);
+        clarifaiCall(data.base64).then(()=>this.setState({loading:false}))
       })
       .catch(e => {
         console.error(e, 'Photo error');;
@@ -78,7 +78,7 @@ export class AppCamera extends Component {
             <Icon
               name="camera-alt"
               color="#ff7c61"
-              size={30}
+              size={60}
               onPress={this.toggleBarCode.bind(this)} />
           </View>
         </BarCodeScanner>
@@ -103,20 +103,22 @@ export class AppCamera extends Component {
           flashMode={flash}>
           <View style={styles.barcode}>
             <Icon
-              name="barcode-scan"
-              type="material-community"
-              color="#ff7c61"
-              size={30}
-              onPress={this.toggleBarCode.bind(this)} />
+              name={`flash-${flash}`}
+              size={45}
+              color="white"
+              onPress={this.toggleFlash.bind(this)}
+              />
           </View>
           <View style={styles.controls}>
             <Icon
               raised
-              name={`flash-${flash}`}
-              size={26}
+              name="barcode-scan"
+              type="material-community"
               color="#00a587"
+              size={26}
               reverse
-              onPress={this.toggleFlash.bind(this)} />
+              onPress={this.toggleBarCode.bind(this)}
+               />
             <Icon
               raised
               name="camera"
@@ -138,6 +140,7 @@ export class AppCamera extends Component {
   }
 
   render() {
+    console.log(this.props.loading)
     if (this.state.loading) {
       return <Spinner />
     }

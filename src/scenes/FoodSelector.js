@@ -14,21 +14,20 @@ class FoodSelector extends Component {
     this.state = {
       foodArr: props.foodArr,
       foodInput: '',
-      error: ''
+      error: '',
+      xAppId: "",
+      xAppKey: "",
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  deleteFromFoodArr = item => {
-    let newStateArr = this.state.foodArr.slice()
-    newStateArr.splice(newStateArr.indexOf(item), 1)
-    this.setState({foodArr: newStateArr})
-  }
-
-  addToFoodArr = item => {
-    let newStateArr = this.state.foodArr.slice()
-    newStateArr.push(item)
-    this.setState({foodArr: newStateArr, foodInput: ''})
+  componentDidMount(){
+    return firebase.firestore().doc(`env/nutrionix`)
+      .get()
+      .then(snapshot =>{
+        const nutrionix = snapshot.data()
+        this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
+      })
   }
 
   handleSubmit (userId) {
@@ -37,8 +36,8 @@ class FoodSelector extends Component {
       query: this.state.foodArr.join(", ")
     }, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": this.state.xAppId,
+        "x-app-key": this.state.xAppKey,
         "Content-Type": "application/json"
       }
     })
@@ -93,7 +92,6 @@ class FoodSelector extends Component {
     );
   }
 }
-/////DO ERROR HNADLING
 
 const styles = StyleSheet.create({
   tabContainer: {

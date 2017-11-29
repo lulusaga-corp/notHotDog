@@ -53,7 +53,12 @@ export const clearFoodStore = () => ({ type: CLEAR_FOOD_STORE });
  | Reducer
  |--------------------------------------------------
  */
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+  todaysMeals: [],
+  weekMeals: [],
+  monthMeals: [],
+  mostRecent: []
+}
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type){

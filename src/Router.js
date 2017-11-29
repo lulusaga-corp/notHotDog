@@ -35,6 +35,7 @@ class RouterComponent extends Component {
   }
 
   render () {
+    const onBackFunction = () => Actions.Camera({loading:false})
     return (
       <Router style={styles.container}>
         <Scene
