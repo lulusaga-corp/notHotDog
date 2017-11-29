@@ -12,15 +12,15 @@ export default function clarifaiCall(base64data) {
         apiKey: clarifaiKey
       });
       process.nextTick = setImmediate;
-      clarifai.models
+      return clarifai.models
         .predict(Clarifai.FOOD_MODEL, { base64: base64data })
-        .then(response => {
-          let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
-            .map(item => item.name)
-          Actions.FoodSelector({ foodArr });
-        }, err => {
-          console.error
-        })
-    })
 
+    })
+    .then(response => {
+      let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
+        .map(item => item.name)
+      Actions.FoodSelector({ foodArr });
+    })
+    .catch(console.error)
 }
+

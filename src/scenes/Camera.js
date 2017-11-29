@@ -142,7 +142,11 @@ export class AppCamera extends Component {
   render() {
     console.log(this.props.loading)
     if (this.state.loading) {
-      return <Spinner />
+      return (
+        <View style={styles.container}>
+        <Spinner />
+      </View>
+      )
     }
     return (
       <View style={styles.container}>

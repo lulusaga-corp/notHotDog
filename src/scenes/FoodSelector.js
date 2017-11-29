@@ -28,6 +28,7 @@ class FoodSelector extends Component {
         const nutrionix = snapshot.data()
         this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
       })
+
   }
 
   handleSubmit (userId) {
