@@ -38,15 +38,18 @@ class AccountHome extends Component {
       { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }})
 
     const { selectedIndex } = this.state
+    const foodChart = this.props.food.allMeals ? mealReducer(this.props.food[timeFrames[this.state.selectedIndex]]) : null
+    // console.log('history data', foodChart)
     return (
       <View>
         <ButtonGroup
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{height: 40}}/>
+          containerStyle={{height: 40, marginBottom: 20, marginTop:10}}
+          selectedTextStyle={{color: "#ef4836"}} />
         {
-          this.props.food.allMeals ? <PieChart allFoods={[mealReducer(this.props.food[timeFrames[this.state.selectedIndex]])]} /> : null
+          this.props.food.allMeals ? <PieChart allFoods={foodChart} /> : null
         }
       </View>
     )
