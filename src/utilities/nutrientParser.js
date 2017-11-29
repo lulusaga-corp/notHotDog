@@ -97,21 +97,19 @@ export default function fullNutrientParser(apiResponse){
     foodArr.forEach(item => {
       let nutrients = item.full_nutrients;
       item.parsed_nutrients = {};
-      let daily_values = [];
-      item.daily_values = daily_values.sort((a,b) => a.percentDV > b.percentDV)
+      item.daily_values = [];
       return nutrients.forEach(nutrient => {
         if (key[nutrient.attr_id]){
           let parsed = item.parsed_nutrients;
           let nutrientObj = {}
           nutrientObj.quantity = nutrient.value;
           nutrientObj.unit = key[nutrient.attr_id][1]
-          if (key[nutrient.attr_id][2]) {
-            let nutrient = {};
-            nurient.name = key[nutrient.attr_id];
-            nutrient.rdv = key[nutrient.attr_id][2];
-            nutrient.percentDV = Math.floor(+nutrient.value/key[nutrient.attr_id][2]*100)
-            daily_values.push(nutrient)
+          let dv = {
+            name: key[nutrient.attr_id][0]
           }
+          dv.rdv = (key[nutrient.attr_id][2]) || null;
+          dv.percentdv = Math.floor(+nutrient.value/key[nutrient.attr_id][2]*100) || null;
+          item.daily_values.push(dv)
           parsed[key[nutrient.attr_id][0]] = nutrientObj;
         }
       })
