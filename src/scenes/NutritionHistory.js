@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ButtonGroup } from "react-native-elements"
 import PieChart from "../components/PieChart";
 
-class NutritionHistory extends Component {
+class AccountHome extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -38,6 +38,8 @@ class NutritionHistory extends Component {
       { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }})
 
     const { selectedIndex } = this.state
+    const foodChart = this.props.food.allMeals ? mealReducer(this.props.food[timeFrames[this.state.selectedIndex]]) : null
+    // console.log('history data', foodChart)
     return (
       <View>
         <ButtonGroup
@@ -46,7 +48,7 @@ class NutritionHistory extends Component {
           buttons={buttons}
           containerStyle={{height: 40}}/>
         {
-          this.props.food.allMeals ? <PieChart allFoods={[mealReducer(this.props.food[timeFrames[this.state.selectedIndex]])]} /> : null
+          this.props.food.allMeals ? <PieChart allFoods={foodChart} /> : null
         }
       </View>
     )
@@ -57,4 +59,4 @@ mapStateToProps = (state) =>({
   food: state.food
 })
 
-export default connect(mapStateToProps)(NutritionHistory);
+export default connect(mapStateToProps)(AccountHome);

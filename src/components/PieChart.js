@@ -5,44 +5,37 @@ import { Svg } from "react-native-svg";
 
 class PieChart extends Component {
   render() {
-    const foodCharts = this.props.allFoods
-
+    const unformatted = this.props.allFoods.data
+    let chartData = [];
+    chartData.push(
+        { x: "carbs", y: unformatted.carbs },
+        { x: "fat", y: unformatted.fat },
+        { x: "protein", y: unformatted.protein }
+    );
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-          {foodCharts &&
-            foodCharts.map((food, idx) => {
-              let chartData = [];
-              chartData.push(
-                { x: "carbs", y: food.data.carbs },
-                { x: "fat", y: food.data.fat },
-                { x: "protein", y: food.data.protein }
-              );
-              return (
-                <View key={idx} style={styles.container}>
-                  <Svg width={Dimensions.get("window").width} height={130}>
-                    <VictoryLegend x={100} y={100}
-                    centerTitle
-                    orientation="horizontal"
-                    gutter={10}
-                    data={[
-                      { name: "Carbs", symbol: { fill: "tomato" } },
-                      { name: "Fat", symbol: { fill: "orange" } },
-                      { name: "Protein", symbol: { fill: "gold" } }
-                    ]}
-                  />
-                </Svg>
-                <VictoryPie
-                colorScale={["tomato", "orange", "gold"]}
-                data={chartData}
-                innerRadius={2}
-                padAngle={2}
-                style={{ labels: { fontSize: 1 } }}
-                />
-                <Text style={styles.title}>{food.food_name}</Text>
-                </View>
-              );
-            })}
-        </ScrollView>
+    
+      <View style={styles.container}>
+        <Svg width={Dimensions.get("window").width} height={130}>
+          <VictoryLegend x={100} y={100}
+          centerTitle
+          orientation="horizontal"
+          gutter={10}
+          data={[
+            { name: "Carbs", symbol: { fill: "tomato" } },
+            { name: "Fat", symbol: { fill: "orange" } },
+            { name: "Protein", symbol: { fill: "gold" } }
+          ]}
+        />
+      </Svg>
+      <VictoryPie
+      colorScale={["tomato", "orange", "gold"]}
+      data={chartData}
+      innerRadius={2}
+      padAngle={2}
+      style={{ labels: { fontSize: 1 } }}
+      />
+      {/* <Text style={styles.title}>{food.food_name}</Text> */}
+      </View>
     );
   }
 }
