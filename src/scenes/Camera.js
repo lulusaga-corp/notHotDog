@@ -6,6 +6,7 @@ import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
+
 import { cameraStyle as styles }  from '../assets/stylesheets';
 const clarifai = new Clarifai.App({
   apiKey: "dd78fc13ab31417c9e61706721dc8179"
@@ -32,6 +33,7 @@ export class AppCamera extends Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+
   }
 
   toggleView() {
@@ -55,10 +57,12 @@ export class AppCamera extends Component {
           .then(response => {
             let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
               .map(item => item.name)
+
             Actions.FoodSelector({ foodArr });
           }, err => {
             console.error
           })
+          .catch(console.log)
       })
       .catch(e => {
         console.error(e, 'Photo error');;
