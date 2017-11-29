@@ -16,40 +16,22 @@ class PieChart extends Component {
     return (
     
       <View style={styles.container}>
-        
-      <VictoryPie
-      colorScale={["tomato", "orange", "gold"]}
-      data={chartData}
-      innerRadius={100}
-      padAngle={2}
-      style={{ labels: { fontSize: 1 } }}
-      />
-      {/* <Text style={styles.title}>{food.food_name}</Text> */}
-      {/* <Svg width={Dimensions.get("window").width} height={130}>
-          <VictoryLegend x={100} y={100}
-          centerTitle
-          orientation="horizontal"
-          itemsPerRow={3}
-          gutter={10}
-          data={[
-            { name: "Carbs", symbol: { fill: "tomato" } },
-            { name: "Fat", symbol: { fill: "orange" } },
-            { name: "Protein", symbol: { fill: "gold" } }
-          ]}
+      <View style={styles.pie}>
+        <VictoryPie
+          colorScale={["tomato", "orange", "gold"]}
+          data={chartData}
+          innerRadius={100}
+          padAngle={2}
+          style={{ labels: { fontSize: 1 } }}
         />
-      </Svg> */}
-        <Card title="Source of Calories" containerStyle={styles.legend}>
-          <Icon name="label" color="tomato"/><Text>Carbs</Text>
-          <Icon name="label" color="orange"/><Text>Fat</Text>
-          <Icon name="label" color="gold"/><Text>Protein</Text>
-        </Card>
-        {/* <Card title="Source of Calories">
-        <List>
-              <ListItem key="carbs" title="Carbs" leftIcon={{name: "label", color:"tomato"}}/>
-              <ListItem key="fat" title="Fat" leftIcon={{name: "label", color:"orange"}}/>
-              <ListItem key="protein" title="Protein" leftIcon={{name: "label", color:"gold"}}/>
-        </List>
-        </Card> */}
+      </View>
+      <Card title="Source of Calories" containerStyle={styles.legend}>
+        <View flexDirection="row">
+          <View style={styles.legendItem} flexDirection="row"><Icon marginRight={2} name="label" color="tomato"/><Text style={styles.legendText}>Carbs</Text></View>
+          <View style={styles.legendItem} flexDirection="row"><Icon marginRight={2} name="label" color="orange"/><Text style={styles.legendText}>Fat</Text></View>
+          <View style={styles.legendItem} flexDirection="row"><Icon marginRight={2} name="label" color="gold"/><Text style={styles.legendText}>Protein</Text></View>
+        </View>
+      </Card>
       </View>
     );
   }
@@ -68,13 +50,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  lenged: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    // justifyContent: 'flex-start',
-    // alignContent: 'flex-start',
-    // alignSelf: 'flex-start',
-    flexWrap: 'nowrap'
+  legend: {
+    margin: -15
+  },
+  pie: {
+    marginTop: -25
+  },
+  legendText: {
+    marginTop: 3
+  },
+  legendItem: {
+    marginRight: 10,
+    justifyContent: "space-between"
   }
   
 });

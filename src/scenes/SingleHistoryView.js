@@ -39,12 +39,15 @@ class SingleHistoryView extends Component {
     })
     return (
       <ScrollView style={styles.container}>
+      <View style={styles.buttonView}>
         <ButtonGroup
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{height: 40}}
-          selectedTextStyle={{color: "#ef4836"}} />
+          // containerStyle={{height: 40, marginBottom: 20, marginTop:10}}
+          selectedTextStyle={{color: "#ef4836"}}
+          textStyle={{}} />
+        </View>
         <View>
           {
             singleMeal && <PieChart allFoods={meal[selectedIndex]} />
@@ -57,6 +60,12 @@ class SingleHistoryView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  buttonView: {
+    // height: 40, 
+    marginBottom: 20, 
+    marginTop:10,
     flex: 1
   }
 })
