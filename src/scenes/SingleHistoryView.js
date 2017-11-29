@@ -5,6 +5,8 @@ import { getAllUserMeals } from '../store/food';
 import { connect } from 'react-redux'
 import { ButtonGroup } from "react-native-elements";
 
+//testing testing 
+
 class SingleHistoryView extends Component {
   constructor (props) {
     super(props)
