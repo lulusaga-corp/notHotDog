@@ -1,16 +1,13 @@
-import { Camera, Permissions } from 'expo';
-import { Actions } from 'react-native-router-flux'
+import { Camera, Permissions, BarCodeScanner } from 'expo';
 import React, { Component } from 'react';
-import Clarifai from 'clarifai'
 import { Text, View } from 'react-native';
 import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
 import { cameraStyle as styles }  from '../assets/stylesheets';
-const clarifai = new Clarifai.App({
-  apiKey: "dd78fc13ab31417c9e61706721dc8179"
-});
-process.nextTick = setImmediate;
+import clarifaiCall from '../utilities/clarifaiCall';
+import barcodeScanner from '../utilities/barcodeScanner'
+import { connect } from 'react-redux';
 
 const flashModeOrder = {
   off: 'on',
@@ -25,6 +22,7 @@ export class AppCamera extends Component {
       hasCameraPermission: null,
       flash: 'auto',
       showGallery: false,
+      showBarcode: false,
       loading: false
     };
   }
@@ -46,19 +44,17 @@ export class AppCamera extends Component {
     });
   }
 
+  toggleBarCode() {
+    this.setState({
+      showBarcode: !this.state.showBarcode
+    })
+  }
+
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifai.models
-          .predict(Clarifai.FOOD_MODEL, { base64: data.base64 })
-          .then(response => {
-            let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
-              .map(item => item.name)
-            Actions.FoodSelector({ foodArr });
-          }, err => {
-            console.error
-          })
+        clarifaiCall(data.base64);
       })
       .catch(e => {
         console.error(e, 'Photo error');;
@@ -69,6 +65,25 @@ export class AppCamera extends Component {
   renderGallery() {
     return <CameraGallery onPress={this.toggleView.bind(this)} />;
   }
+
+  renderBarCode() {
+    return (
+      <BarCodeScanner 
+        onBarCodeRead={data => {
+          barcodeScanner(data.data,this.props.userId)
+          this.setState({showBarcode: false, loading: true})
+        }} 
+        style={styles.scanner}>
+        <View style={styles.barcode}>
+            <Icon
+              name="camera-alt"
+              color="#ff7c61"
+              size={30}
+              onPress={this.toggleBarCode.bind(this)} />
+          </View>
+        </BarCodeScanner>
+    )
+  }
     
   renderCamera() {
     const { flash, hasCameraPermission } = this.state;
@@ -76,6 +91,8 @@ export class AppCamera extends Component {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
+    } else if (this.state.showBarcode) {
+      return this.renderBarCode()
     } else {
       return (
         <Camera
@@ -84,6 +101,14 @@ export class AppCamera extends Component {
           }}
           style={styles.camera}
           flashMode={flash}>
+          <View style={styles.barcode}>
+            <Icon
+              name="barcode-scan"
+              type="material-community"
+              color="#ff7c61"
+              size={30}
+              onPress={this.toggleBarCode.bind(this)} />
+          </View>
           <View style={styles.controls}>
             <Icon
               raised
@@ -124,4 +149,8 @@ export class AppCamera extends Component {
   }
 }
 
-export default AppCamera
+const mapStateToProps = state => ({
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+});
+
+export default connect(mapStateToProps)(AppCamera)
