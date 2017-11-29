@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Constants } from 'expo';
 
 const cameraStyle = StyleSheet.create({
   container: {
@@ -13,6 +14,14 @@ const cameraStyle = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'flex-end',
     margin: 5,
+  },
+  barcode: {
+    margin: 5,
+    padding: 5,
+    alignItems: 'flex-end'
+  },
+  scanner: {
+    flex: 1,
   }
 });
 

@@ -68,7 +68,19 @@ export class AppCamera extends Component {
 
   renderBarCode() {
     return (
-      <BarCodeScanner onBarCodeRead={data => barcodeScanner(data.data,this.props.userId)} style={styles.camera} />
+      <BarCodeScanner 
+        onBarCodeRead={data => {
+          barcodeScanner(data.data,this.props.userId)
+        }} 
+        style={styles.scanner}>
+        <View style={styles.barcode}>
+            <Icon
+              name="camera-alt"
+              color="#ff7c61"
+              size={30}
+              onPress={this.toggleBarCode.bind(this)} />
+          </View>
+        </BarCodeScanner>
     )
   }
     
@@ -88,15 +100,15 @@ export class AppCamera extends Component {
           }}
           style={styles.camera}
           flashMode={flash}>
-          <View style={styles.controls}>
+          <View style={styles.barcode}>
             <Icon
-              raised
-              name="barcode"
-              type="font-awesome"
-              size={26}
-              color="#00a587"
-              reverse
+              name="barcode-scan"
+              type="material-community"
+              color="#ff7c61"
+              size={30}
               onPress={this.toggleBarCode.bind(this)} />
+          </View>
+          <View style={styles.controls}>
             <Icon
               raised
               name={`flash-${flash}`}
