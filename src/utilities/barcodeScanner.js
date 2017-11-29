@@ -1,11 +1,14 @@
+import React from 'react'
 import axios from 'axios';
 import storeMeal from './storeMeal';
+import {Spinner} from '../components/common'
 
-export default function getProductFromUPC(upc,userId) {
+export default function barcodeScanner(upc,userId) {
+  console.log('scanned a barcode')
   axios.get(`https://trackapi.nutritionix.com/v2/search/item?upc=${upc}`, {
       headers: {
-        "x-app-id": "eeab842c",
-        "x-app-key": "21e0db6ffe3531c4fc579edd953ca88f",
+        "x-app-id": "da40e3ba",
+        "x-app-key": "9039730dc95644122941bec700a3ebe4",
         "Content-Type": "application/json"
       }
     })
@@ -15,4 +18,6 @@ export default function getProductFromUPC(upc,userId) {
     }, err => {
       console.error
     })
+    .catch(err => console.error(err))
+  return <Spinner />
 }
