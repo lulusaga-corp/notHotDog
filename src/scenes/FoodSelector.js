@@ -3,8 +3,8 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { ScrollView, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { List, ListItem, CheckBox } from 'react-native-elements';
 import { getAllUserMeals } from '../store/food'
 import storeMeal from '../utilities/storeMeal';
 
@@ -14,7 +14,8 @@ class FoodSelector extends Component {
     this.state = {
       foodArr: props.foodArr,
       foodInput: '',
-      error: ''
+      error: '',
+      checked: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -28,13 +29,28 @@ class FoodSelector extends Component {
   addToFoodArr = item => {
     let newStateArr = this.state.foodArr.slice()
     newStateArr.push(item)
-    this.setState({foodArr: newStateArr, foodInput: ''})
+    let newChecked = {...this.state.checked}
+    newChecked[item] = true;
+    this.setState({foodArr: newStateArr, foodInput: '', error: false, checked: {}})
+  }
+
+  toggleChecked = item => {
+    let newChecked = {...this.state.checked}
+    newChecked[item] = !newChecked[item];
+    this.setState({checked: newChecked})
   }
 
   handleSubmit (userId) {
     if (!userId) return;
+    let selected = [];
+    for (food in this.state.checked) {
+      if (this.state.checked[food]) {
+        selected.push(food)
+      }
+    }
+    // console.log('selected foods:', selected)
     axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
-      query: this.state.foodArr.join(", ")
+      query: selected.join(", ")
     }, {
       headers: {
         "x-app-id": "da40e3ba",
@@ -59,10 +75,20 @@ class FoodSelector extends Component {
           <List>
             {
               foodArr && foodArr.map((item, i) => {
-                return <ListItem
-                  key={i} title={item}
-                  rightIcon={{name: 'clear'}}
-                  onPressRightIcon={() => this.deleteFromFoodArr(item)}/>
+                return ( 
+                  <CheckBox
+                    key={i}
+                    right
+                    title={item}
+                    iconRight
+                    iconType='material'
+                    checkedIcon='check'
+                    uncheckedIcon='add'
+                    checkedColor={'#00a587'}
+                    checked={this.state.checked[item] || false}
+                    onPress={() => this.toggleChecked(item)}
+                  />
+                )
               })
             }
             <ListItem
@@ -78,7 +104,6 @@ class FoodSelector extends Component {
               onPressRightIcon={() => this.addToFoodArr(this.state.foodInput)}/>
             <ListItem
               onPress={() =>{
-                console.log("user ID", userId)
                 this.handleSubmit(userId)
               }}
               title="Click here to submit!"
@@ -86,7 +111,7 @@ class FoodSelector extends Component {
             />
           </List>
           {
-            this.state.error ? <Text>We could not find one of the foods you entered in our database as it was typed. Please try again!</Text> : null
+            this.state.error ? <Text style={styles.error}>We could not find one of the foods you entered in our database as it was typed. Please try again!</Text> : null
           }
         </ScrollView>
       </View>
@@ -100,6 +125,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
     flexDirection: "column"
+  },
+  error: {
+    color: "#b5000c"
   }
 });
 
