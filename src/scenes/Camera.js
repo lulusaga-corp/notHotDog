@@ -54,7 +54,7 @@ export class AppCamera extends Component {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64).then(()=>this.setState({loading:false}))
+        clarifaiCall(data.base64)
       })
       .catch(e => {
         console.error(e, 'Photo error');;
