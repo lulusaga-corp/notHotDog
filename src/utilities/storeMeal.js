@@ -15,7 +15,8 @@ export default function storeMeal(data,userId) {
       foodItem.data.protein = food.nf_protein;
       foodItem.data.carbs = food.nf_total_carbohydrate;
       foodItem.data.fat = food.nf_total_fat;
-      foodItem.nutrients = food.parsed_nutrients
+      foodItem.nutrients = food.parsed_nutrients;
+      foodItem.dv = food.daily_values.filter(dv => dv.percentdv).sort((a,b) => a.percentdv < b.percentdv)
       mealInstance.push(foodItem);
     });
   }
@@ -25,7 +26,7 @@ export default function storeMeal(data,userId) {
     timestamp
   })
     .then(() => {
-    const mostRecent = {mostRecent: mealInstance[0]}
+      const mostRecent = {mostRecent: mealInstance[0]}
       Actions.AccountHome({mealInstance})
     })
 }

@@ -15,16 +15,21 @@ class FoodSelector extends Component {
       foodArr: props.foodArr,
       foodInput: '',
       error: '',
-      checked: {}
+      checked: {},
+      xAppId: "",
+      xAppKey: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  deleteFromFoodArr = item => {
-    let newStateArr = this.state.foodArr.slice()
-    newStateArr.splice(newStateArr.indexOf(item), 1)
-    this.setState({foodArr: newStateArr})
-  }
+  componentDidMount(){
+    return firebase.firestore().doc(`env/nutrionix`)
+      .get()
+      .then(snapshot =>{
+        const nutrionix = snapshot.data()
+        this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
+      })
+    }
 
   addToFoodArr = item => {
     let newStateArr = this.state.foodArr.slice()
@@ -48,13 +53,12 @@ class FoodSelector extends Component {
         selected.push(food)
       }
     }
-    // console.log('selected foods:', selected)
     axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
       query: selected.join(", ")
     }, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": this.state.xAppId,
+        "x-app-key": this.state.xAppKey,
         "Content-Type": "application/json"
       }
     })
@@ -118,7 +122,6 @@ class FoodSelector extends Component {
     );
   }
 }
-/////DO ERROR HNADLING
 
 const styles = StyleSheet.create({
   tabContainer: {
