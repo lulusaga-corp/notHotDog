@@ -21,42 +21,36 @@ class AccountHome extends Component {
      this.props.userId && this.props.fetchAllMeals(this.props.userId)
   }
 
-
   render() {
     const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
     const singleMeal = this.props.mealInstance ? this.props.mealInstance : mostRecent
     const { selectedIndex } = this.state
+    let reduced = singleMeal ? singleMeal.reduce((acc, foodItem) =>{
+      acc.serving += foodItem.serving
+      acc.data.protein += foodItem.data.protein
+      acc.data.carbs += foodItem.data.carbs
+      acc.data.fat += foodItem.data.fat
+      return acc
+    }, { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }}) : null
     let buttons = ["meal"]
+    let meal = [reduced]
     singleMeal && singleMeal.map((food) => {
       buttons.push(food.food_name)
+      meal.push(food)
     })
-    // const foodChart = singleMeal ? mealReducer(this.props.food[timeFrames[this.state.selectedIndex]]) : null
-    console.log('single meal', singleMeal)
     return (
       <ScrollView style={styles.container}>
         <ButtonGroup
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{height: 40}}/>
-        {
-          singleMeal && singleMeal.map((food) => {
-            // let chartData = [];
-            // chartData.push(
-            //   { x: "carbs", y: food.data.carbs },
-            //   { x: "fat", y: food.data.fat },
-            //   { x: "protein", y: food.data.protein }
-            // );
-            // console.log('account home food', food)
-            return (
-              <View>
-                <PieChart allFoods={food} /> 
-              </View>
-            )
-          })
-        }
-        
-      
+          containerStyle={{height: 40}}
+          selectedTextStyle={{color: "#ef4836"}} />
+        <View>
+          {
+            singleMeal && <PieChart allFoods={meal[selectedIndex]} />
+          }
+        </View>
       </ScrollView>
     )
   }

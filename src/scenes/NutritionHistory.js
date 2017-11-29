@@ -46,7 +46,8 @@ class AccountHome extends Component {
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{height: 40}}/>
+          containerStyle={{height: 40}}
+          selectedTextStyle={{color: "#ef4836"}} />
         {
           this.props.food.allMeals ? <PieChart allFoods={foodChart} /> : null
         }
