@@ -36,7 +36,7 @@ class FoodSelector extends Component {
     newStateArr.push(item)
     let newChecked = {...this.state.checked}
     newChecked[item] = true;
-    this.setState({foodArr: newStateArr, foodInput: '', error: false, checked: {}})
+    this.setState({foodArr: newStateArr, foodInput: '', error: false, checked: newChecked})
   }
 
   toggleChecked = item => {

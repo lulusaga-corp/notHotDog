@@ -104,7 +104,7 @@ export class AppCamera extends Component {
           <View style={styles.barcode}>
             <Icon
               name={`flash-${flash}`}
-              size={45}
+              size={30}
               color="white"
               onPress={this.toggleFlash.bind(this)}
               />
