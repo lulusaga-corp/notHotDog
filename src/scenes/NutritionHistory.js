@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ButtonGroup } from "react-native-elements"
 import PieChart from "../components/PieChart";
 
-class AccountHome extends Component {
+class NutritionHistory extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -57,4 +57,4 @@ mapStateToProps = (state) =>({
   food: state.food
 })
 
-export default connect(mapStateToProps)(AccountHome);
+export default connect(mapStateToProps)(NutritionHistory);
