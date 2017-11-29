@@ -4,10 +4,9 @@ import 'firebase/firestore';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import { getAllUserMeals } from '../store/food'
-import fullNutrientParser from '../utilities/nutrientParser';
+import storeMeal from '../utilities/storeMeal';
 
 class FoodSelector extends Component {
   constructor (props) {
@@ -80,6 +79,7 @@ class FoodSelector extends Component {
           const mostRecent = {mostRecent: mealInstance[0]}
             Actions.AccountHome({mealInstance})
           })
+        storeMeal(data, userId)
       })
       .catch(()=>this.setState({error: true}))
   }
@@ -128,7 +128,6 @@ class FoodSelector extends Component {
     );
   }
 }
-/////DO ERROR HNADLING
 
 const styles = StyleSheet.create({
   tabContainer: {

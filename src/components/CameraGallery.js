@@ -4,11 +4,7 @@ import { ImagePicker } from 'expo';
 import { dispatch } from 'redux';
 import { getOptions } from '../store/food';
 import { Spinner } from './common/index';
-import Clarifai from 'clarifai'
-import firebase from 'firebase';
-import 'firebase/firestore';
-process.nextTick = setImmediate;
-import { Actions } from 'react-native-router-flux';
+import clarifaiCall from '../utilities/clarifaiCall';
 
 export default class GalleryScreen extends React.Component {
   constructor (props) {
@@ -34,15 +30,7 @@ export default class GalleryScreen extends React.Component {
       if (photo.cancelled) {
         this.props.onPress();
       } else {
-        clarifai.models
-          .predict(Clarifai.FOOD_MODEL, { base64: photo.base64 })
-          .then(response => {
-            let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
-              .map(item => item.name)
-            Actions.FoodSelector({ foodArr });
-          }, err => {
-            console.error
-          })
+        clarifaiCall(photo.base64)
       }
     })
 

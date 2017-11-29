@@ -13,6 +13,14 @@ const cameraStyle = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'flex-end',
     margin: 5,
+  },
+  barcode: {
+    margin: 5,
+    padding: 5,
+    alignItems: 'flex-end'
+  },
+  scanner: {
+    flex: 1,
   }
 });
 
