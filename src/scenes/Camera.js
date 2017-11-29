@@ -140,7 +140,6 @@ export class AppCamera extends Component {
   }
 
   render() {
-    console.log(this.props.loading)
     if (this.state.loading) {
       return (
         <View style={styles.container}>
