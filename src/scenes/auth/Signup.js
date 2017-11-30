@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Input, Button, Item, Spinner } from '../../components/common/index';
@@ -16,6 +16,8 @@ const propTypes = {
   authError: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
+
+const background = require("../../../starwberry2.jpg");
 
 class Signup extends Component {
   constructor(props) {
@@ -38,6 +40,8 @@ class Signup extends Component {
     const { handleSubmit } = this.props;
 
     return (
+      <View style={styles.container}>
+      <Image source={background} style={styles.background} resizeMode="cover">
       <Container>
 
         <Item>
@@ -97,7 +101,7 @@ class Signup extends Component {
               <Spinner />
             </Item>
           :
-            <Item>
+            <Item> 
               <Button onPress={handleSubmit(this.handleFormSubmit)}>Log in</Button>
             </Item>}
 
@@ -112,6 +116,8 @@ class Signup extends Component {
           </TouchableOpacity>
         </Item>
       </Container>
+      </Image>
+      </View>
     );
   }
 }

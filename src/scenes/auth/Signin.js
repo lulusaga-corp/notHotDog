@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux'
 import { signInUser, clearState } from '../../store/auth';
 import { Actions } from 'react-native-router-flux';
@@ -15,6 +15,8 @@ const propTypes = {
   authError: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
+
+const background = require("../../../starwberry2.jpg");
 
 class Signin extends Component {
   constructor(props) {
@@ -37,9 +39,10 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
+      <View style={styles.container}>
+      <Image source={background} style={styles.background} resizeMode="cover">
       <Container>
-
-        <Item>
+        <Item> 
           <Field
             name="email"
             component={Input}
@@ -86,6 +89,8 @@ class Signin extends Component {
           </TouchableOpacity>
         </Item>
       </Container>
+      </Image>
+      </View>
     )
   }
 }
@@ -111,5 +116,7 @@ const mapStateToProps = ({auth}) => ({
   loading: auth.loading ,
   userId: auth && auth.user  ? auth.user.uid : ''
 });
+
+
 
 export default connect(mapStateToProps, { signInUser, clearState })(Signin);
