@@ -5,15 +5,29 @@ import CameraGallery from '../components/CameraGallery';
 import { Spinner } from '../components/common'
 import { Icon } from 'react-native-elements';
 import { cameraStyle as styles }  from '../assets/stylesheets';
-import clarifaiCall from '../utilities/clarifaiCall';
 import barcodeScanner from '../utilities/barcodeScanner'
 import { connect } from 'react-redux';
+import Clarifai from 'clarifai';
+import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import { clearFoodStore } from '../store/food'
 
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
   auto: 'off'
 };
+
+export async function clarifaiCall(base64data, apiKey) {
+  const clarifai = await new Clarifai.App({ apiKey });
+  process.nextTick = setImmediate;
+  const response = await clarifai.models.predict(Clarifai.FOOD_MODEL, { base64: base64data })
+  const foodArr = response.outputs[0].data.concepts
+    .filter(concept => concept.value >= 0.85)
+    .map(item => item.name)
+  return foodArr
+}
 
 export class AppCamera extends Component {
   constructor (props) {
@@ -25,6 +39,7 @@ export class AppCamera extends Component {
       showBarcode: false,
       loading: false
     };
+    clarifaiCall = clarifaiCall.bind(this)
   }
 
   async componentWillMount() {
@@ -52,13 +67,11 @@ export class AppCamera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
-      this.camera.takePictureAsync({base64: true}).then(data => {
-        this.setState({loading: true})
-        clarifaiCall(data.base64)
-      })
-      .catch(e => {
-        console.error(e, 'Photo error');;
-      })
+      this.setState({loading: true})
+      const data = await this.camera.takePictureAsync({base64: true})
+      const foodArr = await clarifaiCall(data.base64, this.props.apiKey)
+      this.setState({loading:false})
+      Actions.FoodSelector({ foodArr });
     }
   };
 
@@ -156,7 +169,8 @@ export class AppCamera extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : '',
+  apiKey: state.auth.api[0].apiKey
 });
 
 export default connect(mapStateToProps)(AppCamera)

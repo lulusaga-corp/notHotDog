@@ -16,6 +16,7 @@ export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
+export const GET_API_KEYS = 'GET_API_KEYS'
 /**
  |--------------------------------------------------
  | Actions
@@ -27,9 +28,7 @@ export const signInUser = ({ email, password }) => (dispatch) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
       dispatch({ type: SIGN_IN_SUCCESS, payload: user });
-
       dispatch(reset('signin'));
-  
     })
     .catch((error) => { dispatch({ type: SIGN_IN_FAILURE, payload: authFailMessage(error.code) }); });
 };
@@ -42,7 +41,16 @@ export const signUpUser = ({ email, password, firstname, lastname }) => (dispatc
       dispatch({ type: SIGN_UP_SUCCESS, payload: user });
       dispatch(reset('signup'));
       return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
-        })
+    })
+    .then(()=> {
+      return firebase.firestore().collection(`env`).get()
+    })
+    .then(snapshot => {
+      snapshot.forEach(doc =>{
+        console.log(doc.data())
+      })
+      dispatch({type: GET_API_KEYS, payload:snapshot.data()})
+    })
     .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
 };
 
@@ -86,10 +94,13 @@ const INITIAL_STATE = {
   error: '',
   loading: false,
   user: null,
+  api: [{apiKey:''}, {id:'', key:''}]
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case GET_API_KEYS:
+      return {...state, api: action.payload}
     case SIGN_UP_REQUEST:
       return { ...state, ...INITIAL_STATE, loading: true };
     case SIGN_UP_SUCCESS:
