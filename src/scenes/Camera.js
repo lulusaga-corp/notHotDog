@@ -123,14 +123,14 @@ export class AppCamera extends Component {
               raised
               name="camera"
               size={36}
-              color="#ef4836"
+              color="tomato"
               reverse
               onPress={this.takePicture.bind(this)} />
             <Icon
               raised
               name="image"
               size={26}
-              color="#b5000c"
+              color="#00a587"
               reverse
               onPress={this.toggleView.bind(this)} />
           </View>
