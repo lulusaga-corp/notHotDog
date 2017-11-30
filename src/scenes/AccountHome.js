@@ -25,7 +25,6 @@ class AccountHome extends Component {
   render() {
     const mostRecent = this.props.mostRecent ? this.props.mostRecent : null
     const singleMeal = this.props.mealInstance ? this.props.mealInstance : mostRecent
-    console.log('single meal', singleMeal)
     const { selectedIndex } = this.state
     let reduced = singleMeal ? singleMeal.reduce((acc, foodItem) =>{
       acc.serving += foodItem.serving
@@ -43,7 +42,6 @@ class AccountHome extends Component {
     singleMeal && singleMeal.map((food) => {
       buttons.push(food.food_name)
       meal.push(food)
-      console.log('food item in account home', food)
     })
     return (
       <ScrollView style={styles.container}>

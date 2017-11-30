@@ -9,19 +9,18 @@ class BarGraph extends Component {
   
   
   render () {
-    console.log('bar graph props', this.props.nutrients)
     const nutrients = this.props.nutrients ? this.props.nutrients.dv : null
-    // let data = [];
-    // nutrients && nutrients.forEach(nutrient => {
-    //   data.push({x: nutrient.name, y: nutrient.percentdv})
-    // })
-    const data = [
-      { x: "Vitamin C", y: 50},
-      { x: "Calcium", y: 10},
-      { x: "Vitamin D", y: 6},
-      { x: "Vitamin B12", y: 24},
-      { x: "Selenium", y: 6 }
-    ]
+    let nutrientNames = Object.keys(nutrients)
+    let data = [];
+    if (Array.isArray(nutrients)) {
+      nutrients.forEach(nutrient => {
+        data.push({x: nutrient.name, y: nutrient.percentdv})
+      })  
+    } else {
+      nutrientNames.forEach(name => {
+        data.push({x: name, y: nutrients[name]})
+      })
+    }
     return (
       <View style={{alignItems: 'center', paddingTop: 15}}>
       <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 14, color: 'grey'}}>Nutrient Percent Daily Values</Text>
