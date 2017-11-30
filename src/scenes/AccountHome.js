@@ -32,7 +32,7 @@ class AccountHome extends Component {
       acc.data.carbs += foodItem.data.carbs
       acc.data.fat += foodItem.data.fat
       foodItem.dv.forEach(nutrient => {
-        if (acc.dv[nutrient.name]) acc.dv[nutrient.name] += nutrient.percentdv
+        if (acc.dv[nutrient.name]) acc.dv[nutrient.name] = Math.min(100, (acc.dv[nutrient.name] + nutrient.percentdv))
         else acc.dv[nutrient.name] = nutrient.percentdv
       })
       return acc
