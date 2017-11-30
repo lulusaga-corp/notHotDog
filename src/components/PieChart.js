@@ -5,6 +5,7 @@ import { Svg } from "react-native-svg";
 import { Icon, List, ListItem, Card } from "react-native-elements";
 
 class PieChart extends Component {
+ 
   render() {
     const unformatted = this.props.allFoods.data
     let chartData = [];
