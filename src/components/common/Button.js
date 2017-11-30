@@ -32,20 +32,27 @@ function Button({ onPress, children, buttonStyle, textStyle }) {
 
 const styles = {
   button: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#039be5',
+    alignSelf: "stretch",
+    backgroundColor: "#ffd800",
     borderRadius: 3,
     marginTop: 10,
+
+    padding: 5,
+    opacity: "1",
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    position: "relative"
   },
   text: {
-    alignSelf: 'center',
-    color: '#fff',
+    flex: 1,
+    textAlign: "center",
+    alignSelf: "center",
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     paddingTop: 10,
-    paddingBottom: 10,
-  },
+    paddingBottom: 10
+  }
 };
 
 Button.defaultProps = defaultProps;

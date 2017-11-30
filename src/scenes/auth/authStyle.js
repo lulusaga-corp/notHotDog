@@ -18,16 +18,25 @@ const styles = {
     marginBottom: 10
   },
   container: {
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    marginTop: 100,
+    paddingTop:100,
   },
   questionText: {
     textAlign: "center",
-    color: "#4d4d4d"
+    color: "#f7f7f7"
   },
-   background: {
+  background: {
     width,
-    height,
+    height
   },
+  login: {
+    backgroundColor: "#FF3366",
+    paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30
+  }
 };
 
 export default styles;

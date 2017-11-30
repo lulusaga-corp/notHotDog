@@ -54,22 +54,22 @@ const styles = {
   inputContainer: {
     height: 40,
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 2,
+    borderColor: "#ffd800"
   },
   InputText: {
-    color: '#000',
+    color: "#ffffff",
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 18,
     lineHeight: 23,
-    flex: 2,
+    flex: 2
   },
   errorText: {
-    color: '#ff5964',
-  },
+    color: "#ff5964"
+  }
 };
 
 Input.defaultProps = defaultProps;
