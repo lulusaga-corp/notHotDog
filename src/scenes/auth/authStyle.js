@@ -28,7 +28,7 @@ const styles = {
   },
   background: {
     width,
-    height
+    height,
   },
   login: {
     backgroundColor: "#FF3366",

@@ -33,10 +33,11 @@ function Button({ onPress, children, buttonStyle, textStyle }) {
 const styles = {
   button: {
     alignSelf: "stretch",
-    backgroundColor: "tomato",
-    borderRadius: 3,
+    backgroundColor: "#ef4836",
+    borderRadius: 5,
     marginTop: 10,
-
+    marginLeft: 10,
+    marginRight: 10,
     padding: 5,
     opacity: 1,
     justifyContent: "flex-start",

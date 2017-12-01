@@ -66,6 +66,7 @@ class Signin extends Component {
                 placeholder="Password"
               />
             </Item>
+          </Container>
             {this.props.authError ? (
               <Text style={styles.error}>{this.props.authError}</Text>
             ) : (
@@ -90,7 +91,6 @@ class Signin extends Component {
                   Sign Up
                 </Button>
             </Container>
-          </Container>
           </View>
           </Image>
     );

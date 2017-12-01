@@ -18,7 +18,7 @@ const styles = {
     elevation: 1,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: "transparent",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
