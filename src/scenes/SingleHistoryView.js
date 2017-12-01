@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {StyleSheet, View, ScrollView } from "react-native";
 import PieChart from "../components/PieChart";
+import BarGraph from "../components/BarGraph";
 import { getAllUserMeals } from '../store/food';
 import { connect } from 'react-redux'
 import { ButtonGroup } from "react-native-elements";
@@ -29,8 +30,12 @@ class SingleHistoryView extends Component {
       acc.data.protein += foodItem.data.protein
       acc.data.carbs += foodItem.data.carbs
       acc.data.fat += foodItem.data.fat
+      foodItem.dv.forEach(nutrient => {
+        if (acc.dv[nutrient.name]) acc.dv[nutrient.name] = Math.min(100, (acc.dv[nutrient.name] + nutrient.percentdv))
+        else acc.dv[nutrient.name] = nutrient.percentdv
+      })
       return acc
-    }, { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }}) : null
+    }, { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }, dv: {}}) : null
     let buttons = ["meal"]
     let meal = [reduced]
     singleMeal && singleMeal.map((food) => {
@@ -51,6 +56,11 @@ class SingleHistoryView extends Component {
         <View>
           {
             singleMeal && <PieChart allFoods={meal[selectedIndex]} />
+          }
+        </View>
+        <View>
+          {
+            singleMeal && <BarGraph nutrients={meal[selectedIndex]} />
           }
         </View>
       </ScrollView>
