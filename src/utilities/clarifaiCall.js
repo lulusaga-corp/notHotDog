@@ -3,8 +3,12 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+import
+{ beef, chicken, goatAndLamb, pork, fish, seafood, egg, dairy, peanut, shellfish, gluten, vegan, vegetarian }
+from '../utilities/dietaryRestrictions'
 
-export default function clarifaiCall(base64data) {
+
+export default function clarifaiCall(base64data, foodRestrictions) {
   return firebase.firestore().doc(`env/clarifai`).get()
     .then(snapshot =>{
       const clarifaiKey = snapshot.data().apiKey
@@ -17,8 +21,14 @@ export default function clarifaiCall(base64data) {
 
     })
     .then(response => {
-      let foodArr = response.outputs[0].data.concepts.filter(concept => concept.value >= 0.85)
-        .map(item => item.name)
+      const foodRestrictions = foodRestrictions.reduce((acc, restriction) => acc.concat(restriction), [])
+        .reduce((acc, foods) => acc.concat(foods), [])
+      let foodArr = response.outputs[0].data.concepts
+        .filter(concept => concept.value >= 0.85).map(item => item.name)
+        .filter(food=> {
+          console.log(!foodRestrictions.includes(food))
+          return !foodRestrictions.includes(food)
+        })
       Actions.FoodSelector({ foodArr });
     })
     .catch(console.error)
