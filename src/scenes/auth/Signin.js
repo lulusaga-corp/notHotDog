@@ -66,31 +66,31 @@ class Signin extends Component {
                 placeholder="Password"
               />
             </Item>
+          </Container>
             {this.props.authError ? (
               <Text style={styles.error}>{this.props.authError}</Text>
             ) : (
               <View />
             )}
-
+            <Container>
             {this.props.loading ? (
               <Item style={styles.loadingContainer}>
                 <Spinner />
               </Item>
             ) : (
             
-                <Container>
+               
                   <Button onPress={handleSubmit(this.handleFormSubmit)}>
                     Log in
                   </Button>
-                </Container>
+                
              
             )}
-              <Container>
+              
                 <Button onPress={() => Actions.signup()}>
                   Sign Up
                 </Button>
             </Container>
-          </Container>
           </View>
           </Image>
     );

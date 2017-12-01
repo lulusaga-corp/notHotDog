@@ -18,12 +18,12 @@ const styles = {
     elevation: 1,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: "transparent",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    paddingTop: 10,
+    paddingTop: 5,
     paddingBottom: 10
   }
 };
