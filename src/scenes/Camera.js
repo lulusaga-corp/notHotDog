@@ -9,6 +9,9 @@ import clarifaiCall from '../utilities/clarifaiCall';
 import barcodeScanner from '../utilities/barcodeScanner'
 import { connect } from 'react-redux';
 
+import
+{ beef, chicken, goatAndLamb, pork, fish, seafood, egg, dairy, peanut, shellfish, gluten, vegan, vegetarian }
+  from '../utilities/dietaryRestrictions'
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
@@ -54,7 +57,7 @@ export class AppCamera extends Component {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64)
+        clarifaiCall(data.base64, this.props.restrictedFood)
       })
       .catch(e => {
         console.error(e, 'Photo error');;
@@ -156,7 +159,8 @@ export class AppCamera extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : '',
+  restrictedFood: ["vegan"]
 });
 
 export default connect(mapStateToProps)(AppCamera)
