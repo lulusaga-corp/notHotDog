@@ -72,21 +72,21 @@ class Signin extends Component {
             ) : (
               <View />
             )}
-
+            <Container>
             {this.props.loading ? (
               <Item style={styles.loadingContainer}>
                 <Spinner />
               </Item>
             ) : (
             
-                <Container>
+               
                   <Button onPress={handleSubmit(this.handleFormSubmit)}>
                     Log in
                   </Button>
-                </Container>
+                
              
             )}
-              <Container>
+              
                 <Button onPress={() => Actions.signup()}>
                   Sign Up
                 </Button>

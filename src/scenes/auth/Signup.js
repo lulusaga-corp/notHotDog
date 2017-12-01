@@ -55,7 +55,8 @@ class Signup extends Component {
                 placeholder="First name"
               />
             </Item>
-
+          </Container>  
+          <Container>
             <Item>
               <Field
                 name="lastname"
@@ -63,7 +64,8 @@ class Signup extends Component {
                 placeholder="Last name"
               />
             </Item>
-
+          </Container>
+          <Container>
             <Item>
               <Field
                 name="email"
@@ -72,7 +74,8 @@ class Signup extends Component {
                 autoCapitalize={"none"}
               />
             </Item>
-
+          </Container>
+          <Container>
             <Item>
               <Field
                 name="password"
@@ -81,7 +84,8 @@ class Signup extends Component {
                 placeholder="Password"
               />
             </Item>
-
+          </Container>
+          <Container>
             <Item>
               <Field
                 name="repassword"
@@ -90,6 +94,7 @@ class Signup extends Component {
                 placeholder="Repeat Password"
               />
             </Item>
+          </Container>
             {this.props.authError ? (
               <Text style={styles.error}>{this.props.authError}</Text>
             ) : (
@@ -108,7 +113,7 @@ class Signup extends Component {
               </Container>
             )}
            
-          </Container>
+          
         </View>
       </Image>
     );

@@ -19,8 +19,9 @@ const styles = {
   },
   container: {
     backgroundColor: "transparent",
-    marginTop: 100,
+    marginTop: 130,
     paddingTop:100,
+    // alignItems: "space-between"
   },
   questionText: {
     textAlign: "center",

@@ -60,7 +60,7 @@ const styles = {
     borderColor: "#ffd800"
   },
   InputText: {
-    color: "#ffffff",
+    color: "black",
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 18,
