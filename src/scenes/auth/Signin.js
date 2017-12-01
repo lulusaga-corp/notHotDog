@@ -77,15 +77,15 @@ class Signin extends Component {
                 <Spinner />
               </Item>
             ) : (
-              <View>
+            
                 <Container>
                   <Button onPress={handleSubmit(this.handleFormSubmit)}>
                     Log in
                   </Button>
                 </Container>
-              </View>
+             
             )}
-        <Container>
+              <Container>
                 <Button onPress={() => Actions.signup()}>
                   Sign Up
                 </Button>
