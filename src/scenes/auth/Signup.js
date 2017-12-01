@@ -44,40 +44,74 @@ class Signup extends Component {
   render() {
     const { handleSubmit } = this.props;
 
-    return <Image source={background} style={styles.background} resizeMode="cover">
+    return (
+      <Image source={background} style={styles.background} resizeMode="cover">
         <View style={styles.container}>
           <Container>
             <Item>
-              <Field name="firstname" component={Input} placeholder="First name" />
+              <Field
+                name="firstname"
+                component={Input}
+                placeholder="First name"
+              />
             </Item>
 
             <Item>
-              <Field name="lastname" component={Input} placeholder="Last name" />
+              <Field
+                name="lastname"
+                component={Input}
+                placeholder="Last name"
+              />
             </Item>
 
             <Item>
-              <Field name="email" component={Input} placeholder="Email" autoCapitalize={"none"} />
+              <Field
+                name="email"
+                component={Input}
+                placeholder="Email"
+                autoCapitalize={"none"}
+              />
             </Item>
 
             <Item>
-              <Field name="password" component={Input} secureTextEntry placeholder="Password" />
+              <Field
+                name="password"
+                component={Input}
+                secureTextEntry
+                placeholder="Password"
+              />
             </Item>
 
             <Item>
-              <Field name="repassword" component={Input} secureTextEntry placeholder="Repeat Password" />
+              <Field
+                name="repassword"
+                component={Input}
+                secureTextEntry
+                placeholder="Repeat Password"
+              />
             </Item>
-            {this.props.authError ? <Text style={styles.error}>
-                {this.props.authError}
-              </Text> : <View />}
+            {this.props.authError ? (
+              <Text style={styles.error}>{this.props.authError}</Text>
+            ) : (
+              <View />
+            )}
 
-            {this.props.loading ? <Item style={styles.loadingContainer}>
+            {this.props.loading ? (
+              <Item style={styles.loadingContainer}>
                 <Spinner />
-              </Item> : <Container>
-                <Button onPress={() => Actions.signup()}>Sign Up</Button>
-              </Container>}
+              </Item>
+            ) : (
+              <Container>
+                <Button onPress={handleSubmit(this.handleFormSubmit)}>
+                  Sign Up
+                </Button>
+              </Container>
+            )}
+           
           </Container>
         </View>
-      </Image>;
+      </Image>
+    );
   }
 }
 

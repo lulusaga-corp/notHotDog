@@ -38,7 +38,7 @@ const styles = {
     marginTop: 10,
 
     padding: 5,
-    opacity: "1",
+    opacity: 1,
     justifyContent: "flex-start",
     flexDirection: "row",
     position: "relative"

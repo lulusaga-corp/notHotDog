@@ -22,7 +22,7 @@ const styles = {
   container: {
     padding: 5,
     backgroundColor: "#36d7b7",
-    opacity: "1",
+    opacity: 1,
     justifyContent: "flex-start",
     flexDirection: "row",
     position: "relative"
