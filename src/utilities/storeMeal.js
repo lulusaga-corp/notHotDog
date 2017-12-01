@@ -16,7 +16,7 @@ export default function storeMeal(data,userId) {
       foodItem.data.carbs = food.nf_total_carbohydrate;
       foodItem.data.fat = food.nf_total_fat;
       foodItem.nutrients = food.parsed_nutrients;
-      foodItem.dv = food.daily_values.filter(dv => dv.percentdv).sort((a,b) => a.percentdv < b.percentdv)
+      foodItem.dv = food.daily_values.filter(dv => dv.percentdv).sort((a, b) => b.percentdv - a.percentdv)
       mealInstance.push(foodItem);
     });
   }

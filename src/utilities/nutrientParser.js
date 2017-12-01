@@ -108,7 +108,7 @@ export default function fullNutrientParser(apiResponse){
             name: key[nutrient.attr_id][0]
           }
           dv.rdv = (key[nutrient.attr_id][2]) || null;
-          dv.percentdv = Math.floor(+nutrient.value/key[nutrient.attr_id][2]*100) || null;
+          dv.percentdv = Math.min(100, Math.floor(nutrient.value/key[nutrient.attr_id][2]*100)) || null;
           item.daily_values.push(dv)
           parsed[key[nutrient.attr_id][0]] = nutrientObj;
         }
