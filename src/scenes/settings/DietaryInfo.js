@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Container } from '../../components/common/Container'
 
 class DietaryInfo extends Component {
   constructor(props){
@@ -14,13 +13,21 @@ class DietaryInfo extends Component {
       diet: {
         vegan: false,
         vegetarian: false,
-        gf: false
+        pescatarian:false,
+        gf: false,
+        peanutAllergy:false,
+        shellfishAllergy: false,
+        treeNutAllergy: false,
+        noLactose: false,
+        noPork: false,
+        noRedMeat: false
       },
       restricted: [],
       allergies: [],
       newAllergy: '',
       uid: this.props.uid
     }
+    this.editPreference = this.editPreference.bind(this)
   }
 
   /* Load dietary data from Firestore */
@@ -29,59 +36,20 @@ class DietaryInfo extends Component {
     .then(res => res.data())
     .then(data => {
       if (data.dietary) {
-        this.setState({
-          diet: data.dietary.specialDiet || this.state.diet,
-          restricted: data.dietary.restricted || this.state.restricted,
-        })
+        const userDiet = data.dietary.reduce((acc, restriction)=> acc[restriction] = true, {})
+        this.setState({...this.state, userDiet})
       }
     })
   }
 
   /* Set SpecialDiets */
-  addVegan(){
-    const restricted = this.state.restricted.concat('vegan')
-    this.setState({ restricted })
+  editPreference(preference){
+    console.log("PREFFERANCE", preference)
+    const newState = {...this.state}
+    newState.diet[preference] = !this.state.diet[preference]
+    console.log(newState)
+    this.setState(newState)
   }
-
-  addVegetarian(){
-    const restricted = this.state.restricted.concat('vegetarian')
-    this.setState({ restricted })
-  }
-  addPescatarian(){
-    const restricted = this.state.restricted.concat('pescatarian')
-    this.setState({ restricted })
-  }
-
-  addgf(){
-    const restricted = this.state.restricted.concat('gf')
-    this.setState({ restricted })
-  }
-
-  addPeanutAllergy(){
-    const restricted = this.state.restricted.concat('peanut')
-    this.setState({ restricted })
-  }
-
-  addShellfishAllergy(){
-    const restricted = this.state.restricted.concat('shellfish')
-    this.setState({ restricted })
-  }
-
-  addTreenutAllergy(){
-    const restricted = this.state.restricted.concat('treeNut')
-    this.setState({ restricted })
-  }
-
-  addNoPork(){
-    const restricted = this.state.restricted.concat('pork')
-    this.setState({ restricted })
-  }
-
-  addNoRedMeat(){
-    const restricted = this.state.restricted.concat('redMeat')
-    this.setState({ restricted })
-  }
-
 
   /* Add/Remove Allergies */
   allergyInput(text) {
@@ -95,13 +63,14 @@ class DietaryInfo extends Component {
 
   removeAllergy(item) {
     this.setState({
-      restricted: [...this.state.restricted.filter(allergy => allergy !== item)]
+      allergies: [...this.state.allergies.filter(allergy => allergy !== item)]
     })
   }
 
   /* Send Dietary data to Firestore */
-  editDiet(){
-    let restricted = this.state.restricted
+  sendDiet(){
+    let data =
+      { dietary: [...Object.key(this.state.diet), this.state.allergies] }
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data, { merge: true })
       .catch(err => console.error(err))
     Actions.pop();
@@ -116,6 +85,8 @@ class DietaryInfo extends Component {
       gf: 'Gluten Free'
     }
     let diet = Object.keys(this.state.diet).filter(key => this.state.diet[key] === true).map(diet => specialDiets[diet]);
+    console.log(this.state)
+
     return (
       <View>
         <ScrollView>
@@ -126,25 +97,25 @@ class DietaryInfo extends Component {
                 containerStyle={styles.containerStyle}
                 title='Vegan'
                 checked={this.state.diet.vegan}
-                onPress={this.addVegan.bind(this)}
+                onPress={()=>this.editPreference("vegan")}
               />
               <CheckBox
                 containerStyle={styles.containerStyle}
                 title='Vegetarian'
                 checked={this.state.diet.vegetarian}
-                onPress={this.addVegetarian.bind(this)}
+                onPress={()=>this.editPreference('vegetarian')}
               />
               <CheckBox
                 containerStyle={styles.containerStyle}
                 title='Pescatarian'
-                checked={this.state.diet.gf}
-                onPress={this.addPescatarian.bind(this)}
+                checked={this.state.diet.pescatarian}
+                onPress={()=>this.editPreference('pescatarian')}
               />
               <CheckBox
                 containerStyle={styles.containerStyle}
                 title='Gluten Free'
                 checked={this.state.diet.gf}
-                onPress={this.addgf.bind(this)}
+                onPress={()=>this.editPreference('gf')}
               />
             </View>
               <Text style={styles.textStyle}>Allergies and Other Avoidances:</Text>
@@ -152,46 +123,46 @@ class DietaryInfo extends Component {
               <CheckBox
                 title='Peanut'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addPeanutAllergy.bind(this)}
+                checked={this.state.diet.peanutAllergy}
+                onPress={()=>this.editPreference('peanutAllergy')}
               />
               <CheckBox
                 title='Shellfish'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addShellfishAllergy.bind(this)}
+                checked={this.state.diet.shellfishAllergy}
+                onPress={()=>this.editPreference('shellfishAllergy')}
               />
               <CheckBox
                 title='Tree Nut'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addTreenutAllergy.bind(this)}
+                checked={this.state.diet.treeNutAllergy}
+                onPress={()=>this.editPreference('treeNutAllergy')}
               />
               <CheckBox
                 title='Lactose'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addTreenutAllergy.bind(this)}
+                checked={this.state.diet.noLactose}
+                onPress={()=>this.editPreference('noLactose')}
               />
               <CheckBox
                 title='Pork'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addNoPork.bind(this)}
+                checked={this.state.diet.noPork}
+                onPress={()=>this.editPreference('noPork')}
               />
               <CheckBox
                 title='Red Meat'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.gf}
-                onPress={this.addNoRedMeat.bind(this)}
+                checked={this.state.diet.noReadMeat}
+                onPress={()=>this.editPreference('noReadMeat')}
               />
               </View>
               <List>
                 {
-                this.state.restricted && this.state.restricted.map((allergy, i) => {
+                this.state.allergies && this.state.allergies.map((allergy, i) => {
                   return (
-                    <ListItem 
-                      key={i} title={allergy} 
+                    <ListItem
+                      key={i} title={allergy}
                       rightIcon={{name: 'clear'}}
                       onPressRightIcon={() => this.removeAllergy(allergy)}
                     />
@@ -208,7 +179,7 @@ class DietaryInfo extends Component {
                   textInputAutoCapitalize={"none"}
                   onPressRightIcon={() => this.addAllergy(this.state.newAllergy)} />
               </List>
-            <Button onPress={this.editDiet.bind(this)} title="Save Special Diet Changes"/>
+            <Button onPress={this.sendDiet.bind(this)} title="Save Special Diet Changes"/>
           </View>
         </ScrollView>
       </View>
