@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
-import { dietaryRestrictions } from '../utilities/dietaryRestrictions'
+import { restrictedFood } from '../utilities/dietaryRestrictions'
 
 
 export default function clarifaiCall(base64data, foodRestrictions) {
@@ -19,14 +19,14 @@ export default function clarifaiCall(base64data, foodRestrictions) {
 
     })
     .then(response => {
-      const foodRestrictions = foodRestrictions
-        .reduce((acc, restriction) => acc.concat(dietaryRestrictions[restriction]), [])
+      const allRestricted = foodRestrictions
+        .reduce((acc, restriction) => acc.concat(restrictedFood[restriction]), [])
         .reduce((acc, foods) => acc.concat(foods), [])
       let foodArr = response.outputs[0].data.concepts
         .filter(concept => concept.value >= 0.85).map(item => item.name)
         .filter(food=> {
-          console.log(!foodRestrictions.includes(food))
-          return !foodRestrictions.includes(food)
+          console.log(!allRestricted.includes(food))
+          return !allRestricted.includes(food)
         })
       Actions.FoodSelector({ foodArr });
     })

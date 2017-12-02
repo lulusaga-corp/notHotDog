@@ -9,9 +9,6 @@ import clarifaiCall from '../utilities/clarifaiCall';
 import barcodeScanner from '../utilities/barcodeScanner'
 import { connect } from 'react-redux';
 
-import
-{ beef, chicken, goatAndLamb, pork, fish, seafood, egg, dairy, peanut, shellfish, gluten, vegan, vegetarian }
-  from '../utilities/dietaryRestrictions'
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
