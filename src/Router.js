@@ -26,7 +26,6 @@ class RouterComponent extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (this.props !== nextProps) {
-      console.log("HIT!", nextProps.userId)
       nextProps.userId && this.props.fetchAllMeals(nextProps.userId)
     }
   }
@@ -51,7 +50,6 @@ class RouterComponent extends Component {
           <Scene key="deleteAccount" component={AccountManagement} title="Delete Account" />
           <Scene key="dietary" component={DietaryInfo} title="Edit Dietary Preferences" />
           <Scene key="userInfo" component={UserInfo} title="Edit Account Info" />
-
           <Scene key="FoodSelector" component={FoodSelector} title="Select" />
           <Scene key="SingleHistoryView" component={SingleHistoryView} title="SingleHistoryView" />
           <Scene

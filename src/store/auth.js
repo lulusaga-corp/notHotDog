@@ -20,8 +20,8 @@ export const GET_API_KEYS = 'GET_API_KEYS'
 export const GET_USER_PROFILE = 'GET_USER_PROFILE'
 export const GET_USER_FIRST_NAME = 'GET_USER_FIRST_NAME'
 export const GET_USER_LAST_NAME = 'GET_USER_LAST_NAME'
-export const GET_USER_DIETARY = 'GET_USER_DIETARY'
-export const GET_USER_ALLERGIES = 'GET_USER_ALLERGIES'
+export const GET_USER_FOOD_RESTRICTIONS = 'GET_USER_FOOD_RESTRICTIONS'
+
 /**
  |--------------------------------------------------
  | Actions
@@ -115,6 +115,8 @@ const reducer = (state = INITIAL_STATE, action = {}) => {
     case GET_API_KEYS:
       return {...state, api: action.payload}
     case GET_USER_PROFILE:
+      return Object.assign(state, action.payload)
+    case GET_USER_FOOD_RESTRICTIONS:
       return Object.assign(state, action.payload)
     case SIGN_UP_REQUEST:
       return { ...state, ...INITIAL_STATE, loading: true };

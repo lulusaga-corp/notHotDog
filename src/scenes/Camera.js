@@ -23,10 +23,19 @@ export class AppCamera extends Component {
       flash: 'auto',
       showGallery: false,
       showBarcode: false,
-      loading: false
+      loading: false,
+      restrictions: this.props.user.dietary,
+      allergies: this.props.user.allergies
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    nextProps.userId && this.setState({restrictions: nextProps.restrictions})
+  }
+  componentDidMount(){
+    this.setState({restrictions: this.props.user.dietary,
+      allergies: this.props.user.allergies})
+  }
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
@@ -51,10 +60,11 @@ export class AppCamera extends Component {
   }
 
   takePicture = async function() {
+    console.log(this.state.restrictions)
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64, this.props.restrictedFood)
+        clarifaiCall(data.base64, this.state.restrictions, this.state.allergies)
       })
       .catch(e => {
         console.error(e, 'Photo error');;
@@ -63,7 +73,7 @@ export class AppCamera extends Component {
   };
 
   renderGallery() {
-    return <CameraGallery onPress={this.toggleView.bind(this)} />;
+    return <CameraGallery restrictions={this.state.restrictions} allergies={this.state.allergies} onPress={this.toggleView.bind(this)} />;
   }
 
   renderBarCode() {
@@ -140,6 +150,8 @@ export class AppCamera extends Component {
   }
 
   render() {
+    console.log(this.state.allergies)
+
     if (this.state.loading) {
       return (
         <View style={styles.container}>
@@ -156,8 +168,7 @@ export class AppCamera extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.auth && state.auth.user  ? state.auth.user.uid : '',
-  restrictedFood: ["vegan"]
+  user: state.auth
 });
 
 export default connect(mapStateToProps)(AppCamera)

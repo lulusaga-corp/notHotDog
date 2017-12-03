@@ -21,10 +21,6 @@ class UserInfo extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    this.props = nextProps ? nextProps : this.props
-  }
-
   editFirstName(text){
     this.setState({firstName: text})
   }

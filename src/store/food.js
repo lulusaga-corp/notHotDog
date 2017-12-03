@@ -63,7 +63,6 @@ const INITIAL_STATE = {
 const reducer = (state = INITIAL_STATE, action = {}) => {
     switch(action.type){
       case GET_ALL_USER_MEALS:
-        console.log(action.payload)
           return {...state, ...action.payload}
       case UPDATE_MOST_RECENT_MEAL:
           return {...state, mostRecent: action.payload}

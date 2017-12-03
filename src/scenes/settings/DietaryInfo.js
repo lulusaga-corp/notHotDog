@@ -6,8 +6,7 @@ import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import store from '../../../configureStore';
-import { GET_USER_FIRST_NAME, GET_USER_LAST_NAME, GET_USER_DIETARY, GET_USER_ALLERGIES
-} from '../../store/auth'
+import { GET_USER_FOOD_RESTRICTIONS, GET_USER_PROFILE } from '../../store/auth'
 
 
 class DietaryInfo extends Component {
@@ -43,7 +42,6 @@ class DietaryInfo extends Component {
         res.data().dietary.forEach(restriction => {
           newState.diet[restriction] = true
           newState.allergies = [...this.state.allergies, ...user.allergies]
-          console.log(newState)
         } )
         this.setState({...this.state, ...newState})
       }
@@ -53,10 +51,8 @@ class DietaryInfo extends Component {
 
   /* Set SpecialDiets */
   editPreference(preference){
-    console.log("PREFFERANCE", preference)
     const newState = {...this.state}
     newState.diet[preference] = !this.state.diet[preference]
-    console.log(newState)
     this.setState(newState)
   }
 
@@ -83,20 +79,16 @@ class DietaryInfo extends Component {
           .filter(specialDiet => !!this.state.diet[specialDiet])],
       allergies: this.state.allergies
     }
-    console.log("data to send:", data)
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data, { merge: true })
       .then(()=>{
-        store.dispatch({type:GET_USER_DIETARY, payload: data.dietary})
-        store.dispatch({type:GET_USER_ALLERGIES, payload: data.allergies})
-        store.dispatch({type:GET_USER_FIRST_NAME, payload: data.firstname})
-        store.dispatch({type:GET_USER_LAST_NAME, payload: data.lastname})
+        store.dispatch({type:GET_USER_PROFILE, payload: data})
+        Actions.camera(data);
       })
       .catch(err => console.error(err))
-    Actions.pop();
+
   }
 
   render () {
-    console.log('this state', this.state)
 
     return (
       <View>
