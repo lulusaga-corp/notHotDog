@@ -26,7 +26,7 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * [Clarifai](https://www.clarifai.com/)
 * [Nutritionix](https://developer.nutritionix.com/)
 
-### Your Viewtrition Team:
+### Viewtrition Team:
 * [Gabriel DeFazio](https://github.com/gabrieldefazio)
 * [Lucy Sutton](https://github.com/lucysutton91)
 * [Łukasz Kapica](https://github.com/kapicaluk)
