@@ -32,6 +32,7 @@ class FoodSelector extends Component {
     }
 
   addToFoodArr = item => {
+    if (!item.length) return;
     let newStateArr = this.state.foodArr.slice()
     newStateArr.push(item)
     let newChecked = {...this.state.checked}
