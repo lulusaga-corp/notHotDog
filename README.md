@@ -1,8 +1,8 @@
 ## Viewtrition
 
 ### How to Download Viewtrition:
-![qrCode]('qrCode.png')
-[https://expo.io/@kapicaluk/viewtrition](https://expo.io/@kapicaluk/viewtrition)
+![qrCode](qrCode.png)  
+[https://expo.io/@kapicaluk/viewtrition](https://expo.io/@kapicaluk/viewtrition)  
 Currently Avaliable for iOS only. If you use an android device, see below for instructions for running Viewtrition on a Mac OS device.
 
 ### Running Viewtrition on Your Computer
@@ -14,7 +14,7 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * Tap to select the foods you are eating
 * Checkout out your nutrition information visualized on graphs and charts
 
-### Technology Used:
+### Technology Stack:
 * React Native (via create-react-native-app)
 * Expo
 * Firebase
