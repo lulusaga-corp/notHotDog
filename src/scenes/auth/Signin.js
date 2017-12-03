@@ -47,9 +47,6 @@ class Signin extends Component {
     return (
       <Image source={background} style={styles.background} resizeMode="cover">
       <View style={styles.container}>
-        <Image
-          source={require('white-logo.png')}
-        />
           <Container>
             <Item>
               <Field
