@@ -1,7 +1,7 @@
 ## Viewtrition
 
 ### How to Download Viewtrition:
-Open Expo and scan:
+Open Expo and scan:  
 ![qrCode](qrCode.png)  
 [https://expo.io/@kapicaluk/viewtrition](https://expo.io/@kapicaluk/viewtrition)  
 Currently Avaliable for iOS only. If you use an android device, see below for instructions for running Viewtrition on a Mac OS device.
