@@ -1,4 +1,4 @@
-import * as auth from '../../src/modules/auth';
+import * as auth from '../../src/store/auth';
 
 /* TESTING REDUCER */
 describe('auth reducer', () => {

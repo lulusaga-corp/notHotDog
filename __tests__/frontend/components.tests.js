@@ -1,12 +1,11 @@
 import React from 'react';
-// import Signin from '../../src/components/auth/Signin';
 import {Button, Confirm, Container, Header, Input, Item, Spinner} from '../../src/components/common';
+import CameraGallery from '../../src/components/CameraGallery';
+import BarGraph from '../../src/components/BarGraph';
+import PieChart from '../../src/components/PieChart';
 
 import renderer from 'react-test-renderer';
 import { createStore } from 'redux';
-
-/* Auth Components */
-// Try these later??
 
 /* Common Components */
 describe('Button component', () => {
@@ -70,10 +69,27 @@ describe('Spinner component', () => {
   })
 })
 
-/* Icon Container */
-describe('Icon Container component', () => {
+/* Camera Roll Component */
+describe('Camera Gallery scene', () => {
   it('renders without crashing', () => {
-    const renderedIconContainer = renderer.create(<IconContainer />).toJSON();
-    expect(renderedIconContainer).toMatchSnapshot();
-  })
+    const renderedCameraGallery = renderer.create(<CameraGallery />).toJSON();
+    expect(renderedCameraGallery).toMatchSnapshot();
+  });
+})
+
+/* Graph Components */
+describe('Pie Chart', () => {
+  it('renders without crashing', () => {
+    let allFoods = {data: {}};
+    const renderedPieChart = renderer.create(<PieChart allFoods={allFoods}/>).toJSON();
+    expect(renderedPieChart).toMatchSnapshot();
+  });
+})
+
+describe('Bar Graph', () => {
+  it('renders without crashing', () => {
+    let allFoods = {data: {}, dv: {calcium: 2, potassium: 12}};
+    const renderedBarGraph = renderer.create(<BarGraph nutrients={allFoods}/>).toJSON();
+    expect(renderedBarGraph).toMatchSnapshot();
+  });
 })

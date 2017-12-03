@@ -1,9 +1,8 @@
 import React from 'react';
 import requireAuth from '../../src/scenes/auth/requireAuth';
 import requireNotAuth from '../../src/scenes/auth/requireNotAuth';
-import Signup from '../../src/containers/auth/Signup';
-import Signin from '../../src/containers/auth/Signin';
-import LandingContainer from '../../src/containers/LandingContainer';
+import Signup from '../../src/scenes/auth/Signup';
+import Signin from '../../src/scenes/auth/Signin';
 
 import renderer from 'react-test-renderer';
 
@@ -30,12 +29,4 @@ describe('requireNotAuth', () => {
     const renderedSignin = requireNotAuth(Signin);
     expect(renderedSignin).toMatchSnapshot();
   })
-})
-
-/* Landing Container */
-describe('LandingContainer', () => {
-  it('renders without crashing', () => {
-    const renderedLandingContainer = renderer.create(<LandingContainer />).toJSON();
-    expect(renderedLandingContainer).toMatchSnapshot();
-  });
 })
