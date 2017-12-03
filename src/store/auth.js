@@ -17,8 +17,7 @@ export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 export const GET_API_KEYS = 'GET_API_KEYS'
-export const GET_FOOD_RESTRICTIONS = 'GET_FOOD_RESTRICTIONS'
-export const GET_USER_PROFILE ='GET_USER_PROFILE'
+export const GET_USER_PROFILE = 'GET_USER_PROFILE'
 export const GET_USER_FIRST_NAME = 'GET_USER_FIRST_NAME'
 export const GET_USER_LAST_NAME = 'GET_USER_LAST_NAME'
 export const GET_USER_DIETARY = 'GET_USER_DIETARY'
@@ -111,34 +110,27 @@ const INITIAL_STATE = {
   lastname:''
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case GET_API_KEYS:
       return {...state, api: action.payload}
+    case GET_USER_PROFILE:
+      return Object.assign(state, action.payload)
     case SIGN_UP_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, ...INITIAL_STATE, loading: true };
     case SIGN_UP_SUCCESS:
-      return { ...state, user: action.payload };
+      return { ...state, ...INITIAL_STATE, user: action.payload };
     case SIGN_UP_FAILURE:
-      return { ...state, error: action.payload };
+      return { ...state, ...INITIAL_STATE, error: action.payload };
     case SIGN_IN_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, ...INITIAL_STATE, loading: true };
     case SIGN_IN_SUCCESS:
-      return { ...state, user: action.payload };
+      return { ...state, ...INITIAL_STATE, user: action.payload };
     case SIGN_IN_FAILURE:
-      return { ...state, error: action.payload };
+      return { ...state, ...INITIAL_STATE, error: action.payload };
     case SET_INITIAL_STATE:
       return { ...state, ...INITIAL_STATE };
-    case GET_FOOD_RESTRICTIONS:
-      return {...state, foodRestrictions: payload.foodRestrictions};
-    case GET_USER_FIRST_NAME:
-     return {...state, firstname: action.payload}
-    case GET_USER_LAST_NAME:
-      return {...state, lastname: action.payload}
-    case GET_USER_DIETARY:
-      return {...state, dietary: action.payload}
-    case GET_USER_ALLERGIES:
-      return {...state, allergies: action.payload}
+
     default:
       return state;
   }

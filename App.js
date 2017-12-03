@@ -5,10 +5,7 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import Router from './src/Router';
 import store from './configureStore';
-import {
-  SIGN_IN_SUCCESS, GET_API_KEYS, GET_USER_FIRST_NAME,
-  GET_USER_LAST_NAME, GET_USER_DIETARY, GET_USER_ALLERGIES
-} from './src/store/auth'
+import { SIGN_IN_SUCCESS, GET_API_KEYS, GET_USER_PROFILE } from './src/store/auth'
 import { Spinner } from './src/components/common';
 
 class App extends Component {
@@ -33,10 +30,8 @@ class App extends Component {
         firebase.firestore().collection(`users`).doc(`${user.uid}`).get()
           .then(res => {
             const userProfile = res.data()
-            store.dispatch({type:GET_USER_FIRST_NAME, payload: userProfile.firstname})
-            store.dispatch({type:GET_USER_LAST_NAME, payload: userProfile.lastname})
-            store.dispatch({type:GET_USER_DIETARY, payload: userProfile.dietary})
-            store.dispatch({type:GET_USER_ALLERGIES, payload: userProfile.allergies})
+            console.log('USERPROF', userProfile)
+            store.dispatch({type:GET_USER_PROFILE, payload: userProfile})
           })
           .catch(console.error)
 

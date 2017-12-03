@@ -23,7 +23,6 @@ export const getAllUserMeals = userId => dispatch => {
     .get()
     .then(snapshot => {
       let allMeals = []
-      if(!snapshot.length) return;
       snapshot.forEach(doc => allMeals.push(doc.data()))
 
       //---------time filterers-----------
@@ -61,9 +60,10 @@ const INITIAL_STATE = {
   mostRecent: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = INITIAL_STATE, action = {}) => {
     switch(action.type){
       case GET_ALL_USER_MEALS:
+        console.log(action.payload)
           return {...state, ...action.payload}
       case UPDATE_MOST_RECENT_MEAL:
           return {...state, mostRecent: action.payload}

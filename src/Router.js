@@ -26,6 +26,7 @@ class RouterComponent extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (this.props !== nextProps) {
+      console.log("HIT!", nextProps.userId)
       nextProps.userId && this.props.fetchAllMeals(nextProps.userId)
     }
   }

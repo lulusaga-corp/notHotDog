@@ -11,24 +11,12 @@ class UserInfo extends Component {
     this.state = {
       user: this.props.user,
       uid: this.props.uid,
-      firstName: this.props.user.displayName,
-      lastName: '',
+      firstName: this.props.firstname || '',
+      lastName: this.props.lastname || '',
+      email: this.props.email || '',
       currentPass: '',
       newPass: ''
     }
-  }
-
-  componentDidMount(){
-    firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
-    .then(res => res.data())
-    .then(data => {
-      if (data.firstname) {
-        this.setState({
-          firstName: data.firstname,
-          lastName: data.lastname
-        })
-      }
-    })
   }
 
   editFirstName(text){
@@ -53,9 +41,9 @@ class UserInfo extends Component {
 
   editAccount(){
     let updatedInfo = {
-      displayName: this.state.firstName,
-      email: this.state.user.email,
-      lastName: this.state.lastName
+      firstname: this.state.firstName,
+      lastname: this.state.lastName,
+      email: this.state.email,
     }
     let user = firebase.auth().currentUser
     user.updateProfile({ displayName: `${updatedInfo.displayName}` })
@@ -87,7 +75,7 @@ class UserInfo extends Component {
                 <FormLabel>First Name:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editFirstName(text)} 
-                  defaultValue={(this.state.firstName) ? this.state.firstName : user.displayName} />
+                  defaultValue={ this.state.firstName ? this.state.firstName : null} />
                 <FormLabel>Last Name:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editLastName(text)} 
@@ -95,7 +83,7 @@ class UserInfo extends Component {
                 <FormLabel>Email:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editEmail(text)} 
-                  defaultValue={user.email} />
+                  defaultValue={this.state.email} />
                 <FormLabel>Current Password:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editCurrentPass(text)} 
@@ -113,17 +101,10 @@ class UserInfo extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  if (state.auth.user) {
-    return {
-      user: state.auth.user.providerData[0],
-      uid: state.auth.user.uid
-    }
-  } else {
-    return {
-      user: {}
-    }
-  }
-}
+const mapStateToProps = state => ({
+  firstname: state.auth.firstname,
+  lastname: state.auth.lastname,
+  email: state.auth.user.email
+})
 
 export default connect( mapStateToProps )(UserInfo);
