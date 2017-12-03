@@ -6,7 +6,7 @@ Open Expo and scan:
 [https://expo.io/@kapicaluk/viewtrition](https://expo.io/@kapicaluk/viewtrition)  
 Currently Avaliable for iOS only. If you use an android device, see below for instructions for running Viewtrition on a Mac OS device.
 
-### Running Viewtrition on Your Computer
+### Running Viewtrition on Your Computer:
 If you do not have an iOS device, you can clone this repo and run it on your Mac OS device using the script 'npm-run-ios'. Node.js and npm must be installed. For more information on running an app created with create-react-native-app, visit [create-react-native-app on GitHub](https://github.com/react-community/create-react-native-app).
 
 ### How To Use Viewtrition:
