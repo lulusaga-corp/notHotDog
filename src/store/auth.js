@@ -28,39 +28,49 @@ export const GET_USER_FOOD_RESTRICTIONS = 'GET_USER_FOOD_RESTRICTIONS'
  |--------------------------------------------------
  */
 export const signInUser = ({ email, password }) => (dispatch) => {
-  dispatch({ type: SIGN_IN_REQUEST });
-
+  dispatch({type: SIGN_IN_REQUEST});
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
-      dispatch({ type: SIGN_IN_SUCCESS, payload: user });
+      dispatch({type: SIGN_IN_SUCCESS, payload: user});
       dispatch(reset('signin'))
       return firebase.firestore().collection(`env`).get()
-  })
     .then(snapshot => {
-      if (snapshot){
-        dispatch({type: GET_API_KEYS, payload:snapshot.data()})
-      }
+      let apiKeys = []
+      snapshot.forEach(doc => apiKeys.push(doc.data()))
+      dispatch({type: GET_API_KEYS, payload: apiKeys})
+      return firebase.firestore().collection(`users`).doc(`${user.uid}`).get()
     })
-    .catch((error) => { dispatch({ type: SIGN_IN_FAILURE, payload: authFailMessage(error.code) }); });
-};
+    .then(res => {
+      const userProfile = res.data()
+      dispatch({type: GET_USER_PROFILE, payload: userProfile})
+    }).catch(console.error)
+  })
+  .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
+}
 
 export const signUpUser = ({ email, password, firstname, lastname }) => (dispatch) => {
   dispatch({ type: SIGN_UP_REQUEST });
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
+  .then((user) => {
       dispatch({ type: SIGN_UP_SUCCESS, payload: user });
       dispatch(reset('signup'));
-      return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
-    })
+      return firebase.firestore().collection(`users`).doc(`${user.uid}`)
+        .set({ firstname, lastname })
     .then(()=> {
       return firebase.firestore().collection(`env`).get()
     })
     .then(snapshot => {
-      if (snapshot){
-        dispatch({type: GET_API_KEYS, payload:snapshot.data()})
-      }
+      let apiKeys = []
+      snapshot.forEach(doc => apiKeys.push(doc.data()))
+      dispatch({type: GET_API_KEYS, payload: apiKeys})
+      return firebase.firestore().collection(`users`).doc(`${user.uid}`).get()
     })
-    .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
+    .then(res => {
+      const userProfile = res.data()
+      dispatch({type: GET_USER_PROFILE, payload: userProfile})
+    }).catch(console.error)
+  })
+  .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
 };
 
 export const clearState = () => (

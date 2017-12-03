@@ -29,9 +29,10 @@ class App extends Component {
             const userProfile = res.data()
             store.dispatch({type:GET_USER_PROFILE, payload: userProfile})
             this.setState({ loaded: true });
-            Actions.camera()
             })
           .catch(console.error)
+      } else {
+        this.setState({ loaded: true });
       }
     });
   }
