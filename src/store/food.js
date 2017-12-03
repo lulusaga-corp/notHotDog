@@ -23,6 +23,7 @@ export const getAllUserMeals = userId => dispatch => {
     .get()
     .then(snapshot => {
       let allMeals = []
+      if(!snapshot.length) return;
       snapshot.forEach(doc => allMeals.push(doc.data()))
 
       //---------time filterers-----------

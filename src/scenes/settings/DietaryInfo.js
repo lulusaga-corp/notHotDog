@@ -5,6 +5,10 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import store from '../../../configureStore';
+import { GET_USER_FIRST_NAME, GET_USER_LAST_NAME, GET_USER_DIETARY, GET_USER_ALLERGIES
+} from '../../store/auth'
+
 
 class DietaryInfo extends Component {
   constructor(props){
@@ -14,15 +18,14 @@ class DietaryInfo extends Component {
         vegan: false,
         vegetarian: false,
         pescatarian:false,
-        gf: false,
-        peanutAllergy:false,
-        shellfishAllergy: false,
-        treeNutAllergy: false,
-        noLactose: false,
-        noPork: false,
-        noRedMeat: false
+        gluten: false,
+        peanut:false,
+        shellfish: false,
+        treeNut: false,
+        dairy: false,
+        pork: false,
+        redMeat: false
       },
-      restricted: [],
       allergies: [],
       newAllergy: '',
       uid: this.props.uid
@@ -31,15 +34,21 @@ class DietaryInfo extends Component {
   }
 
   /* Load dietary data from Firestore */
-  componentDidMount(){
+  componentWillMount(){
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
-    .then(res => res.data())
-    .then(data => {
-      if (data.dietary) {
-        const userDiet = data.dietary.reduce((acc, restriction)=> acc[restriction] = true, {})
-        this.setState({...this.state, userDiet})
+    .then(res => {
+      const user = res.data()
+      if (user.dietary) {
+        const newState = {...this.state}
+        res.data().dietary.forEach(restriction => {
+          newState.diet[restriction] = true
+          newState.allergies = [...this.state.allergies, ...user.allergies]
+          console.log(newState)
+        } )
+        this.setState({...this.state, ...newState})
       }
     })
+    .catch(console.error)
   }
 
   /* Set SpecialDiets */
@@ -69,23 +78,25 @@ class DietaryInfo extends Component {
 
   /* Send Dietary data to Firestore */
   sendDiet(){
-    let data =
-      { dietary: [...Object.key(this.state.diet), this.state.allergies] }
+    let data = {
+      dietary: [...Object.keys(this.state.diet)
+          .filter(specialDiet => !!this.state.diet[specialDiet])],
+      allergies: this.state.allergies
+    }
+    console.log("data to send:", data)
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data, { merge: true })
+      .then(()=>{
+        store.dispatch({type:GET_USER_DIETARY, payload: data.dietary})
+        store.dispatch({type:GET_USER_ALLERGIES, payload: data.allergies})
+        store.dispatch({type:GET_USER_FIRST_NAME, payload: data.firstname})
+        store.dispatch({type:GET_USER_LAST_NAME, payload: data.lastname})
+      })
       .catch(err => console.error(err))
     Actions.pop();
   }
 
   render () {
-    let user = this.state.user;
-    let specialDiets = {
-      vegan: 'Vegan',
-      vegetarian: 'Vegetarian',
-      pescatarian: 'Pescatarian',
-      gf: 'Gluten Free'
-    }
-    let diet = Object.keys(this.state.diet).filter(key => this.state.diet[key] === true).map(diet => specialDiets[diet]);
-    console.log(this.state)
+    console.log('this state', this.state)
 
     return (
       <View>
@@ -114,8 +125,8 @@ class DietaryInfo extends Component {
               <CheckBox
                 containerStyle={styles.containerStyle}
                 title='Gluten Free'
-                checked={this.state.diet.gf}
-                onPress={()=>this.editPreference('gf')}
+                checked={this.state.diet.gluten}
+                onPress={()=>this.editPreference('gluten')}
               />
             </View>
               <Text style={styles.textStyle}>Allergies and Other Avoidances:</Text>
@@ -123,38 +134,38 @@ class DietaryInfo extends Component {
               <CheckBox
                 title='Peanut'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.peanutAllergy}
-                onPress={()=>this.editPreference('peanutAllergy')}
+                checked={this.state.diet.peanut}
+                onPress={()=>this.editPreference('peanut')}
               />
               <CheckBox
                 title='Shellfish'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.shellfishAllergy}
-                onPress={()=>this.editPreference('shellfishAllergy')}
+                checked={this.state.diet.shellfish}
+                onPress={()=>this.editPreference('shellfish')}
               />
               <CheckBox
                 title='Tree Nut'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.treeNutAllergy}
-                onPress={()=>this.editPreference('treeNutAllergy')}
+                checked={this.state.diet.treeNut}
+                onPress={()=>this.editPreference('treeNut')}
               />
               <CheckBox
                 title='Lactose'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.noLactose}
-                onPress={()=>this.editPreference('noLactose')}
+                checked={this.state.diet.dairy}
+                onPress={()=>this.editPreference('dairy')}
               />
               <CheckBox
                 title='Pork'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.noPork}
-                onPress={()=>this.editPreference('noPork')}
+                checked={this.state.diet.pork}
+                onPress={()=>this.editPreference('pork')}
               />
               <CheckBox
                 title='Red Meat'
                 containerStyle={styles.containerStyle}
-                checked={this.state.diet.noReadMeat}
-                onPress={()=>this.editPreference('noReadMeat')}
+                checked={this.state.diet.redMeat}
+                onPress={()=>this.editPreference('redMeat')}
               />
               </View>
               <List>

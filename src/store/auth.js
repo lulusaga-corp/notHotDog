@@ -16,6 +16,13 @@ export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
+export const GET_API_KEYS = 'GET_API_KEYS'
+export const GET_FOOD_RESTRICTIONS = 'GET_FOOD_RESTRICTIONS'
+export const GET_USER_PROFILE ='GET_USER_PROFILE'
+export const GET_USER_FIRST_NAME = 'GET_USER_FIRST_NAME'
+export const GET_USER_LAST_NAME = 'GET_USER_LAST_NAME'
+export const GET_USER_DIETARY = 'GET_USER_DIETARY'
+export const GET_USER_ALLERGIES = 'GET_USER_ALLERGIES'
 /**
  |--------------------------------------------------
  | Actions
@@ -27,20 +34,33 @@ export const signInUser = ({ email, password }) => (dispatch) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
       dispatch({ type: SIGN_IN_SUCCESS, payload: user });
-      dispatch(reset('signin'));
+      dispatch(reset('signin'))
+      return firebase.firestore().collection(`env`).get()
+  })
+    .then(snapshot => {
+      if (snapshot){
+        dispatch({type: GET_API_KEYS, payload:snapshot.data()})
+      }
     })
     .catch((error) => { dispatch({ type: SIGN_IN_FAILURE, payload: authFailMessage(error.code) }); });
 };
 
 export const signUpUser = ({ email, password, firstname, lastname }) => (dispatch) => {
   dispatch({ type: SIGN_UP_REQUEST });
-
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
       dispatch({ type: SIGN_UP_SUCCESS, payload: user });
       dispatch(reset('signup'));
       return firebase.firestore().collection(`users`).doc(`${user.uid}`).set({ firstname, lastname })
-        })
+    })
+    .then(()=> {
+      return firebase.firestore().collection(`env`).get()
+    })
+    .then(snapshot => {
+      if (snapshot){
+        dispatch({type: GET_API_KEYS, payload:snapshot.data()})
+      }
+    })
     .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
 };
 
@@ -84,24 +104,41 @@ const INITIAL_STATE = {
   error: '',
   loading: false,
   user: null,
+  api: [{ apiKey:'' }, { id:'', key:'' }],
+  dietary:[],
+  allergies:[],
+  firstname:'',
+  lastname:''
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case GET_API_KEYS:
+      return {...state, api: action.payload}
     case SIGN_UP_REQUEST:
-      return { ...state, ...INITIAL_STATE, loading: true };
+      return { ...state, loading: true };
     case SIGN_UP_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, user: action.payload };
     case SIGN_UP_FAILURE:
-      return { ...state, ...INITIAL_STATE, error: action.payload };
+      return { ...state, error: action.payload };
     case SIGN_IN_REQUEST:
-      return { ...state, ...INITIAL_STATE, loading: true };
+      return { ...state, loading: true };
     case SIGN_IN_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, user: action.payload };
     case SIGN_IN_FAILURE:
-      return { ...state, ...INITIAL_STATE, error: action.payload };
+      return { ...state, error: action.payload };
     case SET_INITIAL_STATE:
       return { ...state, ...INITIAL_STATE };
+    case GET_FOOD_RESTRICTIONS:
+      return {...state, foodRestrictions: payload.foodRestrictions};
+    case GET_USER_FIRST_NAME:
+     return {...state, firstname: action.payload}
+    case GET_USER_LAST_NAME:
+      return {...state, lastname: action.payload}
+    case GET_USER_DIETARY:
+      return {...state, dietary: action.payload}
+    case GET_USER_ALLERGIES:
+      return {...state, allergies: action.payload}
     default:
       return state;
   }
