@@ -13,7 +13,7 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * Create an account
 * Snap a picture of your food
 * Tap to select the foods you are eating
-* Checkout out your nutrition information visualized on graphs and charts
+* Check out your nutrition information visualized on graphs and charts
 
 ### Technology Stack:
 * React Native (via create-react-native-app)
