@@ -32,25 +32,9 @@ class DietaryInfo extends Component {
     this.editPreference = this.editPreference.bind(this)
   }
 
-  /* Load dietary data from Firestore */
-  componentWillMount(){
-    firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
-    .then(res => {
-      const user = res.data()
-      if (user.dietary) {
-        const newState = {...this.state}
-        res.data().dietary.forEach(restriction => {
-          newState.diet[restriction] = true
-          newState.allergies = [...this.state.allergies, ...user.allergies]
-        } )
-        this.setState({...this.state, ...newState})
-      }
-    })
-    .catch(console.error)
-  }
-
   /* Set SpecialDiets */
   editPreference(preference){
+    if (!preference) return;
     const newState = {...this.state}
     newState.diet[preference] = !this.state.diet[preference]
     this.setState(newState)
@@ -89,6 +73,7 @@ class DietaryInfo extends Component {
   }
 
   render () {
+    console.log(this.props)
 
     return (
       <View>
@@ -207,10 +192,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state) => {
-  return {
-    uid: state.auth.user.uid
-  }
-}
+const mapStateToProps = state => ({
+  restrictions: state.auth.restrictions,
+  allergies: state.auth.allergies
+})
 
 export default connect(mapStateToProps)(DietaryInfo);

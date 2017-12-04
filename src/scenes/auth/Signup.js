@@ -26,9 +26,9 @@ class Signup extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  componentWillMount() {
-    this.props.clearState();
-  }
+  // componentWillMount() {
+  //   if (!this.props.userId) this.props.clearState();
+  // }
 
   handleFormSubmit(props) {
     const { email, password, firstname, lastname } = props;

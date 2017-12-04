@@ -30,7 +30,7 @@ export class AppCamera extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    nextProps.userId && this.setState({restrictions: nextProps.restrictions})
+    if(nextProps) this.props = nextProps
   }
 
   async componentWillMount() {
