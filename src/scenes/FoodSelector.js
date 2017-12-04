@@ -22,16 +22,8 @@ class FoodSelector extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount(){
-    return firebase.firestore().doc(`env/nutrionix`)
-      .get()
-      .then(snapshot =>{
-        const nutrionix = snapshot.data()
-        this.setState({ xAppId: nutrionix.id, xAppKey: nutrionix.key})
-      })
-    }
-
   addToFoodArr = item => {
+    if (!item.length) return;
     let newStateArr = this.state.foodArr.slice()
     newStateArr.push(item)
     let newChecked = {...this.state.checked}
@@ -57,8 +49,8 @@ class FoodSelector extends Component {
       query: selected.join(", ")
     }, {
       headers: {
-        "x-app-id": this.state.xAppId,
-        "x-app-key": this.state.xAppKey,
+        "x-app-id": this.props.nutrionix.id,
+        "x-app-key": this.props.nutrionix.key,
         "Content-Type": "application/json"
       }
     })
@@ -152,7 +144,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+  userId: state.auth && state.auth.user  ? state.auth.user.uid : '',
+  nutrionix: state.auth.api[1]
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchAllMeals: userId => dispatch(getAllUserMeals(userId))

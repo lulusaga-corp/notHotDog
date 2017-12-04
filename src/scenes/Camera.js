@@ -23,7 +23,9 @@ export class AppCamera extends Component {
       flash: 'auto',
       showGallery: false,
       showBarcode: false,
-      loading: false
+      loading: false,
+      restrictions: this.props.user.dietary,
+      allergies: this.props.user.allergies
     };
   }
 
@@ -54,37 +56,37 @@ export class AppCamera extends Component {
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64)
+        clarifaiCall(data.base64, this.state.restrictions, this.state.allergies, this.props.clarifaiKey)
       })
-      .catch(e => {
-        console.error(e, 'Photo error');;
-      })
+        .catch(e => {
+          console.error(e, 'Photo error');;
+        })
     }
   };
 
   renderGallery() {
-    return <CameraGallery onPress={this.toggleView.bind(this)} />;
+    return <CameraGallery restrictions={this.state.restrictions} allergies={this.state.allergies} clarifaiKey={this.props.clarifaiKey} onPress={this.toggleView.bind(this)} />;
   }
 
   renderBarCode() {
     return (
-      <BarCodeScanner 
+      <BarCodeScanner
         onBarCodeRead={data => {
-          barcodeScanner(data.data,this.props.userId)
+          barcodeScanner(data.data,this.props.userId, this.props.nutrionix)
           this.setState({showBarcode: false, loading: true})
-        }} 
+        }}
         style={styles.scanner}>
         <View style={styles.barcode}>
-            <Icon
-              name="camera-alt"
-              color="#ff7c61"
-              size={60}
-              onPress={this.toggleBarCode.bind(this)} />
-          </View>
-        </BarCodeScanner>
+          <Icon
+            name="camera-alt"
+            color="#ff7c61"
+            size={60}
+            onPress={this.toggleBarCode.bind(this)} />
+        </View>
+      </BarCodeScanner>
     )
   }
-    
+
   renderCamera() {
     const { flash, hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
@@ -107,7 +109,7 @@ export class AppCamera extends Component {
               size={30}
               color="white"
               onPress={this.toggleFlash.bind(this)}
-              />
+            />
           </View>
           <View style={styles.controls}>
             <Icon
@@ -118,7 +120,7 @@ export class AppCamera extends Component {
               size={26}
               reverse
               onPress={this.toggleBarCode.bind(this)}
-               />
+            />
             <Icon
               raised
               name="camera"
@@ -140,11 +142,12 @@ export class AppCamera extends Component {
   }
 
   render() {
+
     if (this.state.loading) {
       return (
         <View style={styles.container}>
-        <Spinner />
-      </View>
+          <Spinner />
+        </View>
       )
     }
     return (
@@ -156,7 +159,9 @@ export class AppCamera extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.auth && state.auth.user  ? state.auth.user.uid : ''
+  user: state.auth,
+  clarifaiKey: state.auth.api[0].apiKey,
+  nutrionix: state.auth.api[1]
 });
 
 export default connect(mapStateToProps)(AppCamera)

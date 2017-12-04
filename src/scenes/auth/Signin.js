@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { Text, View, Image, KeyboardAvoidingView } from "react-native";
 import { connect } from "react-redux";
 import { signInUser, clearState } from "../../store/auth";
 import { Actions } from "react-native-router-flux";
 import { Field, reduxForm } from "redux-form";
-import {
-  Container,
-  Input,
-  Button,
-  Item,
-  Spinner
-} from "../../components/common/index";
+import { Container, Input, Button, Item, Spinner } from "../../components/common/index";
+import logo from '../../../logo.png';
 import styles from "./authStyle";
 
 const propTypes = {
@@ -32,7 +27,7 @@ class Signin extends Component {
   }
 
   componentWillMount() {
-    this.props.userId ? null : this.props.clearState();
+    if (!this.props.userId) this.props.clearState();
   }
 
   handleFormSubmit(props) {
@@ -46,8 +41,10 @@ class Signin extends Component {
 
     return (
       <Image source={background} style={styles.background} resizeMode="cover">
-      <View style={styles.container}>
+        <KeyboardAvoidingView>
+        <View style={styles.container}>
           <Container>
+            {/*<Image source={logo} style={styles.logoStyle} />*/}
             <Item>
               <Field
                 name="email"
@@ -67,32 +64,33 @@ class Signin extends Component {
               />
             </Item>
           </Container>
-            {this.props.authError ? (
-              <Text style={styles.error}>{this.props.authError}</Text>
-            ) : (
-              <View />
-            )}
-            <Container>
+          {this.props.authError ? (
+            <Text style={styles.error}>{this.props.authError}</Text>
+          ) : (
+            <View />
+          )}
+          <Container>
             {this.props.loading ? (
               <Item style={styles.loadingContainer}>
                 <Spinner />
               </Item>
             ) : (
-            
-               
-                  <Button onPress={handleSubmit(this.handleFormSubmit)}>
-                    Log in
-                  </Button>
-                
-             
+
+
+              <Button onPress={handleSubmit(this.handleFormSubmit)}>
+                Log in
+              </Button>
+
+
             )}
-              
-                <Button onPress={() => Actions.signup()}>
-                  Sign Up
-                </Button>
-            </Container>
-          </View>
-          </Image>
+
+            <Button onPress={() => Actions.signup()}>
+              Sign Up
+            </Button>
+          </Container>
+        </View>
+        </KeyboardAvoidingView>
+      </Image>
     );
   }
 }
