@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Text, View, TouchableOpacity, Image } from "react-native";
-import { Actions } from "react-native-router-flux";
+import { Text, View, Image, KeyboardAvoidingView } from "react-native";
+import logo from '../../../logo.png'
 import { Field, reduxForm } from "redux-form";
-import {
-  Container,
-  Input,
-  Button,
-  Item,
-  Spinner
-} from "../../components/common/index";
+import { Container, Input, Button, Item, Spinner } from "../../components/common/index";
 import styles from "./authStyle";
 import { signUpUser, clearState } from "../../store/auth";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -46,7 +41,10 @@ class Signup extends Component {
 
     return (
       <Image source={background} style={styles.background} resizeMode="cover">
+        {/*<Image source={logo} style={styles.logoStyle} />*/}
+
         <View style={styles.container}>
+          <KeyboardAwareScrollView>
           <Container>
             <Item>
               <Field
@@ -112,8 +110,7 @@ class Signup extends Component {
                 </Button>
               </Container>
             )}
-           
-          
+          </KeyboardAwareScrollView>
         </View>
       </Image>
     );
