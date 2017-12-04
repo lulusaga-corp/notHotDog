@@ -23,7 +23,7 @@ const propTypes = {
 };
 
 const background = require("../../../starwberry2.jpg");
-
+const logo = require('../../../white-logo.png');
 class Signin extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +46,8 @@ class Signin extends Component {
 
     return (
       <Image source={background} style={styles.background} resizeMode="cover">
-      <View style={styles.container}>
+        <Image source={logo} />
+        <View style={styles.container}>
           <Container>
             <Item>
               <Field
@@ -67,32 +68,32 @@ class Signin extends Component {
               />
             </Item>
           </Container>
-            {this.props.authError ? (
-              <Text style={styles.error}>{this.props.authError}</Text>
-            ) : (
-              <View />
-            )}
-            <Container>
+          {this.props.authError ? (
+            <Text style={styles.error}>{this.props.authError}</Text>
+          ) : (
+            <View />
+          )}
+          <Container>
             {this.props.loading ? (
               <Item style={styles.loadingContainer}>
                 <Spinner />
               </Item>
             ) : (
-            
-               
-                  <Button onPress={handleSubmit(this.handleFormSubmit)}>
-                    Log in
-                  </Button>
-                
-             
+
+
+              <Button onPress={handleSubmit(this.handleFormSubmit)}>
+                Log in
+              </Button>
+
+
             )}
-              
-                <Button onPress={() => Actions.signup()}>
-                  Sign Up
-                </Button>
-            </Container>
-          </View>
-          </Image>
+
+            <Button onPress={() => Actions.signup()}>
+              Sign Up
+            </Button>
+          </Container>
+        </View>
+      </Image>
     );
   }
 }

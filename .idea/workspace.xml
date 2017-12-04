@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2982d932-a87f-4f6a-aa9e-fa32254fc9d4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/Camera.js" afterPath="$PROJECT_DIR$/src/scenes/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Router.js" afterPath="$PROJECT_DIR$/src/Router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/FoodSelector.js" afterPath="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/auth/Signin.js" afterPath="$PROJECT_DIR$/src/scenes/auth/Signin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/barcodeScanner.js" afterPath="$PROJECT_DIR$/src/utilities/barcodeScanner.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/clarifaiCall.js" afterPath="$PROJECT_DIR$/src/utilities/clarifaiCall.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,35 +20,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Camera.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Signin.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Signin.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scenes/auth/Signin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
+            <state relative-caret-position="269">
+              <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
               <folding>
-                <marker date="1512346017459" expanded="true" signature="3005:3007" ph="{&quot;authError&quot;: auth.error...}" />
+                <marker date="1512348934390" expanded="true" signature="2973:2975" ph="{&quot;authError&quot;: auth.error...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="barcodeScanner.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="barcodeScanner.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utilities/barcodeScanner.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -74,12 +64,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App.js">
+      <file leaf-file-name="Camera.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="2856">
+              <caret line="167" column="21" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,33 +79,9 @@
       <file leaf-file-name="FoodSelector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <marker date="1512337995305" expanded="true" signature="456:4132" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="974:1251" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="1438:2020" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="1525:1606" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="1563:1600" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="1738:1870" ph="{&quot;Content-Type&quot;: &quot;application/json&quot;...}" />
-                <marker date="1512337995305" expanded="true" signature="1927:1968" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="2034:4130" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="2121:4119" ph="&lt;View/&gt;" />
-                <marker date="1512337995305" expanded="true" signature="2164:4105" ph="&lt;ScrollView/&gt;" />
-                <marker date="1512337995305" expanded="true" signature="2187:3889" ph="&lt;List/&gt;" />
-                <marker date="1512337995305" expanded="true" signature="2342:3070" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="3098:3573" ph="&lt;ListItem/&gt;" />
-                <marker date="1512337995305" expanded="true" signature="3586:3871" ph="&lt;ListItem/&gt;" />
-                <marker date="1512337995305" expanded="true" signature="3624:3683" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="4167:4476" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="4185:4260" ph="{&quot;backgroundColor&quot;: &quot;##fff&quot;...}" />
-                <marker date="1512337995305" expanded="true" signature="4271:4318" ph="{&quot;textAlign&quot;: 'center'...}" />
-                <marker date="1512337995305" expanded="true" signature="4334:4371" ph="{&quot;backgroundColor&quot;: &quot;##00a587&quot;...}" />
-                <marker date="1512337995305" expanded="true" signature="4388:4437" ph="{&quot;color&quot;: &quot;white&quot;...}" />
-                <marker date="1512337995305" expanded="true" signature="4448:4474" ph="{&quot;color&quot;: &quot;##b5000c&quot;...}" />
-                <marker date="1512337995305" expanded="true" signature="4514:4585" ph="{...}" />
-                <marker date="1512337995305" expanded="true" signature="4630:4694" ph="{...}" />
-              </folding>
+            <state relative-caret-position="2260">
+              <caret line="145" column="29" lean-forward="false" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,8 +89,8 @@
       <file leaf-file-name="Router.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="1445">
+              <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
                 <element signature="e#793#850#0" expanded="true" />
               </folding>
@@ -130,23 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clarifaiCall.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/clarifaiCall.js">
+      <file leaf-file-name="UserInfo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/scenes/settings/UserInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <marker date="1512337995308" expanded="true" signature="1098:1123" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="food.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/food.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="109" />
               <folding />
             </state>
           </provider>
@@ -156,9 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>foodArr</find>
-      <find>uid</find>
-      <find>food</find>
       <find>getOp</find>
       <find>userId</find>
       <find>mealArr</find>
@@ -185,6 +138,9 @@
       <find>GET_AP</find>
       <find>store</find>
       <find>apikey</find>
+      <find>nutritionix</find>
+      <find>api</find>
+      <find>clarifai</find>
       <find>console.lo</find>
     </findStrings>
     <replaceStrings>
@@ -195,6 +151,7 @@
     <dirStrings>
       <dir>$PROJECT_DIR$/node_modules/victory-native</dir>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$/.expo</dir>
       <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
@@ -232,17 +189,17 @@
         <option value="$PROJECT_DIR$/src/scenes/History.js" />
         <option value="$PROJECT_DIR$/src/scenes/settings/UserInfo.js" />
         <option value="$PROJECT_DIR$/src/store/food.js" />
-        <option value="$PROJECT_DIR$/src/utilities/clarifaiCall.js" />
         <option value="$PROJECT_DIR$/src/utilities/dietaryRestrictions.js" />
         <option value="$PROJECT_DIR$/src/scenes/settings/DietaryInfo.js" />
         <option value="$PROJECT_DIR$/src/components/CameraGallery.js" />
-        <option value="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
         <option value="$PROJECT_DIR$/App.js" />
-        <option value="$PROJECT_DIR$/src/Router.js" />
         <option value="$PROJECT_DIR$/src/store/auth.js" />
         <option value="$PROJECT_DIR$/src/scenes/Camera.js" />
-        <option value="$PROJECT_DIR$/src/scenes/auth/Signin.js" />
         <option value="$PROJECT_DIR$/src/utilities/barcodeScanner.js" />
+        <option value="$PROJECT_DIR$/src/scenes/FoodSelector.js" />
+        <option value="$PROJECT_DIR$/src/utilities/clarifaiCall.js" />
+        <option value="$PROJECT_DIR$/src/Router.js" />
+        <option value="$PROJECT_DIR$/src/scenes/auth/Signin.js" />
       </list>
     </option>
   </component>
@@ -316,6 +273,13 @@
               <item name="notHotDog" type="b2602c69:ProjectViewProjectNode" />
               <item name="notHotDog" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scenes" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="notHotDog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="notHotDog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -381,7 +345,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191920000" />
+    <option name="totallyTimeSpent" value="193492000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1191" height="766" extended-state="0" />
@@ -395,7 +359,7 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22044444" sideWeight="0.1483376" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279099" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16691506" sideWeight="0.49771392" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26825634" sideWeight="0.49771392" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -632,25 +596,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/AccountSettings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/scenes/settings/AccountManagement.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/settings/UserInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-622">
-          <caret line="21" column="3" lean-forward="false" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -686,38 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <marker date="1512337995305" expanded="true" signature="456:4132" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="974:1251" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="1438:2020" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="1525:1606" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="1563:1600" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="1738:1870" ph="{&quot;Content-Type&quot;: &quot;application/json&quot;...}" />
-            <marker date="1512337995305" expanded="true" signature="1927:1968" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="2034:4130" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="2121:4119" ph="&lt;View/&gt;" />
-            <marker date="1512337995305" expanded="true" signature="2164:4105" ph="&lt;ScrollView/&gt;" />
-            <marker date="1512337995305" expanded="true" signature="2187:3889" ph="&lt;List/&gt;" />
-            <marker date="1512337995305" expanded="true" signature="2342:3070" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="3098:3573" ph="&lt;ListItem/&gt;" />
-            <marker date="1512337995305" expanded="true" signature="3586:3871" ph="&lt;ListItem/&gt;" />
-            <marker date="1512337995305" expanded="true" signature="3624:3683" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="4167:4476" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="4185:4260" ph="{&quot;backgroundColor&quot;: &quot;##fff&quot;...}" />
-            <marker date="1512337995305" expanded="true" signature="4271:4318" ph="{&quot;textAlign&quot;: 'center'...}" />
-            <marker date="1512337995305" expanded="true" signature="4334:4371" ph="{&quot;backgroundColor&quot;: &quot;##00a587&quot;...}" />
-            <marker date="1512337995305" expanded="true" signature="4388:4437" ph="{&quot;color&quot;: &quot;white&quot;...}" />
-            <marker date="1512337995305" expanded="true" signature="4448:4474" ph="{&quot;color&quot;: &quot;##b5000c&quot;...}" />
-            <marker date="1512337995305" expanded="true" signature="4514:4585" ph="{...}" />
-            <marker date="1512337995305" expanded="true" signature="4630:4694" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/white-logo.png" />
     <entry file="file://$PROJECT_DIR$/src/store/food.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -735,31 +652,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
-          <folding>
-            <element signature="e#793#850#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/auth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/clarifaiCall.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <marker date="1512337995308" expanded="true" signature="1098:1123" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,32 +668,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/barcodeScanner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/settings/UserInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/FoodSelector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2260">
+          <caret line="145" column="29" lean-forward="false" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/scenes/Camera.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="2856">
+          <caret line="167" column="21" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/auth/Signin.js">
+    <entry file="file://$PROJECT_DIR$/src/scenes/AccountSettings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
+        <state relative-caret-position="17">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/clarifaiCall.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="8" lean-forward="true" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
           <folding>
-            <marker date="1512346017459" expanded="true" signature="3005:3007" ph="{&quot;authError&quot;: auth.error...}" />
+            <element signature="e#0#32#0" expanded="true" />
+            <marker date="1512347649983" expanded="true" signature="822:845" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/barcodeScanner.js">
+    <entry file="file://$PROJECT_DIR$/src/Router.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="1445">
+          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#793#850#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/auth/Signin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+          <folding>
+            <marker date="1512348934390" expanded="true" signature="2973:2975" ph="{&quot;authError&quot;: auth.error...}" />
           </folding>
         </state>
       </provider>
