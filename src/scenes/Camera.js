@@ -29,10 +29,6 @@ export class AppCamera extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps){
-   this.setState({restrictions: nextProps.data.dietary})
-  }
-
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });

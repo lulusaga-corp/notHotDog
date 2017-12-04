@@ -30,9 +30,9 @@ class RouterComponent extends Component {
   //   }
   // }
 
-  // componentDidMount() {
-  //     this.props.userId && this.props.fetchAllMeals(this.props.userId)
-  // }
+  componentDidMount() {
+      this.props.userId && this.props.fetchAllMeals(this.props.userId)
+  }
 
   render () {
     return (

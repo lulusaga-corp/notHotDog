@@ -42,7 +42,7 @@ export const signInUser = ({ email, password }) => (dispatch) => {
     })
     .then(res => {
       const userProfile = res.data()
-      dispatch({type: GET_USER_PROFILE, payload: userProfile})
+      return dispatch({type: GET_USER_PROFILE, payload: userProfile})
     }).catch(console.error)
   })
   .catch((error) => { dispatch({ type: SIGN_UP_FAILURE, payload: authFailMessage(error.code) }); });
