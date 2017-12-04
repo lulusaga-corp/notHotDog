@@ -57,11 +57,10 @@ export class AppCamera extends Component {
   }
 
   takePicture = async function() {
-    console.log(this.state.restrictions)
     if (this.camera) {
       this.camera.takePictureAsync({base64: true}).then(data => {
         this.setState({loading: true})
-        clarifaiCall(data.base64, this.state.restrictions, this.state.allergies)
+        clarifaiCall(data.base64, this.state.restrictions, this.state.allergies, this.props.clarifaiKey)
       })
         .catch(e => {
           console.error(e, 'Photo error');;
@@ -70,14 +69,14 @@ export class AppCamera extends Component {
   };
 
   renderGallery() {
-    return <CameraGallery restrictions={this.state.restrictions} allergies={this.state.allergies} onPress={this.toggleView.bind(this)} />;
+    return <CameraGallery restrictions={this.state.restrictions} allergies={this.state.allergies} clarifaiKey={this.props.clarifaiKey} onPress={this.toggleView.bind(this)} />;
   }
 
   renderBarCode() {
     return (
       <BarCodeScanner
         onBarCodeRead={data => {
-          barcodeScanner(data.data,this.props.userId)
+          barcodeScanner(data.data,this.props.userId, this.props.nutrionix)
           this.setState({showBarcode: false, loading: true})
         }}
         style={styles.scanner}>
@@ -147,7 +146,6 @@ export class AppCamera extends Component {
   }
 
   render() {
-    console.log(this.state.allergies)
 
     if (this.state.loading) {
       return (
@@ -165,7 +163,9 @@ export class AppCamera extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth
+  user: state.auth,
+  clarifaiKey: state.auth.api[0].apiKey,
+  nutrionix: state.auth.api[1]
 });
 
 export default connect(mapStateToProps)(AppCamera)

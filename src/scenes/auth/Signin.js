@@ -42,7 +42,6 @@ class Signin extends Component {
   }
 
   render() {
-    console.log("HIT FROM SIGNIN")
     const { handleSubmit } = this.props;
 
     return (
