@@ -24,7 +24,7 @@ class History extends Component {
                         titleStyle={ styles.title } wrapperStyle={styles.wrapper}
                         title={meal.timestamp ? meal.timestamp.toString().split(' ').slice(0, 4).join(' ') : null} >
                     {
-                      meal.mealInstance.map((food, index) => (
+                      meal.mealInstance && meal.mealInstance.map((food, index) => (
                         <Text style={{textAlign:"center", padding:2}} key={index}>
                           { `${ food.food_name.charAt(0).toUpperCase().concat(food.food_name.slice(1)) }` }
                         </Text>

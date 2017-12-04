@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Text, View, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements'
 import { CheckBox, List, ListItem } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import store from '../../../configureStore';
-import { GET_USER_FOOD_RESTRICTIONS, GET_USER_PROFILE } from '../../store/auth'
+import { GET_USER_PROFILE } from '../../store/auth'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 
 class DietaryInfo extends Component {
@@ -25,13 +28,20 @@ class DietaryInfo extends Component {
         pork: false,
         redMeat: false
       },
-      allergies: [],
+      allergies: this.props.allergies,
       newAllergy: '',
       uid: this.props.uid
     }
     this.editPreference = this.editPreference.bind(this)
   }
 
+  componentDidMount(){
+    console.log(this.props)
+    const newState = {...this.state}
+    this.props.restrictions.forEach(restriction => newState.diet[`${restriction}`] = true)
+    console.log("newstate:", newState)
+    this.setState(newState)
+  }
   /* Set SpecialDiets */
   editPreference(preference){
     if (!preference) return;
@@ -59,25 +69,26 @@ class DietaryInfo extends Component {
   /* Send Dietary data to Firestore */
   sendDiet(){
     let data = {
-      dietary: [...Object.keys(this.state.diet)
-          .filter(specialDiet => !!this.state.diet[specialDiet])],
+      dietary: Object.keys(this.state.diet)
+          .filter(specialDiet => !!this.state.diet[specialDiet]),
       allergies: this.state.allergies
     }
+    console.log("DATA", data)
     firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set(data, { merge: true })
       .then(()=>{
         store.dispatch({type:GET_USER_PROFILE, payload: data})
-        Actions.camera(data);
+        Actions.pop();
       })
       .catch(err => console.error(err))
 
   }
 
   render () {
-    console.log(this.props)
 
     return (
       <View>
         <ScrollView>
+          <KeyboardAwareScrollView>
           <View>
             <Text style={styles.textStyle}>Dietary Preferences: </Text>
             <View style={styles.boxStyle}>
@@ -165,10 +176,13 @@ class DietaryInfo extends Component {
                   rightIcon={{ name: 'add'}}
                   textInputAutoCorrect={true}
                   textInputAutoCapitalize={"none"}
-                  onPressRightIcon={() => this.addAllergy(this.state.newAllergy)} />
+                  onPressRightIcon={() =>{
+                    if (this.state.newAllergy.length) this.addAllergy(this.state.newAllergy)
+                  }} />
               </List>
-            <Button onPress={this.sendDiet.bind(this)} title="Save Special Diet Changes"/>
+            <Button style={styles.save} onPress={this.sendDiet.bind(this)} title="Save Special Diet Changes"/>
           </View>
+          </KeyboardAwareScrollView>
         </ScrollView>
       </View>
     )
@@ -189,11 +203,17 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: 'bold',
     padding: 10
+  },
+  save: {
+    marginTop: 5,
+    backgroundColor: '#ef4836',
+    borderRadius: 5
   }
 })
 
 const mapStateToProps = state => ({
-  restrictions: state.auth.restrictions,
+  uid: state.auth.user.uid,
+  restrictions: state.auth.dietary,
   allergies: state.auth.allergies
 })
 

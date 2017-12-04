@@ -24,15 +24,15 @@ class RouterComponent extends Component {
     super(props)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props !== nextProps) {
-      nextProps.userId && this.props.fetchAllMeals(nextProps.userId)
-    }
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   if (this.props !== nextProps) {
+  //     nextProps.userId && this.props.fetchAllMeals(nextProps.userId)
+  //   }
+  // }
 
-  componentDidMount() {
-      this.props.userId && this.props.fetchAllMeals(this.props.userId)
-  }
+  // componentDidMount() {
+  //     this.props.userId && this.props.fetchAllMeals(this.props.userId)
+  // }
 
   render () {
     return (

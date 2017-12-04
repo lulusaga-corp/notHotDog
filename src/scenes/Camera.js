@@ -30,7 +30,7 @@ export class AppCamera extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps) this.props = nextProps
+   this.setState({restrictions: nextProps.data.dietary})
   }
 
   async componentWillMount() {
