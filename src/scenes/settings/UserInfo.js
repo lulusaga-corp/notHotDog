@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux';
 import { FormLabel, FormInput } from 'react-native-elements'
 import firebase from 'firebase';
+import store from '../../../configureStore'
+import { GET_USER_PROFILE } from '../../store/auth'
 
 class UserInfo extends Component {
   constructor(props){
@@ -11,24 +13,12 @@ class UserInfo extends Component {
     this.state = {
       user: this.props.user,
       uid: this.props.uid,
-      firstName: this.props.user.displayName,
-      lastName: '',
+      firstName: this.props.firstname || '',
+      lastName: this.props.lastname || '',
+      email: this.props.email || '',
       currentPass: '',
       newPass: ''
     }
-  }
-
-  componentDidMount(){
-    firebase.firestore().collection(`users`).doc(`${this.state.uid}`).get()
-    .then(res => res.data())
-    .then(data => {
-      if (data.firstname) {
-        this.setState({
-          firstName: data.firstname,
-          lastName: data.lastname
-        })
-      }
-    })
   }
 
   editFirstName(text){
@@ -52,29 +42,29 @@ class UserInfo extends Component {
   }
 
   editAccount(){
-    let updatedInfo = {
-      displayName: this.state.firstName,
-      email: this.state.user.email,
-      lastName: this.state.lastName
+    const usersName = {
+      firstname: this.state.firstName,
+      lastname: this.state.lastName
     }
+    const email = this.state.email
     let user = firebase.auth().currentUser
-    user.updateProfile({ displayName: `${updatedInfo.displayName}` })
-    .then(() => {
-      return user.updateEmail(`${updatedInfo.email}`)
+    firebase.firestore().collection(`users`).doc(`${user.uid}`).set(usersName, { merge: true })
+      .then(()=>{
+      return user.updateEmail(email)
     })
     .then(() => {
       if (this.state.newPass && this.state.currentPass) {
-        firebase.auth().signInWithEmailAndPassword(this.state.user.email, this.state.currentPass)
-        .then((user) => user.updatePassword(this.state.newPass))
-        .catch(err => AlertIOS.alert('Password Error', null))
-      } else if (this.state.newPass) {
+        return firebase.auth()
+          .signInWithEmailAndPassword(this.state.user.email, this.state.currentPass)
+          .then((user) => user.updatePassword(this.state.newPass))
+          .catch(console.error)
+      } else if (this.state.newPass || this.state.currentPass) {
         AlertIOS.alert('Password Required', 'Please return to previous page and enter your current password')
       }
     })
-      .catch(err => console.error(err))
-    this.setState({ user: {...this.state.user, displayName: `${updatedInfo.displayName}`}})
-    firebase.firestore().collection(`users`).doc(`${this.state.uid}`).set({ firstname: updatedInfo.displayName, lastname: updatedInfo.lastName }, { merge: true })
-    Actions.popTo('settings', { userFirstName: updatedInfo.displayName });
+    usersName.email = email
+    store.dispatch({type:GET_USER_PROFILE, payload: usersName})
+    Actions.popTo('settings');
   }
 
   render () {
@@ -87,7 +77,7 @@ class UserInfo extends Component {
                 <FormLabel>First Name:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editFirstName(text)} 
-                  defaultValue={(this.state.firstName) ? this.state.firstName : user.displayName} />
+                  defaultValue={ this.state.firstName ? this.state.firstName : null} />
                 <FormLabel>Last Name:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editLastName(text)} 
@@ -95,7 +85,7 @@ class UserInfo extends Component {
                 <FormLabel>Email:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editEmail(text)} 
-                  defaultValue={user.email} />
+                  defaultValue={this.state.email} />
                 <FormLabel>Current Password:</FormLabel>
                 <FormInput 
                   onChangeText={(text) => this.editCurrentPass(text)} 
@@ -113,17 +103,10 @@ class UserInfo extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  if (state.auth.user) {
-    return {
-      user: state.auth.user.providerData[0],
-      uid: state.auth.user.uid
-    }
-  } else {
-    return {
-      user: {}
-    }
-  }
-}
+const mapStateToProps = state => ({
+  firstname: state.auth.firstname,
+  lastname: state.auth.lastname,
+  email: state.auth.user.email
+})
 
 export default connect( mapStateToProps )(UserInfo);

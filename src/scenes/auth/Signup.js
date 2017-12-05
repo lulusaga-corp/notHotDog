@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Text, View, Image } from 'react-native';
+import logo from '../../../logo.png'
 import { Field, reduxForm } from 'redux-form';
-import {
-  Container,
-  Input,
-  Button,
-  Item,
-  Spinner
-} from '../../components/common/index';
+import { Container, Input, Button, Item, Spinner } from '../../components/common/index';
 import styles from './authStyle';
 import { signUpUser, clearState } from '../../store/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -29,10 +25,6 @@ class Signup extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  componentWillMount() {
-    this.props.clearState();
-  }
-
   handleFormSubmit(props) {
     const { email, password, firstname, lastname } = props;
     this.props.signUpUser({ email, password, firstname, lastname });
@@ -43,7 +35,10 @@ class Signup extends Component {
 
     return (
       <Image source={background} style={styles.background} resizeMode="cover">
+        {/*<Image source={logo} style={styles.logoStyle} />*/}
+
         <View style={styles.container}>
+          <KeyboardAwareScrollView>
           <Container>
             <Item>
               <Field
@@ -92,22 +87,24 @@ class Signup extends Component {
               />
             </Item>
           </Container>
-          {this.props.authError ? (
-            <Text style={styles.error}>{this.props.authError}</Text>
-          ) : (
-            <View />
-          )}
-          {this.props.loading ? (
-            <Item style={styles.loadingContainer}>
-              <Spinner />
-            </Item>
-          ) : (
-            <Container>
-              <Button onPress={handleSubmit(this.handleFormSubmit)}>
-                Sign Up
-              </Button>
-            </Container>
-          )}
+            {this.props.authError ? (
+              <Text style={styles.error}>{this.props.authError}</Text>
+            ) : (
+              <View />
+            )}
+
+            {this.props.loading ? (
+              <Item style={styles.loadingContainer}>
+                <Spinner />
+              </Item>
+            ) : (
+              <Container>
+                <Button onPress={handleSubmit(this.handleFormSubmit)}>
+                  Sign Up
+                </Button>
+              </Container>
+            )}
+          </KeyboardAwareScrollView>
         </View>
       </Image>
     );

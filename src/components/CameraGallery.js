@@ -4,13 +4,14 @@ import { ImagePicker } from 'expo';
 import { Spinner } from './common/index';
 import clarifaiCall from '../utilities/clarifaiCall';
 
-const GalleryScreen = () => {
+const GalleryScreen = (props) => {
+  
   ImagePicker.launchImageLibraryAsync({base64: true})
   .then(photo => {
     if (photo.cancelled) {
       this.props.onPress();
     } else {
-      clarifaiCall(photo.base64)
+      clarifaiCall(photo.base64, props.restrictions, props.allergies)
     }
   })
 

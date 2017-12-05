@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import Router from './src/Router';
 import store from './configureStore';
-import { SIGN_IN_SUCCESS } from './src/store/auth';
+import { SIGN_IN_SUCCESS, GET_API_KEYS, GET_USER_PROFILE } from './src/store/auth'
 import { Spinner } from './src/components/common';
+import {Actions} from 'react-native-router-flux'
 
 firebase.initializeApp(firebaseConfig);
 
@@ -17,10 +18,22 @@ class App extends Component {
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      this.setState({ loaded: true });
-
       if (user) {
         store.dispatch({ type: SIGN_IN_SUCCESS, payload: user });
+        firebase.firestore().collection(`env`).get()
+          .then(snapshot => {
+            let apiKeys=[]
+            snapshot.forEach(doc => apiKeys.push(doc.data()))
+            store.dispatch({type: GET_API_KEYS, payload:apiKeys})
+            return firebase.firestore().collection(`users`).doc(`${user.uid}`).get()})
+          .then(res => {
+            const userProfile = res.data()
+            store.dispatch({type:GET_USER_PROFILE, payload: userProfile})
+            this.setState({ loaded: true });
+            })
+          .catch(console.error)
+      } else {
+        this.setState({ loaded: true });
       }
     });
   }

@@ -29,7 +29,7 @@ export const getAllUserMeals = userId => dispatch => {
       const today = mealInstance => moment(mealInstance.timestamp).isSame(moment(), "day")
       const week = mealInstance => moment(mealInstance.timestamp).isAfter(moment().subtract(1, "week"), "day")
       const month = mealInstance => moment(mealInstance.timestamp).isAfter(moment().subtract(1, "month"), "day")
-
+if (!allMeals.length) return;
       const mealData = allMeals.reduce((acc, mealInstance) => {
         if (today(mealInstance)) acc.todaysMeals ? acc.todaysMeals.push(mealInstance) : acc.todaysMeals = [mealInstance]
         if (week(mealInstance)) acc.weekMeals ? acc.weekMeals.push(mealInstance) : acc.weekMeals = [mealInstance]
@@ -60,7 +60,7 @@ const INITIAL_STATE = {
   mostRecent: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = INITIAL_STATE, action = {}) => {
     switch(action.type){
       case GET_ALL_USER_MEALS:
           return {...state, ...action.payload}

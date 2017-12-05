@@ -11,21 +11,17 @@ const History = (props) => {
   return (
     <View style={styles.tabContainer}>
       <ScrollView>
-      <View style={styles.mealContainer}>
+      <View style={ styles.mealContainer }>
         {
           allMeals && allMeals.map((meal, index) => {
             return (
               <TouchableOpacity key={index} onPress={() => Actions.SingleHistoryView(meal)}>
-                <Card
-                  dividerStyle={styles.divider}
-                  flexDirection="column"
-                  containerStyle={styles.container}
-                  titleStyle={styles.title}
-                  wrapperStyle={styles.wrapper}
-                  title={meal.timestamp ? meal.timestamp.toString().split(' ').slice(0, 4).join(' ') : null} >
+                <Card dividerStyle={styles.divider} flexDirection="column" containerStyle={ styles.container }
+                      titleStyle={ styles.title } wrapperStyle={styles.wrapper}
+                      title={meal.timestamp ? meal.timestamp.toString().split(' ').slice(0, 4).join(' ') : null} >
                   {
-                    meal.mealInstance.map((food, index) => (
-                      <Text style={{textAlign:'center', padding:2}} key={index}>
+                    meal.mealInstance && meal.mealInstance.map((food, index) => (
+                      <Text style={{textAlign:"center", padding:2}} key={index}>
                         { `${ food.food_name.charAt(0).toUpperCase().concat(food.food_name.slice(1)) }` }
                       </Text>
                     ))

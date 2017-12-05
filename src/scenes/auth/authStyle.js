@@ -20,8 +20,7 @@ const styles = {
   },
   container: {
     backgroundColor: 'transparent',
-    marginTop: 130,
-    paddingTop: 100
+    marginTop: 200
   },
   questionText: {
     textAlign: 'center',
@@ -37,6 +36,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30
+  },
+  logoStyle: {
   }
 };
 

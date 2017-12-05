@@ -60,7 +60,7 @@ class AccountHome extends Component {
           {
             singleMeal && <BarGraph nutrients={meal[selectedIndex]} />
           }
-        </View> 
+        </View>
       </ScrollView>
     )
   }
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   mostRecent: state.food.mostRecent,
-  userId: state.auth && state.auth.user ? state.auth.user.uid : null
+  userId: state.auth && state.auth.user ? state.auth.user.uid : ''
 })
 
 const mapDispatchToProps = (dispatch) => ({
