@@ -20,14 +20,14 @@ const Item = props => (
 
 const styles = {
   container: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     padding: 5,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     opacity: 1,
     borderRadius: 5,
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    position: "relative",
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    position: 'relative',
     marginRight: 10,
     marginLeft: 10
   }

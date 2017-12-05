@@ -1,18 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Text, View, TouchableOpacity, Image } from "react-native";
-import { Actions } from "react-native-router-flux";
-import { Field, reduxForm } from "redux-form";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Text, View, Image } from 'react-native';
+import { Field, reduxForm } from 'redux-form';
 import {
   Container,
   Input,
   Button,
   Item,
   Spinner
-} from "../../components/common/index";
-import styles from "./authStyle";
-import { signUpUser, clearState } from "../../store/auth";
+} from '../../components/common/index';
+import styles from './authStyle';
+import { signUpUser, clearState } from '../../store/auth';
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -22,12 +21,11 @@ const propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
-const background = require("../../../starwberry2.jpg");
+const background = require('../../assets/images/starwberry2.jpg');
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
@@ -37,7 +35,6 @@ class Signup extends Component {
 
   handleFormSubmit(props) {
     const { email, password, firstname, lastname } = props;
-
     this.props.signUpUser({ email, password, firstname, lastname });
   }
 
@@ -71,7 +68,7 @@ class Signup extends Component {
                 name="email"
                 component={Input}
                 placeholder="Email"
-                autoCapitalize={"none"}
+                autoCapitalize={'none'}
               />
             </Item>
           </Container>
@@ -95,25 +92,22 @@ class Signup extends Component {
               />
             </Item>
           </Container>
-            {this.props.authError ? (
-              <Text style={styles.error}>{this.props.authError}</Text>
-            ) : (
-              <View />
-            )}
-
-            {this.props.loading ? (
-              <Item style={styles.loadingContainer}>
-                <Spinner />
-              </Item>
-            ) : (
-              <Container>
-                <Button onPress={handleSubmit(this.handleFormSubmit)}>
-                  Sign Up
-                </Button>
-              </Container>
-            )}
-           
-          
+          {this.props.authError ? (
+            <Text style={styles.error}>{this.props.authError}</Text>
+          ) : (
+            <View />
+          )}
+          {this.props.loading ? (
+            <Item style={styles.loadingContainer}>
+              <Spinner />
+            </Item>
+          ) : (
+            <Container>
+              <Button onPress={handleSubmit(this.handleFormSubmit)}>
+                Sign Up
+              </Button>
+            </Container>
+          )}
         </View>
       </Image>
     );
@@ -122,7 +116,7 @@ class Signup extends Component {
 
 const validate = props => {
   const errors = {};
-  const fields = ["firstname", "lastname", "email", "password"];
+  const fields = ['firstname', 'lastname', 'email', 'password'];
 
   fields.forEach(f => {
     if (!(f in props)) {
@@ -131,26 +125,26 @@ const validate = props => {
   });
 
   if (props.firstname && props.firstname.length < 3) {
-    errors.firstname = "Minimum of 3 characters";
+    errors.firstname = 'Minimum of 3 characters';
   } else if (props.firstname && props.firstname.length > 20) {
-    errors.firstname = "Maximum of 20 characters";
+    errors.firstname = 'Maximum of 20 characters';
   }
 
   if (props.lastname && props.lastname.length < 3) {
-    errors.lastname = "Minimum of 3 characters";
+    errors.lastname = 'Minimum of 3 characters';
   } else if (props.lastname && props.lastname.length > 20) {
-    errors.lastname = "Maximum of 20 characters";
+    errors.lastname = 'Maximum of 20 characters';
   }
 
   if (
     props.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(props.email)
   ) {
-    errors.email = "please provide valid email";
+    errors.email = 'please provide valid email';
   }
 
   if (props.password && props.password.length < 6) {
-    errors.password = "minimum 6 characters";
+    errors.password = 'minimum 6 characters';
   }
 
   if (props.password !== props.repassword) {
@@ -161,7 +155,7 @@ const validate = props => {
 };
 
 Signup.propTypes = propTypes;
-Signup = reduxForm({ form: "signup", validate })(Signup);
+Signup = reduxForm({ form: 'signup', validate })(Signup);
 
 const mapStateToProps = ({ auth }) => {
   const { error, loading, user } = auth;

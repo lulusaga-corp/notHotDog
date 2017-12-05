@@ -76,8 +76,8 @@ class FoodSelector extends Component {
     return (
       <View style={styles.tabContainer}>
         <ScrollView>
-          <List>
           <Text style={styles.title}>Select the foods you're going to eat...</Text>
+          <List>
             {
               foodArr && foodArr.map((item, i) => {
                 return ( 
@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center', 
+    paddingTop: 15
   },
   checkedbox: {
     backgroundColor: "#00a587",

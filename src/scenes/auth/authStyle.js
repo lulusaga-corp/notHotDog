@@ -1,10 +1,11 @@
 import {Dimensions} from 'react-native'
-const { width, height } = Dimensions.get("window");
+
+const { width, height } = Dimensions.get('window');
 const styles = {
   error: {
     fontSize: 20,
-    alignSelf: "center",
-    color: "#e62117",
+    alignSelf: 'center',
+    color: '#e62117',
     paddingTop: 20,
     paddingBottom: 10
   },
@@ -18,24 +19,23 @@ const styles = {
     marginBottom: 10
   },
   container: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     marginTop: 130,
-    paddingTop:100,
-    // alignItems: "space-between"
+    paddingTop: 100
   },
   questionText: {
-    textAlign: "center",
-    color: "#f7f7f7"
+    textAlign: 'center',
+    color: '#f7f7f7'
   },
   background: {
     width,
     height,
   },
   login: {
-    backgroundColor: "#FF3366",
+    backgroundColor: '#FF3366',
     paddingVertical: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 30
   }
 };

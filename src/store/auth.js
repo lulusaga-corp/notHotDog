@@ -9,6 +9,7 @@ import { clearFoodStore } from './food'
  | Types
  |--------------------------------------------------
  */
+
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
@@ -16,11 +17,13 @@ export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
+
 /**
  |--------------------------------------------------
  | Actions
  |--------------------------------------------------
  */
+
 export const signInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: SIGN_IN_REQUEST });
 

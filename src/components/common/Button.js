@@ -32,25 +32,25 @@ function Button({ onPress, children, buttonStyle, textStyle }) {
 
 const styles = {
   button: {
-    alignSelf: "stretch",
-    backgroundColor: "#ef4836",
+    alignSelf: 'stretch',
+    backgroundColor: '#ef4836',
     borderRadius: 5,
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
     padding: 5,
     opacity: 1,
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    position: "relative"
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    position: 'relative'
   },
   text: {
     flex: 1,
-    textAlign: "center",
-    alignSelf: "center",
-    color: "#fff",
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10
   }

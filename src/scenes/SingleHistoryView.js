@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import {StyleSheet, View, ScrollView } from "react-native";
-import PieChart from "../components/PieChart";
+import React, { Component } from 'react';
+import {StyleSheet, View, ScrollView } from 'react-native';
+import PieChart from '../components/PieChart';
 import { getAllUserMeals } from '../store/food';
 import { connect } from 'react-redux'
-import { ButtonGroup } from "react-native-elements";
+import { ButtonGroup } from 'react-native-elements';
 
 class SingleHistoryView extends Component {
   constructor (props) {
@@ -24,14 +24,14 @@ class SingleHistoryView extends Component {
   render() {
     const singleMeal = this.props.mealInstance;
     const { selectedIndex } = this.state
-    let reduced = singleMeal ? singleMeal.reduce((acc, foodItem) =>{
+    let reduced = singleMeal ? singleMeal.reduce((acc, foodItem) => {
       acc.serving += foodItem.serving
       acc.data.protein += foodItem.data.protein
       acc.data.carbs += foodItem.data.carbs
       acc.data.fat += foodItem.data.fat
       return acc
     }, { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }}) : null
-    let buttons = ["meal"]
+    let buttons = ['meal']
     let meal = [reduced]
     singleMeal && singleMeal.map((food) => {
       buttons.push(food.food_name)
@@ -44,8 +44,7 @@ class SingleHistoryView extends Component {
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          // containerStyle={{height: 40, marginBottom: 20, marginTop:10}}
-          selectedTextStyle={{color: "#ef4836"}}
+          selectedTextStyle={{color: '#ef4836'}}
           textStyle={{}} />
         </View>
         <View>
@@ -63,9 +62,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   buttonView: {
-    // height: 40, 
-    marginBottom: 20, 
-    marginTop:10,
+    marginBottom: 20,
+    marginTop: 10,
     flex: 1
   }
 })
