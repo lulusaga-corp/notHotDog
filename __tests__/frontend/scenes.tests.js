@@ -10,6 +10,8 @@ import AccountManagement from '../../src/scenes/settings/AccountManagement';
 import DietaryInfo from '../../src/scenes/settings/AccountManagement';
 import UserInfo from '../../src/scenes/settings/AccountManagement';
 
+import App from '../../App.js'
+
 import renderer from 'react-test-renderer';
 import { createStore } from 'redux';
 
@@ -104,7 +106,6 @@ describe('Camera scene', () => {
 
 
 /* Food Selector Scene */ 
-/** - Firebase Issue!
 describe('Food Selector scene', () => {
   let store;
   beforeEach(() => {
@@ -117,7 +118,6 @@ describe('Food Selector scene', () => {
     expect(renderedFoodSelector).toMatchSnapshot();
   });
 })
-**/
 
 /* Meal History Scene */
 describe('History scene', () => {

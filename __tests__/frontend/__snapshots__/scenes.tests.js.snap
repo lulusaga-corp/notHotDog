@@ -942,6 +942,330 @@ exports[`DietaryInfo scene renders correctly without crashing 1`] = `
 </View>
 `;
 
+exports[`Food Selector scene renders without crashing 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#ffffff",
+              "borderColor": "#bbb",
+              "borderTopWidth": 1,
+              "marginTop": 20,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          Select the foods you're going to eat...
+        </Text>
+        <View
+          disabled={false}
+          onLongPress={undefined}
+          onPress={undefined}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderBottomColor": "#bbb",
+                "borderBottomWidth": 1,
+                "paddingBottom": 10,
+                "paddingRight": 10,
+                "paddingTop": 10,
+              },
+              undefined,
+              false,
+              false,
+            ]
+          }
+          underlayColor="white"
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                  "marginLeft": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <View
+                style={undefined}
+              >
+                <View />
+              </View>
+              <View
+                style={undefined}
+              >
+                <View />
+              </View>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "flex-end",
+                    "flex": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "alignItems": null,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={true}
+                autoFocus={undefined}
+                defaultValue={undefined}
+                editable={true}
+                keyboardType={undefined}
+                maxLength={undefined}
+                multiline={undefined}
+                onBlur={undefined}
+                onChangeText={[Function]}
+                onFocus={undefined}
+                placeholder="Add other foods..."
+                returnKeyType={undefined}
+                secureTextEntry={undefined}
+                selectTextOnFocus={undefined}
+                style={
+                  Array [
+                    Object {
+                      "flex": 1,
+                      "height": 20,
+                      "textAlign": "right",
+                    },
+                    undefined,
+                  ]
+                }
+                underlineColorAndroid="transparent"
+                value=""
+              />
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "flex-end",
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                onPress={undefined}
+                style={
+                  Array [
+                    false,
+                    false,
+                    false,
+                    Object {
+                      "alignItems": "center",
+                      "backgroundColor": "transparent",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+                underlayColor="white"
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#bdc6cf",
+                        "fontSize": 28,
+                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Material Icons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderBottomColor": "#bbb",
+                  "borderBottomWidth": 1,
+                  "paddingBottom": 10,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                Object {
+                  "backgroundColor": "#00a587",
+                },
+                false,
+                false,
+              ],
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                  "marginLeft": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <View
+                style={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {},
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      Array [
+                        Object {
+                          "color": "#43484d",
+                          "fontSize": 17.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                        },
+                        Object {
+                          "color": "white",
+                          "textAlign": "center",
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  Click here to submit!
+                </Text>
+              </View>
+              <View
+                style={undefined}
+              >
+                <View />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
 exports[`History scene renders without crashing 1`] = `
 <View
   style={
