@@ -16,7 +16,8 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * Snap a picture of your food
 * Tap to select the foods you are eating
 * Check out your nutrition information visualized on graphs and charts
-
+![qrCode](docs/graphs.png) 
+![qrCode](docs/nutrients.png) 
 ### Technology Stack:
 * React Native (via create-react-native-app)
 * Expo
