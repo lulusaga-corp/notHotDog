@@ -45,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="201">
+              <first_editor relative-caret-position="202">
                 <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
                 <folding />
               </first_editor>
@@ -62,18 +62,6 @@
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="e#134#173#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountHome.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scenes/AccountHome.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="45" column="12" lean-forward="false" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -349,12 +337,12 @@
       <workItem from="1512332048048" duration="1983000" />
       <workItem from="1512350614743" duration="16835000" />
       <workItem from="1512514774969" duration="119000" />
-      <workItem from="1512514911768" duration="1422000" />
+      <workItem from="1512514911768" duration="1509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214094000" />
+    <option name="totallyTimeSpent" value="214181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-165" y="-925" width="1519" height="868" extended-state="0" />
@@ -418,7 +406,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/modules/camera.js" />
     <entry file="file://$PROJECT_DIR$/../gabrieldefazio.com/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
@@ -742,12 +729,17 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="201">
+          <first_editor relative-caret-position="202">
             <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/hand.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>
