@@ -1,5 +1,5 @@
 ## Viewtrition
-
+![qrCode](docs/logo.png) 
 ### How to Download Viewtrition:
 Open Expo and scan:  
 ![qrCode](qrCode.png)  
