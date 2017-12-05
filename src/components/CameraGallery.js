@@ -8,12 +8,13 @@ import clarifaiCall from '../utilities/clarifaiCall';
 
 export default class GalleryScreen extends React.Component {
   render() {
+
     ImagePicker.launchImageLibraryAsync({base64: true})
     .then(photo => {
       if (photo.cancelled) {
         this.props.onPress();
       } else {
-        clarifaiCall(photo.base64)
+        clarifaiCall(photo.base64, this.props.restrictions, this.props.allergies)
       }
     })
 

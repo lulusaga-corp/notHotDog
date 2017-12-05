@@ -2,11 +2,11 @@ import React from 'react'
 import axios from 'axios';
 import storeMeal from './storeMeal';
 
-export default function barcodeScanner(upc,userId) {
+export default function barcodeScanner(upc, userId, nutrionix) {
   axios.get(`https://trackapi.nutritionix.com/v2/search/item?upc=${upc}`, {
       headers: {
-        "x-app-id": "da40e3ba",
-        "x-app-key": "9039730dc95644122941bec700a3ebe4",
+        "x-app-id": nutrionix.id,
+        "x-app-key": nutrionix.key,
         "Content-Type": "application/json"
       }
     })
