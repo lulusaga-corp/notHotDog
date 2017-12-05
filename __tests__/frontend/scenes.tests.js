@@ -94,7 +94,10 @@ describe('Camera scene', () => {
   let store;
   beforeEach(() => {
     store = createStore(()=> {
-      return {auth:{ user: {}}}
+      return {auth: {
+        user: {},
+        api: [{ apiKey:'' }, { id:'', key:'' }, { apiKey:'' }, { id:'', key:'' }]
+      }}
     })
   })
   it('renders without crashing', () => {
@@ -110,7 +113,10 @@ describe('Food Selector scene', () => {
   let store;
   beforeEach(() => {
     store = createStore(()=> {
-      return {food:{}}
+      return {auth: {
+        user: {},
+        api: [{ apiKey:'' }, { id:'', key:'' }, { apiKey:'' }, { id:'', key:'' }]
+      }}
     })
   })
   it('renders without crashing', () => {

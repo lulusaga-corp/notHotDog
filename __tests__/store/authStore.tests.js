@@ -7,6 +7,11 @@ describe('auth reducer', () => {
       error: '',
       loading: false,
       user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -15,6 +20,11 @@ describe('auth reducer', () => {
       error: '',
       loading: true,
       user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -30,6 +40,11 @@ describe('auth reducer', () => {
       error: '',
       loading: false,
       user: bob,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -38,6 +53,11 @@ describe('auth reducer', () => {
       error: 'Email address is already in use.',
       loading: false,
       user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -46,6 +66,11 @@ describe('auth reducer', () => {
       error: '',
       loading: true,
       user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -60,6 +85,11 @@ describe('auth reducer', () => {
       error: '',
       loading: false,
       user: joe,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -68,6 +98,11 @@ describe('auth reducer', () => {
       error: 'Password is invalid.',
       loading: false,
       user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
@@ -75,6 +110,11 @@ describe('auth reducer', () => {
     let tempState = {
       error: '',
       loading: false,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:'',
       user: {
         email: 'joe@joe.com',
         password: '123joe',
@@ -85,7 +125,12 @@ describe('auth reducer', () => {
     expect(auth.default(tempState, {type: auth.SET_INITIAL_STATE})).toEqual({
       error: '',
       loading: false,
-      user: null
+      user: null,
+      api: [{ apiKey:'' }, { id:'', key:'' }],
+      dietary:[],
+      allergies:[],
+      firstname:'',
+      lastname:''
     })
   })
 
