@@ -1,6 +1,8 @@
+![qrCode](docs/logo.png) 
+
 ## Viewtrition
 A mobile app that allows user to track and visualize their nutrition with the snap of a picture.
-![qrCode](docs/logo.png) 
+
 ### How to Download Viewtrition:
 Open Expo and scan:  
 ![qrCode](qrCode.png)  
@@ -16,8 +18,7 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * Snap a picture of your food
 * Tap to select the foods you are eating
 * Check out your nutrition information visualized on graphs and charts
-![qrCode](docs/graphs.png) 
-![qrCode](docs/nutrients.png) 
+
 ### Technology Stack:
 * React Native (via create-react-native-app)
 * Expo
@@ -36,3 +37,6 @@ If you do not have an iOS device, you can clone this repo and run it on your Mac
 * [Sarah Katz](https://github.com/SarahLKatz)
 
 Powered by [Fullstack Academy](https://www.fullstackacademy.com/) and [NYC Tech Talent Pipeline](http://www.techtalentpipeline.nyc/).
+
+![qrCode](docs/graphs.png) 
+![qrCode](docs/nutrients.png) 
