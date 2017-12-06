@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebaseConfig from './firebaseConfig.json';
-firebase.initializeApp(firebaseConfig);
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import Router from './src/Router';
@@ -8,6 +7,8 @@ import store from './configureStore';
 import { SIGN_IN_SUCCESS, GET_API_KEYS, GET_USER_PROFILE } from './src/store/auth'
 import { Spinner } from './src/components/common';
 import {Actions} from 'react-native-router-flux'
+
+firebase.initializeApp(firebaseConfig);
 
 class App extends Component {
   constructor(props) {

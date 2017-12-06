@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    userFirstName : state.auth.user ? state.auth.user.displayName : null,
+    userFirstName: state.auth.user ? state.auth.user.displayName : null,
   }
 }
 export default connect(mapStateToProps, {signOutUser})(AccountSettings);
