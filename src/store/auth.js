@@ -9,6 +9,7 @@ import { clearFoodStore } from './food'
  | Types
  |--------------------------------------------------
  */
+
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
@@ -27,6 +28,7 @@ export const GET_USER_FOOD_RESTRICTIONS = 'GET_USER_FOOD_RESTRICTIONS'
  | Actions
  |--------------------------------------------------
  */
+
 export const signInUser = ({ email, password }) => (dispatch) => {
   dispatch({type: SIGN_IN_REQUEST});
   firebase.auth().signInWithEmailAndPassword(email, password)

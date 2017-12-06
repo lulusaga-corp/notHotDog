@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Text, View, Image, KeyboardAvoidingView } from "react-native";
-import { connect } from "react-redux";
-import { signInUser, clearState } from "../../store/auth";
-import { Actions } from "react-native-router-flux";
-import { Field, reduxForm } from "redux-form";
-import { Container, Input, Button, Item, Spinner } from "../../components/common/index";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Text, View, Image, KeyboardAvoidingView } from 'react-native';
+import { connect } from 'react-redux';
+import { signInUser, clearState } from '../../store/auth';
+import { Actions } from 'react-native-router-flux';
+import { Field, reduxForm } from 'redux-form';
+import { Container, Input, Button, Item, Spinner } from '../../components/common/index';
 import logo from '../../../logo.png';
-import styles from "./authStyle";
+import styles from './authStyle';
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -17,7 +17,7 @@ const propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
-const background = require("../../../starwberry2.jpg");
+const background = require('../../assets/images/starwberry2.jpg');
 
 class Signin extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class Signin extends Component {
                 name="email"
                 component={Input}
                 placeholder="Email"
-                autoCapitalize={"none"}
+                autoCapitalize={'none'}
               />
             </Item>
           </Container>
@@ -97,7 +97,7 @@ class Signin extends Component {
 
 const validate = props => {
   const errors = {};
-  const fields = ["email", "password"];
+  const fields = ['email', 'password'];
 
   fields.forEach(f => {
     if (!(f in props)) {
@@ -109,12 +109,12 @@ const validate = props => {
 };
 
 Signin.propTypes = propTypes;
-Signin = reduxForm({ form: "signin", validate })(Signin);
+Signin = reduxForm({ form: 'signin', validate })(Signin);
 
 const mapStateToProps = ({ auth }) => ({
   authError: auth.error,
   loading: auth.loading,
-  userId: auth && auth.user ? auth.user.uid : ""
+  userId: auth && auth.user ? auth.user.uid : ''
 });
 
 export default connect(mapStateToProps, { signInUser, clearState })(Signin);

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import {StyleSheet, View, ScrollView } from "react-native";
-import PieChart from "../components/PieChart";
+import React, { Component } from 'react';
+import {StyleSheet, View, ScrollView } from 'react-native';
+import PieChart from '../components/PieChart';
 import { getAllUserMeals } from '../store/food';
 import { connect } from 'react-redux'
-import { ButtonGroup } from "react-native-elements";
+import { ButtonGroup } from 'react-native-elements';
 import BarGraph from '../components/BarGraph';
 
 class AccountHome extends Component {
@@ -37,7 +37,7 @@ class AccountHome extends Component {
       })
       return acc
     }, { serving: 0, data: { protein: 0, carbs: 0, fat: 0 }, dv: {}}) : null
-    let buttons = ["meal"]
+    let buttons = ['meal']
     let meal = [reduced]
     singleMeal && singleMeal.map((food) => {
       buttons.push(food.food_name)
@@ -50,7 +50,7 @@ class AccountHome extends Component {
           selectedIndex={selectedIndex}
           buttons={buttons}
           containerStyle={{height: 40, marginBottom: 20, marginTop:10}}
-          selectedTextStyle={{color: "#ef4836"}} />
+          selectedTextStyle={{color: '#ef4836'}} />
         <View>
           {
             singleMeal && <PieChart allFoods={meal[selectedIndex]} />
@@ -61,7 +61,6 @@ class AccountHome extends Component {
             singleMeal && <BarGraph nutrients={meal[selectedIndex]} />
           }
         </View>
-
       </ScrollView>
     )
   }

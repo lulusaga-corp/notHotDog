@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { View } from 'react-native';
-import { ButtonGroup } from "react-native-elements"
-import PieChart from "../components/PieChart";
+import { ButtonGroup } from 'react-native-elements';
+import PieChart from '../components/PieChart';
 
-class AccountHome extends Component {
+class NutritionHistory extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -18,10 +18,10 @@ class AccountHome extends Component {
   }
 
   render () {
-    const buttons = ["Today", 'Week', 'Month', "All"]
-    const timeFrames = ["todaysMeals", "weekMeals", "monthMeals", "allMeals"]
-    const mealReducer = timeFrame => timeFrame.map(meal =>{
-      return meal.mealInstance.reduce((acc, foodItem) =>{
+    const buttons = ['Today', 'Week', 'Month', 'All'];
+    const timeFrames = ['todaysMeals', 'weekMeals', 'monthMeals', 'allMeals'];
+    const mealReducer = timeFrame => timeFrame.map(meal => {
+      return meal.mealInstance.reduce((acc, foodItem) => {
         acc.serving += foodItem.serving
         acc.data.protein += foodItem.data.protein
         acc.data.carbs += foodItem.data.carbs
@@ -39,7 +39,7 @@ class AccountHome extends Component {
 
     const { selectedIndex } = this.state
     const foodChart = this.props.food.allMeals ? mealReducer(this.props.food[timeFrames[this.state.selectedIndex]]) : null
-    // console.log('history data', foodChart)
+
     return (
       <View>
         <ButtonGroup
@@ -47,7 +47,7 @@ class AccountHome extends Component {
           selectedIndex={selectedIndex}
           buttons={buttons}
           containerStyle={{height: 40, marginBottom: 20, marginTop:10}}
-          selectedTextStyle={{color: "#ef4836"}} />
+          selectedTextStyle={{color: '#ef4836'}} />
         {
           this.props.food.allMeals ? <PieChart allFoods={foodChart} /> : null
         }
@@ -56,8 +56,8 @@ class AccountHome extends Component {
   }
 }
 
-mapStateToProps = (state) =>({
+const mapStateToProps = (state) => ({
   food: state.food
 })
 
-export default connect(mapStateToProps)(AccountHome);
+export default connect(mapStateToProps)(NutritionHistory);

@@ -54,13 +54,13 @@ const styles = {
   inputContainer: {
     height: 40,
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 2,
-    borderColor: "#ffd800"
+    borderColor: '#ffd800'
   },
   InputText: {
-    color: "black",
+    color: 'black',
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 18,
@@ -68,7 +68,7 @@ const styles = {
     flex: 2
   },
   errorText: {
-    color: "#ff5964"
+    color: '#ff5964'
   }
 };
 

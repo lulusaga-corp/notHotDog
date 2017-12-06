@@ -164,4 +164,4 @@ const mapStateToProps = state => ({
   nutrionix: state.auth.api[1]
 });
 
-export default connect(mapStateToProps)(AppCamera)
+export default connect(mapStateToProps)(AppCamera);
