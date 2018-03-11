@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`requireAuth renders without crashing 1`] = `<requireAuth />`;
+
+exports[`requireNotAuth renders signin component 1`] = `[Function]`;
+
+exports[`requireNotAuth renders signup component 1`] = `[Function]`;
+
+exports[`requireNotAuth renders without crashing 1`] = `<requireNotAuth />`;
